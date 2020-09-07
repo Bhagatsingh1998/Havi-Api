@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import classes from './App.css';
-import Toolbar from "./containers/Toolbar/Toolbar";
 
+import Toolbar from "./containers/Toolbar/Toolbar";
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   state = {
@@ -59,6 +59,8 @@ class App extends Component {
           activeUser={this.state.activeUser}
           logout={this.logoutHandler}
         />
+        
+        <Footer />
       </React.Fragment>
     );
   }

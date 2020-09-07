@@ -38,6 +38,7 @@ class Toolbar extends Component {
           userLog={(data) =>  this.props.userLogged(data)}
           adminLog={(data) => this.props.adminLogged(data)}
         />
+        
       </React.Fragment>
     );
   }

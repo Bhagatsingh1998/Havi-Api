@@ -223,12 +223,12 @@ class UserEdit extends PureComponent {
           onHide={() => this.props.showEditsHandler(false)}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Edit User Details</Modal.Title>
           </Modal.Header>
           <Modal.Body>{editModal}</Modal.Body>
           <Modal.Footer>
             <Button
-              variant="secondary"
+              variant="danger"
               onClick={() => this.props.showEditsHandler(false)}
             >
               Close

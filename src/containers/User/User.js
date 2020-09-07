@@ -70,14 +70,14 @@ class User extends Component {
         <li key={Math.random()}>
           <input type="checkbox" style={{ marginRight: "1.5%" }} />
           <div className={classes.task}>{el}</div>
-          <div className={classes.update}>
+          {/* <div className={classes.update}>
             <div className={classes.pencil}>
               <i className="fa fa-pencil" id="edit" aria-hidden="true"></i>
             </div>
             <div className={classes.cross}>
               <i className="fa fa-times close" aria-hidden="true"></i>
             </div>
-          </div>
+          </div> */}
         </li>
       );
     });
@@ -113,6 +113,10 @@ class User extends Component {
             <ul>{allLists}</ul>
           </div>
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
       </React.Fragment>
     );
   }

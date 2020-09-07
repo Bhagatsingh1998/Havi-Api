@@ -101,18 +101,18 @@ const UserDetails = props => {
     <React.Fragment>
       <Modal show={props.show} onHide={() => props.showDetailsHandler(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>User Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {modalBody}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => props.showDetailsHandler(false)}>
+          <Button variant="danger" onClick={() => props.showDetailsHandler(false)}>
             Close
           </Button>
-          <Button variant="success" onClick={() => props.showDetailsHandler(false)}>
+          {/* <Button variant="success" onClick={() => props.showDetailsHandler(false)}>
             Edit
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </React.Fragment>
