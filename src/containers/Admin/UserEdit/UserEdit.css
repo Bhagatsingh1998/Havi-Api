@@ -1,0 +1,85 @@
+/* form */
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+#edit-form input[type="text"] {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 1% 0%;
+  width: 80%;
+}
+
+#edit-form input[type="number"] {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 1% 0%;
+  width: 100%;
+}
+
+#edit-form input[type="date"] {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 2% 0%;
+  width: 100%;
+}
+
+#edit-form select {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 2% 0%;
+  width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.otherInfo {
+  display: flex;
+  margin: 1% 0%;
+}
+
+.mainInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.holder {
+  text-align: center;
+  margin: auto;
+  width: 300px;
+  height: 300px;
+  padding: 5%;
+}
+
+.holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.otherInfo {
+  display: flex;
+  margin: 1% 0%;
+}
+
+.label {
+  width: 40%;
+}

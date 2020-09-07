@@ -3,8 +3,9 @@
 }
 
 .label {
-  text-align: center;
+  /* text-align: center; */
   padding-bottom: 2%;
+  padding-left: 10%;
   
 }
 
@@ -61,7 +62,8 @@
   border-right: none;
   border-bottom: 2px dotted var(--pink);
   transition: border-bottom 2s;
-  width: 80%;
+  width: 45%;
+  margin-left: 10%;
 }
 
 .label input[type="date"]:focus {
@@ -81,6 +83,22 @@
 
 .label select:focus {
   border-bottom: 2px solid var(--darkPurple);
+}
+
+.subLabel {
+  display: flex;
+}
+
+.subLabel span strong {
+  /* width: 40%; */
+  flex: 1;
+  /* padding-right: 10%; */
+}
+
+.label input[type="radio"] {
+  padding: 1% 2%;
+  margin-left: 10%;
+  width: 10%;
 }
 
 input::-webkit-outer-spin-button,

@@ -1,0 +1,124 @@
+:root {
+  --darkBlue: #242582;
+  --pink: #F64C72;
+  --purple: #99738E;
+  --blue: #2F2FA2;
+  --darkPurple: #553D67;
+}
+
+body {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+  background-color: whitesmoke;
+}
+
+.todo {
+  width: 65%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1% 5% 1% 5%;
+  margin: 5% auto; 
+}
+
+.inputListItem {
+  width: 90%;
+  padding: 1.5%;
+  margin-top: 2%;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  border: 1.5px solid gray;
+  border-radius: 5px;
+}
+
+.addButton {
+  width: 8%;
+  padding: 1.5% 1%;
+  background-color: var(--darkBlue);
+  color: var(--pink);
+  border: 1.5px solid royalblue;
+  font-weight: bold;
+  border-radius: 5px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.todo .addButton:hover {
+  color: var(--darkBlue);
+  background-color: var(--pink);
+}
+
+
+.listItems {
+  width: 90%;
+}
+
+.listItems li{
+  padding: 1.5% 1% 1.5% 0%;
+  border-bottom: 0.5px solid rgb(175, 175, 175, 0.75);
+  background-color: white;
+  margin-bottom: .5%;
+  justify-content: center;
+}
+
+.listItems ul {
+  display: unset;
+  list-style-type:none;
+}
+
+.listItems ul li {
+  display: flex;
+}
+
+.listItems input[type=checkbox]:checked~.task {
+  text-decoration: line-through;
+}
+
+.listItems input[type=checkbox]:hover {
+  cursor: pointer;
+}
+
+.task {
+  justify-content: center;
+  width: 90%;
+  overflow-wrap: break-word;
+  cursor: pointer;
+}
+
+.update {
+  justify-content: center;
+  display: flex;
+  margin-left: 5%;
+}
+
+.pencil {
+  margin: 0% 30%;
+  font-size: 130%;
+}
+
+.pencil i{
+  cursor: pointer;
+  font-weight: lighter;
+  color: green;
+  font-size: larger;
+  width: 120%;
+}
+
+.pencil i:hover {
+  font-weight: bolder;
+  color: darkgreen;
+}
+
+.cross {
+  margin: 0% 30%;
+  font-size: 130%;
+}
+
+.cross i {  
+  cursor: pointer;
+  color: var(--pink);
+  font-weight: lighter;
+  font-size: larger;
+  margin: 0% 2%;
+}
+
+.cross i:hover {
+  font-weight: bolder;
+  color: red;
+}

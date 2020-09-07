@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Modal, Button} from 'react-bootstrap'
 import axios from 'axios';
 
 import classes from './Signup.css';
@@ -9,19 +10,28 @@ import av4 from './../../assets/images/avtars/av4.png';
 
 class Signup extends Component {
   state={
-    name: null,
-    email: null,
-    userName: null,
-    phone: null,
-    dob: null,
-    password: null,
-    cpassword: null,
-    gender: null,
-    avtarNumber: null,
+    name: '',
+    email: '',
+    userName: '',
+    phone: '',
+    dob: '',
+    password: '',
+    cpassword: '',
+    gender: 'Male',
+    isAdmin: '',
+    avtarNumber: '',
     signup: false,
-    message: null,
+    message: '',
     remove: false
   }
+
+  // shouldComponentUpdate(prevProps, prevSate) {
+  //   if(this.state.signup !== prevSate.signup ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   componentDidUpdate() {
     console.log('componentDidUpdate');
@@ -38,13 +48,13 @@ class Signup extends Component {
         password: this.state.password,
         cpassword: this.state.cpassword,
         gender: this.state.gender,
+        isAdmin: this.state.isAdmin,
         avtarNumber: this.state.avtarNumber
       };
       console.log('data', data);
 
       axios.post('http://localhost:5000/user/signup', data)
       .then(response => {
-        console.log('aa');
         console.log(response);
         this.setState({
           name: '',
@@ -54,13 +64,15 @@ class Signup extends Component {
           dob: '',
           password: '',
           cpassword: '',
-          gender: 'Select an option',
+          gender: 'Male',
+          isAdmin: '',
           avtarNumber: '',
           signup: false,
           message: response.data,
-          remove: true
         });
         console.log(this.state);
+        this.props.signupToggle();
+        this.props.signinToggle();
       })
       .catch(error => {
         console.log('error');
@@ -71,14 +83,15 @@ class Signup extends Component {
 
   componentWillUnmount(){
     console.log('componentWillUnmount');
-    if(this.state.remove) {
-      this.setState({remove: false});
-      console.log('remove true');
-      return true;
-    }
+    // if(this.state.remove) {
+    //   this.setState({remove: false});
+    //   console.log('remove true');
+    //   return true;
+    // }
   }
 
   signupHandler = (event) => {
+    // console.log('aa');
     event.preventDefault();
     if(this.state.gender) {
       this.setState({signup: true});
@@ -120,95 +133,106 @@ class Signup extends Component {
     this.setState({gender: event.target.value })
   }
 
+  isAdminHandler = (event) => {
+    this.setState({isAdmin: event.target.value })
+  }
+
   avatarHandler = event => {
     this.setState({avtarNumber: event.target.value })
   }
 
   render() {
-    let signupComponent = <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" >SignUp Form</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-              <span aria-hidden="true" style={{color: 'red'}}>&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form onSubmit={this.signupHandler} id="signup-form">
-              <div  className={classes.label}>
-                <input type="text" onChange={this.nameHandler} value={this.state.name} required placeholder="Your Full Name" />
-              </div>
-              <div  className={classes.label}>
-                <input type="text" onChange={this.emailHandler}  value={this.state.email} required placeholder="Email" />
-              </div>
-              <div  className={classes.label}>
-                <input type="text" onChange={this.usernameHandler} value={this.state.userName} required placeholder="UserName" />
-              </div>
-              <div  className={classes.label}>
-                <input type="number" onChange={this.phoneHandler} value={this.state.phone} required placeholder="Phone Number" />
-              </div>
-              <div className={classes.label}>
-                <input type="password" onChange={this.passwordHandler} value={this.state.password} required placeholder="Password" />
-              </div>
-              <div className={classes.label}>
-                <input type="password" onChange={this.cpasswordHandler} value={this.state.cpassword} required placeholder="Confirm Password" />
-              </div>
-              <div  className={classes.label}>
-                <input required onChange={this.dobHandler} value={this.state.dob} type="date" />
-              </div>
-              <div className={classes.label}>
-                <select required onChange={this.genderHandler} value={this.state.gender}>
-                  <option disabled selected value>Select an option</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
-              <div className={classes.label}>
-                <p>Select your avatar</p>
-                <div className={classes.mainHolder}>
-                  <div className={classes.avatar}>
-                    <div className={classes.holder}>
-                      <img src={av1} alt="" />
-                    </div>
-                    <input type="radio" required name="avatar" onChange={this.avatarHandler} value="1" />
-                  </div>
-                  <div className={classes.avatar}>
-                    <div className={classes.holder}>
-                      <img src={av2} alt="" />
-                    </div>
-                    <input type="radio" required  name="avatar" onChange={this.avatarHandler} value="2" />
-                  </div>
-                  <div className={classes.avatar}>
-                    <div className={classes.holder}>
-                      <img src={av3} alt="" />
-                    </div>
-                    <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="3" />
-                  </div>
-                  <div className={classes.avatar}>
-                    <div className={classes.holder}>
-                      <img src={av4} alt="" />
-                    </div>
-                    <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="4" />
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-            <button type="submit" form="signup-form" class="btn btn-success">SignUp</button>
+    let signupComponent =
+    <form onSubmit={this.signupHandler} id="signup-form">
+      <div  className={classes.label}>
+        <input type="text" onChange={this.nameHandler} value={this.state.name} required placeholder="Your Full Name" />
+      </div>
+      <div  className={classes.label}>
+        <input type="text" onChange={this.emailHandler}  value={this.state.email} required placeholder="Email" />
+      </div>
+      <div  className={classes.label}>
+        <input type="text" onChange={this.usernameHandler} value={this.state.userName} required placeholder="UserName" />
+      </div>
+      <div  className={classes.label}>
+        <input type="number" onChange={this.phoneHandler} value={this.state.phone} required placeholder="Phone Number" />
+      </div>
+      <div className={classes.label}>
+        <input type="password" onChange={this.passwordHandler} value={this.state.password} required placeholder="Password" />
+      </div>
+      <div className={classes.label}>
+        <input type="password" onChange={this.cpasswordHandler} value={this.state.cpassword} required placeholder="Confirm Password" />
+      </div>
+      <div  className={classes.label}>
+        <div className={classes.subLabel}>
+          <span><strong>Date of Birth</strong> </span>
+          <input required onChange={this.dobHandler} value={this.state.dob} type="date" placeholder="DOB" />  
+        </div>
+      </div>
+      <div  className={classes.label}>
+        <div className="subLabel">
+          <div className={classes.subLabel}>
+            <span><strong>User Type</strong> </span>
+            <input type="radio" onChange={this.isAdminHandler} required name="userType" value="0" />Admin
+            <input type="radio" onChange={this.isAdminHandler} required name="userType" value="1" />User
           </div>
         </div>
       </div>
-    </div>;
-
-    // let script = <script>document.getElementById('radio').checked = false; document.getElementById('select').selectedIndex = 0</script>;
+      <div className={classes.label}>
+        <select required onChange={this.genderHandler} value={this.state.gender}>
+          <option disabled  >Select an option</option>
+          <option selected value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div className={classes.label}>
+        <p><strong>Select your avatar</strong> </p>
+        <div className={classes.mainHolder}>
+          <div className={classes.avatar}>
+            <div className={classes.holder}>
+              <img src={av1} alt="" />
+            </div>
+            <input type="radio" required name="avatar" onChange={this.avatarHandler} value="av1" />
+          </div>
+          <div className={classes.avatar}>
+            <div className={classes.holder}>
+              <img src={av2} alt="" />
+            </div>
+            <input type="radio" required  name="avatar" onChange={this.avatarHandler} value="av2" />
+          </div>
+          <div className={classes.avatar}>
+            <div className={classes.holder}>
+              <img src={av3} alt="" />
+            </div>
+            <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="av3" />
+          </div>
+          <div className={classes.avatar}>
+            <div className={classes.holder}>
+              <img src={av4} alt="" />
+            </div>
+            <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="av4" />
+          </div>
+        </div>
+      </div>
+    </form>;
 
     return (
       <React.Fragment>
-        {signupComponent}
-        {/* {script} */}
+        <Modal show={this.props.show} onHide={this.props.signupToggle}>
+          <Modal.Header closeButton >
+            <Modal.Title>SignUp User</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {signupComponent}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={this.props.signupToggle}>
+              Close
+            </Button>
+            <Button variant="success" form="signup-form" type="submit">
+              Register
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </React.Fragment>
     );
   }

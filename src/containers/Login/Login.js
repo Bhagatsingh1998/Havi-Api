@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 import classes from './Login.css';
@@ -12,9 +13,7 @@ class Login extends Component {
   };
 
   componentDidUpdate() {
-    if(!this.state.login ) {
-      return;
-    } else {
+    if(this.state.login && this.state.logincounter == 0) {
       let data = {
         email: this.state.email,
         password: this.state.password
@@ -22,17 +21,27 @@ class Login extends Component {
       console.log(data);
       axios.post('http://localhost:5000/user/login',data)
       .then(response => {
-        console.log(response);
+        console.log(response.data);
+        this.setState({logincounter: 1})
+        this.props.signinToggle();
+        if(response.data.userDetails.userType === 'User') {
+          this.props.userLog(response.data.userDetails);
+        } else {
+          console.log(response.data.userDetails);
+          this.props.adminLog(response.data.userDetails);
+        }
       })
       .catch(err => {
         console.log(err);
       });
+    } else {
+      return;
     }
   }
 
   loginHandler = event => {
     event.preventDefault();
-    this.setState({login: true, logincounter: 1});
+    this.setState({login: true});
   }
 
   emailHandler = event => {
@@ -45,32 +54,31 @@ class Login extends Component {
 
   render() {
     return (
-      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" >Login</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                <span aria-hidden="true" style={{color: 'red'}}>&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="login-form" onSubmit={this.loginHandler} className={classes.loginForm}>
-                <div  className={classes.label}>
-                  <input type="text" onChange={this.emailHandler} required placeholder="Email" />
-                </div>
-                <div className={classes.label}>
-                  <input type="password" onChange={this.passwordHandler} required placeholder="Password" />
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-              <button type="submit" form="login-form" class="btn btn-success">Login</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <>
+        <Modal show={this.props.show} onHide={this.props.signinToggle}>
+          <Modal.Header closeButton>
+            <Modal.Title>LogIn</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form id="login-form" onSubmit={this.loginHandler} className={classes.loginForm}>
+              <div  className={classes.label}>
+                <input type="text" onChange={this.emailHandler} required placeholder="Email" />
+              </div>
+              <div className={classes.label}>
+                <input type="password" onChange={this.passwordHandler} required placeholder="Password" />
+              </div>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={this.props.signinToggle}>
+              Close
+            </Button>
+            <Button variant="success" form="login-form" type="submit">
+              LogIn 
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
   }
 }
