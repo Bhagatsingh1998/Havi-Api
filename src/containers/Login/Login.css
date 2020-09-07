@@ -1,0 +1,39 @@
+.loginForm {
+  text-align: center;
+}
+
+.label {
+  text-align: center;
+  padding-bottom: 2%;
+  
+}
+
+.label input[type="text"] {
+  padding: 1% 2%;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px dotted var(--pink);
+  transition: border-bottom 2s;
+  width: 80%;
+}
+
+.label input[type="text"]:focus {
+  border-bottom: 2px solid var(--darkPurple);
+}
+
+.label input[type="password"] {
+  padding: 1% 2%;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px dotted var(--pink);
+  transition: border-bottom 3000ms;
+  width: 80%;
+}
+
+.label input[type="password"]:focus {
+  border-bottom: 2px solid var(--darkPurple);
+}
