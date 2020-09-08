@@ -1,0 +1,93 @@
+[debug] [2020-09-08T13:37:02.017Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T13:37:02.019Z] Command:       E:\Program Files\nodejs\node.exe C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-09-08T13:37:02.020Z] CLI Version:   8.6.0
+[debug] [2020-09-08T13:37:02.020Z] Platform:      win32
+[debug] [2020-09-08T13:37:02.020Z] Node Version:  v12.16.2
+[debug] [2020-09-08T13:37:02.021Z] Time:          Tue Sep 08 2020 19:07:02 GMT+0530 (India Standard Time)
+[debug] [2020-09-08T13:37:02.021Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T13:37:02.021Z] 
+[debug] [2020-09-08T13:37:02.027Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-08T13:37:02.028Z] > authorizing via signed-in user
+[debug] [2020-09-08T13:37:02.028Z] [iam] checking project havi-api for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-09-08T13:37:02.030Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-09-08T13:37:02.030Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-09-08T13:37:02.214Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 13:37:02 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T13:37:02.238Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/havi-api:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-09-08T13:37:03.545Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 13:37:03 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1145","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T13:37:03.549Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/havi-api  
+ 
+[debug] [2020-09-08T13:37:03.896Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 13:37:03 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'havi-api'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2020-09-08T13:37:03.914Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/havi-api/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-09-08T13:38:15.817Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T13:38:15.818Z] Command:       E:\Program Files\nodejs\node.exe C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-09-08T13:38:15.818Z] CLI Version:   8.6.0
+[debug] [2020-09-08T13:38:15.818Z] Platform:      win32
+[debug] [2020-09-08T13:38:15.818Z] Node Version:  v12.16.2
+[debug] [2020-09-08T13:38:15.819Z] Time:          Tue Sep 08 2020 19:08:15 GMT+0530 (India Standard Time)
+[debug] [2020-09-08T13:38:15.819Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T13:38:15.820Z] 
+[debug] [2020-09-08T13:38:15.826Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-08T13:38:15.826Z] > authorizing via signed-in user
+[debug] [2020-09-08T13:38:15.826Z] [iam] checking project havi-api for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-09-08T13:38:15.829Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/havi-api:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-09-08T13:38:17.099Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 13:38:16 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1162","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T13:38:17.101Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/havi-api  
+ 
+[debug] [2020-09-08T13:38:38.182Z] Server Error. connect ETIMEDOUT 216.58.200.138:443
+[debug] [2020-09-08T13:38:38.332Z] FirebaseError: Server Error. connect ETIMEDOUT 216.58.200.138:443
+    at Request._callback (C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:32:31)
+    at self.callback (C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:310:20)
+    at Request.EventEmitter.emit (domain.js:482:12)
+    at Request.onRequestError (C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:877:8)
+    at ClientRequest.emit (events.js:322:22)
+    at ClientRequest.EventEmitter.emit (domain.js:482:12)
+    at TLSSocket.socketErrorListener (_http_client.js:426:9)
+    at TLSSocket.emit (events.js:310:20)
+    at TLSSocket.EventEmitter.emit (domain.js:482:12)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[error] 
+[error] Error: Failed to get Firebase project havi-api. Please make sure the project exists and your account has permission to access it.
+[debug] [2020-09-08T13:38:45.025Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T13:38:45.027Z] Command:       E:\Program Files\nodejs\node.exe C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-09-08T13:38:45.027Z] CLI Version:   8.6.0
+[debug] [2020-09-08T13:38:45.027Z] Platform:      win32
+[debug] [2020-09-08T13:38:45.027Z] Node Version:  v12.16.2
+[debug] [2020-09-08T13:38:45.028Z] Time:          Tue Sep 08 2020 19:08:45 GMT+0530 (India Standard Time)
+[debug] [2020-09-08T13:38:45.028Z] ----------------------------------------------------------------------
+[debug] [2020-09-08T13:38:45.028Z] 
+[debug] [2020-09-08T13:38:45.034Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-08T13:38:45.035Z] > authorizing via signed-in user
+[debug] [2020-09-08T13:38:45.035Z] [iam] checking project havi-api for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-09-08T13:38:45.037Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/havi-api:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-09-08T13:38:46.300Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 08 Sep 2020 13:38:46 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1142","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-08T13:38:46.301Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/havi-api  
+ 
+[debug] [2020-09-08T13:39:07.340Z] Server Error. connect ETIMEDOUT 216.58.200.138:443
+[debug] [2020-09-08T13:39:07.451Z] FirebaseError: Server Error. connect ETIMEDOUT 216.58.200.138:443
+    at Request._callback (C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:32:31)
+    at self.callback (C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:310:20)
+    at Request.EventEmitter.emit (domain.js:482:12)
+    at Request.onRequestError (C:\Users\Bhagat Singh\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:877:8)
+    at ClientRequest.emit (events.js:322:22)
+    at ClientRequest.EventEmitter.emit (domain.js:482:12)
+    at TLSSocket.socketErrorListener (_http_client.js:426:9)
+    at TLSSocket.emit (events.js:310:20)
+    at TLSSocket.EventEmitter.emit (domain.js:482:12)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21)
+[error] 
+[error] Error: Failed to get Firebase project havi-api. Please make sure the project exists and your account has permission to access it.
