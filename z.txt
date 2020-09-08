@@ -1,0 +1,46 @@
+
+{
+    "statusCode": 200,
+    "status": "Success",
+    "message": "All Users",
+    "users": [
+        {
+            "loggedIn": [],
+            "toDoList": [],
+            "_id": "5f579d7a061d3500043bbb48",
+            "id": "3",
+            "name": "Admin 1",
+            "email": "admin1@admin.com",
+            "userName": "admin 1",
+            "phone": "9874563210",
+            "dob": "1998-11-22",
+            "password": "$2a$12$srN4hyNqqzsYckUsUfFU3.N7540G5oz5hB2xpWhjNMwLt2lw2oqye",
+            "gender": "Male",
+            "avtarNumber": "boy",
+            "userType": "Admin",
+            "signupTime": "Tue Sep 08 2020 15:04:26 GMT+0000 (Coordinated Universal Time)",
+            "__v": 0
+        },
+        {
+            "loggedIn": [],
+            "toDoList": [],
+            "_id": "5f579dc5061d3500043bbb4a",
+            "id": "5",
+            "name": "User 1",
+            "email": "user1@user.com",
+            "userName": "User 1",
+            "phone": "7896258955",
+            "dob": "1981-08-04",
+            "password": "$2a$12$Cthcon29LfFh7gDsP5HW/ufm9E4XXnFMRTS05kXfKXMt/33vrshCa",
+            "gender": "Female",
+            "avtarNumber": "gentlewomen",
+            "userType": "User",
+            "signupTime": "Tue Sep 08 2020 15:05:41 GMT+0000 (Coordinated Universal Time)",
+            "__v": 0
+        }
+    ],
+    "request": {
+        "url": "https://person-api-app.herokuapp.com/user",
+        "verb": "GET"
+    }
+}

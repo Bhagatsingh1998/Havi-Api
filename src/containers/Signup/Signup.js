@@ -22,7 +22,8 @@ class Signup extends Component {
     avtarNumber: '',
     signup: false,
     message: '',
-    remove: false
+    remove: false,
+    signupErr: null
   }
 
   // shouldComponentUpdate(prevProps, prevSate) {
@@ -75,7 +76,8 @@ class Signup extends Component {
         this.props.signinToggle();
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
+        this.setState({signupErr: error.response.data.message})
       });
     }
   }
@@ -89,7 +91,7 @@ class Signup extends Component {
     event.preventDefault();
     if(this.state.gender) {
       this.setState({signup: true});
-      console.log('signupHandler');
+      // console.log('signupHandler');
     }
   }
 
@@ -136,6 +138,11 @@ class Signup extends Component {
   }
 
   render() {
+    let errorComp = null;
+    if(this.state.signupErr) {
+      errorComp = <p style={{color: 'red', textAlign: 'center'}}>{this.state.signupErr}</p>
+    }
+
     let signupComponent =
     <form onSubmit={this.signupHandler} id="signup-form">
       <div  className={classes.label}>
@@ -216,6 +223,7 @@ class Signup extends Component {
             <Modal.Title>SignUp User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            {errorComp}
             {signupComponent}
           </Modal.Body>
           <Modal.Footer>
