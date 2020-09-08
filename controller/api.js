@@ -1,7 +1,9 @@
-const jwt = require('jsonwebtoken');
+// not using
+// const jwt = require('jsonwebtoken');
 
 const User = require('./../modal/user');
 const bcryptjs = require('bcryptjs');
+const baseURL = require('../baseURL').baseURL;
 
 exports.postUserDetails = (req, res, next) => {
   // console.log(req.body);
@@ -14,12 +16,26 @@ exports.postUserDetails = (req, res, next) => {
   .then(user => {
     if(user) {
       return res.status(301).json({
-        message: 'Email address already present.'
+        statusCode: 301,
+        status: 'Error', 
+        message: 'Email address already present.',
+        userDetails: null,
+        request: {
+          url: `${baseURL}/user/signup`,
+          verb: 'POST'
+        }
       });
     } else {
       if(req.body.password !== req.body.cpassword) {
         return res.status(301).json({
-          message: 'Password didnt match'
+          statusCode: 301,
+          status: 'Error', 
+          message: 'Password and confirm password didnt match',
+          userDetails: null,
+          request: {
+            url: `${baseURL}/user/signup`,
+            verb: 'POST'
+          }
         });
       } else {
         return bcryptjs.hash(req.body.password, 12)
@@ -47,13 +63,21 @@ exports.postUserDetails = (req, res, next) => {
           return user.save()
         })
         .then(dataSaved => {
-          console.log(dataSaved);
+          // console.log(dataSaved);
           return res.status(201).json({
-            message: 'User Saved'
+            statusCode: 201,
+            status: 'Success', 
+            message: 'User saved in database',
+            userDetails: dataSaved,
+            request: {
+              url: `${baseURL}/user/signup`,
+              verb: 'POST'
+            }
           });
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
+          next(error);
         })
       }
     }
@@ -61,66 +85,91 @@ exports.postUserDetails = (req, res, next) => {
 }
 
 exports.postUserLogin = (req, res, next) => {
-  console.log(req.body.email);
+  // console.log(req.body.email);
 
   User.findOne({email: req.body.email})
   .then(user => {
-    console.log(user);
+    // console.log(user);
     if(!user) {
       return res.status(301).json({
-        message: 'Email not found'
+        statusCode: 301,
+        status: 'Error', 
+        message: 'Entered email not found',
+        userDetails: null,
+        request: {
+          url: `${baseURL}/user/login`,
+          verb: 'POST'
+        }
       });
     } else {
       return bcryptjs.compare(req.body.password, user.password)
       .then(doMatch => {
-        console.log(doMatch);
+        // console.log(doMatch);
         if(!doMatch) {
-          console.log('doMatch: 53');
+          // console.log('doMatch: 53');
           return res.status(301).json({
-            message: 'Invalid Password'
+            statusCode: 301,
+            status: 'Error', 
+            message: 'Invalid Password',
+            userDetails: null,
+            request: {
+              url: `${baseURL}/user/login`,
+              verb: 'POST'
+            }
           }) 
         } else {
           let time = new Date();
           user.loggedIn.push(time);
           return user.save()
           .then(saveData => {
-            const token = jwt.sign({
-              email: saveData.email,
-              id: saveData._id
-            }, 
-            'secret_key', 
-            {
-              expiresIn: "1h"
-            })
+            // const token = jwt.sign({
+            //   email: saveData.email,
+            //   id: saveData._id
+            // }, 
+            // 'secret_key', 
+            // {
+            //   expiresIn: "1h"
+            // })
             // console.log('saveData');
             return res.status(201).json({
-              message: 'User LoggedIn',
-              auth: token,
-              userDetails: saveData
+              statusCode: 201,
+              status: 'Success', 
+              message: 'LoggedIn',
+              userDetails: saveData,
+              request: {
+                url: `${baseURL}/user/login`,
+                verb: 'POST'
+              }
             });
-
           })
         }
       })
     }
   })
-  .catch(err => {
-    console.log(err);
-  })
+  .catch(error => {
+    // console.log(err);
+    next(error)
+  });
 }
 
 exports.getAllUsers = (req, res, next) => {
-  console.log('aaa');
   User.find()
   .then(users => {
-    console.log(users);
+    // console.log(users);
     res.status(200).json({
+      statusCode: 200,
+      status: 'Success', 
       message: 'All Users',
-      users: users
+      users: users,
+      request: {
+        url: `${baseURL}/user`,
+        verb: 'GET'
+      }
     });
   })
-  .catch(err => {
-    console.log(err);
+  .catch(error => {
+    // console.log(err);
+    next(error);
   });
 }
 
@@ -130,16 +179,34 @@ exports.postAddToDoList = (req, res, next) => {
 
   User.findById(user_id)
   .then(user => {
+    if(!user) {
+      return res.status(404).json({
+        statusCode: 404,
+        status: 'Error', 
+        message: 'Invalid userId, TODO cannot be saved',
+        userDetails: null,
+        request: {
+          url: `${baseURL}/user/${user_id}`,
+          verb: 'POST'
+        }
+      });
+    }
     // console.log(user);
     const list = req.body.data;
     user.toDoList.push(list);
     return user.save()
   })
   .then(savedData => {
-    console.log(savedData);
+    // console.log(savedData);
     return res.status(201).json({
-      message: 'ToDoList Saved',
-      userDetails: savedData
+      statusCode: 201,
+        status: 'Success', 
+        message: 'TODO saved',
+        userDetails: savedData,
+        request: {
+          url: `${baseURL}/user/${user_id}`,
+          verb: 'POST'
+        }
     });
   })
   .catch(err => {
@@ -155,17 +222,31 @@ exports.getUserDetails = (req, res, next) => {
   .then(user => {
     if(!user) {
       return res.status(404).json({
-        message:  'Invalid UserId'
+        statusCode: 404,
+        status: 'Error', 
+        message: 'Invalid userId, user not found',
+        userDetails: null,
+        request: {
+          url: `${baseURL}/user/${user_id}`,
+          verb: 'GET'
+        }
       });
     } else {
       return res.status(200).json({
-        message: 'User Details',
-        userDetails: user
+        statusCode: 200,
+        status: 'Success', 
+        message: 'Valid userId, user found. ',
+        userDetails: user,
+        request: {
+          url: `${baseURL}/user/${user_id}`,
+          verb: 'GET'
+        }
       });
     }
   })
-  .catch(err => {
-    console.log(err);
+  .catch(error => {
+    // console.log(err);
+    next(error);
   });
 }
 
@@ -175,8 +256,20 @@ exports.patchUserUpdate = (req, res, next) => {
 
   User.findById(user_id)
   .then(user => {
+    if(!user) {
+      return res.status(404).json({
+        statusCode: 404,
+        status: 'Error', 
+        message: 'Invalid userId, user not found',
+        userDetails: null,
+        request: {
+          url: `${baseURL}/user/${user_id}`,
+          verb: 'PATCH'
+        }
+      });
+    }
     // console.log(user);
-    console.log(req.body);
+    // console.log(req.body);
     const name = req.body.name;
     const username = req.body.userName;
     const dob = req.body.dob;
@@ -193,12 +286,19 @@ exports.patchUserUpdate = (req, res, next) => {
   })
   .then(savedData => {
     return res.status(201).json({
-      message: 'Updated successfully',
-      userDetails: savedData
+      statusCode: 201,
+        status: 'Success', 
+        message: 'Valid userId, user details updated. ',
+        userDetails: savedData,
+        request: {
+          url: `${baseURL}/user/${user_id}`,
+          verb: 'PATCH'
+        }
     });
   })
-  .catch(err => {
-    console.log(err);
+  .catch(error => {
+    // console.log(err);
+    next(error);
   })
 }     
 
@@ -208,12 +308,32 @@ exports.deleteUser = (req, res, next) => {
 
   User.findByIdAndDelete(user_id)
   .then(user => {
+    if(!user) {
+      return res.status(404).json({
+        statusCode: 404,
+          status: 'Error', 
+          message: 'Invalid userId, user not found. ',
+          userDetails: null,
+          request: {
+            url: `${baseURL}/user/${user_id}`,
+            verb: 'DELETE'
+          }
+      });
+    }
     // console.log(user);
     return res.status(200).json({
-      message: 'User Deleted'
+      statusCode: 200,
+      status: 'Success', 
+      message: 'Valid userId, user deleted successfully.',
+      userDetails: null,
+      request: {
+        url: `${baseURL}/user/${user_id}`,
+        verb: 'DELETE'
+      }
     });
   })
-  .catch(err => {
-    console.log(err);
+  .catch(error => {
+    // console.log(err);
+    next(error);
   })
 }

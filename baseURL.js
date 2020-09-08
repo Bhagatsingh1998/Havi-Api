@@ -1,0 +1,1 @@
+exports.baseURL = 'https://person-api-app.herokuapp.com';
