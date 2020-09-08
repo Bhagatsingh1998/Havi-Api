@@ -184,7 +184,7 @@ const Documentation = props => {
             <br />
             <br />
             <hr />
-            <p style={{textAlign: 'center'}} >Thank You 🙂</p>
+            <p style={{textAlign: 'center'}} >Thank You <span>🙂</span></p>
             <br/>
             <hr/>
             <hr/>

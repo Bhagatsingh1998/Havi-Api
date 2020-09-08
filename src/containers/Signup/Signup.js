@@ -34,7 +34,7 @@ class Signup extends Component {
   // }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate');
+    // console.log('componentDidUpdate');
     if(!this.state.signup) {
       return;
     } 
@@ -51,11 +51,11 @@ class Signup extends Component {
         isAdmin: this.state.isAdmin,
         avtarNumber: this.state.avtarNumber
       };
-      console.log('data', data);
+      // console.log('data', data);
 
-      axios.post('https://person-api-app.herokuapp.com/user/signup', data)
+      axios.post('/user/signup', data)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         this.setState({
           name: '',
           email: '',
@@ -70,25 +70,19 @@ class Signup extends Component {
           signup: false,
           message: response.data,
         });
-        console.log(this.state);
+        // console.log(this.state);
         this.props.signupToggle();
         this.props.signinToggle();
       })
       .catch(error => {
-        console.log('error');
         console.log(error);
       });
     }
   }
 
-  componentWillUnmount(){
-    console.log('componentWillUnmount');
-    // if(this.state.remove) {
-    //   this.setState({remove: false});
-    //   console.log('remove true');
-    //   return true;
-    // }
-  }
+  // componentWillUnmount(){
+  //   console.log('componentWillUnmount');
+  // }
 
   signupHandler = (event) => {
     // console.log('aa');
@@ -191,25 +185,25 @@ class Signup extends Component {
             <div className={classes.holder}>
               <img src={av1} alt="" />
             </div>
-            <input type="radio" required name="avatar" onChange={this.avatarHandler} value="av1" />
+            <input type="radio" required name="avatar" onChange={this.avatarHandler} value="boy" />
           </div>
           <div className={classes.avatar}>
             <div className={classes.holder}>
               <img src={av2} alt="" />
             </div>
-            <input type="radio" required  name="avatar" onChange={this.avatarHandler} value="av2" />
+            <input type="radio" required  name="avatar" onChange={this.avatarHandler} value="gentleman" />
           </div>
           <div className={classes.avatar}>
             <div className={classes.holder}>
               <img src={av3} alt="" />
             </div>
-            <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="av3" />
+            <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="girl" />
           </div>
           <div className={classes.avatar}>
             <div className={classes.holder}>
               <img src={av4} alt="" />
             </div>
-            <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="av4" />
+            <input type="radio"  required name="avatar" onChange={this.avatarHandler} value="gentlewomen" />
           </div>
         </div>
       </div>

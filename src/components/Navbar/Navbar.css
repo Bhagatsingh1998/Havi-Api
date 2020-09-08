@@ -50,6 +50,7 @@ nav ul {
   color: white;
   border: 5px solid transparent;
   padding: 1%;
+  cursor: pointer;
 }
 
 .navItem:hover {
@@ -73,4 +74,4 @@ nav ul {
     /* padding: 1%; */
   }
   
-}
+} 

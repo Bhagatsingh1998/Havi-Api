@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import UserDetails from "../../components/UserDetails/UserDetails";
+import UserDetails from "./UserDetails/UserDetails";
 import UserEdits from "./UserEdit/UserEdit";
 import classes from "./Admin.css";
 import av1 from "./../../assets/images/avtars/av1.png";
@@ -15,22 +15,38 @@ class Admin extends Component {
     showEdits: false,
     allUsers: [],
     currentUser: false,
-    delete: false
+    delete: false,
+    counter: 0
   };
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     this.loadUsers();
   }
 
+  // shouldComponentUpdate(prevProps, prevState) {
+  //   if(this.props !== prevProps) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
+  componentDidUpdate() {
+    if(this.state.counter === 0) {
+      // console.log(this.props);
+      this.loadUsers();
+      
+    }
+    
+  }
 
   loadUsers = () => {
     axios
-      .get("https://person-api-app.herokuapp.com/user")
+      .get("/user")
       .then((response) => {
-        console.log(response);
-        this.setState({ allUsers: response.data.users });
+        // console.log(response);
+        this.setState({ allUsers: response.data.users, counter: 1 });
       })
       .catch((err) => {
         console.log(err);
@@ -46,9 +62,9 @@ class Admin extends Component {
   };
 
   deleteHandler = (id) => {
-    axios.delete('https://person-api-app.herokuapp.com/user/'+ id)
+    axios.delete('/user/'+ id)
     .then(response => {
-      console.log(response);
+      // console.log(response);
       this.loadUsers();
       // this.setState({delete: !this.state.delete});
     })
@@ -57,20 +73,22 @@ class Admin extends Component {
     });
   };
 
-  
+  counterHandler = () => {
+    this.setState({counter: 0});
+  }
 
   render() {
     // let articelClasses = [classes.card, classes.userItem];
 
     let allArticles = this.state.allUsers.map((user) => {
       let avtar;
-      if (user.avtarNumber === "av1") {
+      if (user.avtarNumber === "boy") {
         avtar = av1;
-      } else if (user.avtarNumber === "av2") {
+      } else if (user.avtarNumber === "gentleman") {
         avtar = av2;
-      } else if (user.avtarNumber === "av3") {
+      } else if (user.avtarNumber === "girl") {
         avtar = av3;
-      } else if (user.avtarNumber === "av4") {
+      } else if (user.avtarNumber === "gentlewomen") {
         avtar = av4;
       }
       return (
@@ -117,6 +135,10 @@ class Admin extends Component {
     return (
       <React.Fragment>
         {grid}
+        <br />
+        <br />
+        <hr />
+        <br />
         <UserDetails
           show={this.state.showDetails}
           showDetailsHandler={(data) => this.showDetailsHandler(data)}
@@ -126,6 +148,7 @@ class Admin extends Component {
           show={this.state.showEdits}
           showEditsHandler={(data) => this.showEditsHandler(data)}
           currentUser={this.state.currentUser}
+          counterHandler={this.counterHandler}
         />
       </React.Fragment>
     );

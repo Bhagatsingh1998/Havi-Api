@@ -21,10 +21,10 @@ class UserEdit extends PureComponent {
     initial: 0
   };
 
-  componentDidMount() {
-    console.log(this.props.currentUser);
-    console.log(this.state);
-  }
+  // componentDidMount() {
+  //   console.log(this.props.currentUser);
+  //   console.log(this.state);
+  // }
 
   componentDidUpdate() {
     // console.log(this.state.counter);
@@ -41,14 +41,14 @@ class UserEdit extends PureComponent {
 
     if(this.state.initial) {
       this.setState({initial: 0});
-      console.log(this.state);
+      // console.log(this.state);
       return true;
     }
     // console.log(this.state);
     // console.log(this.props.currentUser);
 
     if(this.state.edit) {
-      console.log('aa');
+      
       let data = {
         name: this.state.name,
         userName: this.state.userName,
@@ -57,11 +57,12 @@ class UserEdit extends PureComponent {
         gender: this.state.gender
       };
 
-      axios.patch('https://person-api-app.herokuapp.com/user/'+ this.props.currentUser._id, data)
+      axios.patch('/user/'+ this.props.currentUser._id, data)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         this.setState({edit: false});
         this.props.showEditsHandler(false);
+        this.props.counterHandler();
       })
       .catch(err => {
         console.log(err);
@@ -70,12 +71,13 @@ class UserEdit extends PureComponent {
   }
 
   updateHandler = () => {
-    console.log('update');
+    // console.log('update');
     this.setState({edit: true});
+    // this.props.counterHandler();
   }
 
   nameEditHandler = (event) => {
-    console.log(this.state);
+    // console.log(this.state);
     this.setState({ name: event.target.value, initial: 1});
   };
 
@@ -92,19 +94,18 @@ class UserEdit extends PureComponent {
   };
 
   genderEditHandler = (event) => {
-    console.log('a');
     this.setState({ gender: event.target.value, initial: 1 });
   };
 
   render() {
     let avtar;
-    if (this.props.currentUser.avtarNumber === "av1") {
+    if (this.props.currentUser.avtarNumber === "boy") {
       avtar = av1;
-    } else if (this.props.currentUser.avtarNumber === "av2") {
+    } else if (this.props.currentUser.avtarNumber === "gentleman") {
       avtar = av2;
-    } else if (this.props.currentUser.avtarNumber === "av3") {
+    } else if (this.props.currentUser.avtarNumber === "girl") {
       avtar = av3;
-    } else if (this.props.currentUser.avtarNumber === "av4") {
+    } else if (this.props.currentUser.avtarNumber === "gentlewomen") {
       avtar = av4;
     }
 
@@ -156,7 +157,7 @@ class UserEdit extends PureComponent {
           </div>
           <div className={classes.otherInfo}>
             <div className={classes.label}>Email</div>
-            <div className={classes.labelInfo}>test@test.com</div>
+            <div className={classes.labelInfo}>{this.props.currentUser.email}</div>
           </div>
           <div className={classes.otherInfo}>
             <div className={classes.label}>Phone Number</div>
@@ -198,10 +199,10 @@ class UserEdit extends PureComponent {
           </div> */}
           <div className={classes.otherInfo}>
             <div className={classes.label}>Registered On</div>
-            <div className={classes.labelInfo}>23-8-202</div>
+            <div className={classes.labelInfo}>{this.props.currentUser.signupTime}</div>
           </div>
           <div className={classes.otherInfo}>
-            <div className={classes.label}>LoggedIn History</div>
+            <div className={classes.label}>LoggedIn <br/> History</div>
             <div className={classes.labelInfo}>
               <ol>{loggedInHistory}</ol>
             </div>
@@ -231,7 +232,7 @@ class UserEdit extends PureComponent {
               variant="danger"
               onClick={() => this.props.showEditsHandler(false)}
             >
-              Close
+              Cancle
             </Button>
             <Button
               variant="success"

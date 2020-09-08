@@ -61,7 +61,7 @@ const Navbar = (props) => {
         </li>
         <li className={classes.navItem} onClick={props.logout}>
           Logout
-        </li>
+        </li>        
       </>
     );
   }

@@ -24,6 +24,7 @@ main {
   width: 300px;
   box-shadow: 10px 10px 10px var(--pink);
   text-align: center;
+  margin-bottom: 5%;
 }
 
 .card__header,
@@ -83,6 +84,5 @@ main {
 @media(max-width: 420px) {
   .card {
     width: 330px;
-    margin-bottom: 5%;
   }
 }

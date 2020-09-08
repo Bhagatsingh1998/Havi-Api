@@ -27,3 +27,24 @@
 .label {
   width: 40%;
 }
+
+.labelInfo {
+  width: 60%;
+}
+
+@media(max-width: 420px) {
+  .editForms {
+    width: 100%;
+    margin: auto;
+  }
+
+  .labelInfo ol {
+    padding: 0;
+    margin: 0;
+  }
+
+  .labelInfo ul {
+    padding: 0;
+    margin: 0;
+  }
+}

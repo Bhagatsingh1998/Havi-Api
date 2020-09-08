@@ -9,19 +9,21 @@ class Login extends Component {
     email: null,
     password: null,
     login: false,
-    logincounter: 0
+    logincounter: 1,
+    errorMsg: null
   };
 
   componentDidUpdate() {
-    if(this.state.login && this.state.logincounter == 0) {
+    if(this.state.login && this.state.logincounter === 0) {
       let data = {
         email: this.state.email,
         password: this.state.password
       }
-      console.log(data);
-      axios.post('https://person-api-app.herokuapp.com/user/login',data)
+      // console.log(data);
+      axios.post('/user/login',data)
       .then(response => {
         console.log(response.data);
+        
         this.setState({logincounter: 1})
         this.props.signinToggle();
         if(response.data.userDetails.userType === 'User') {
@@ -32,7 +34,10 @@ class Login extends Component {
         }
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err.message);
+        // console.log(err.response.data);
+        // msg = err.response.data.message;
+        this.setState({errorMsg: err.response.data.message})
       });
     } else {
       return;
@@ -41,7 +46,7 @@ class Login extends Component {
 
   loginHandler = event => {
     event.preventDefault();
-    this.setState({login: true});
+    this.setState({login: true, logincounter: 0});
   }
 
   emailHandler = event => {
@@ -53,6 +58,11 @@ class Login extends Component {
   }
 
   render() {
+    let errorComp = null;
+    if(this.state.errorMsg) {
+      errorComp = <p style={{textAlign: 'center', color: 'red'}}>{this.state.errorMsg}</p>
+    }
+
     return (
       <>
         <Modal show={this.props.show} onHide={this.props.signinToggle}>
@@ -60,6 +70,7 @@ class Login extends Component {
             <Modal.Title>LogIn</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            { errorComp }
             <form id="login-form" onSubmit={this.loginHandler} className={classes.loginForm}>
               <div  className={classes.label}>
                 <input type="text" onChange={this.emailHandler} required placeholder="Email" />

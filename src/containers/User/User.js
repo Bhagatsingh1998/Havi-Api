@@ -8,6 +8,7 @@ class User extends Component {
     toDolists: [],
     currentList: "",
     counter: 0,
+    todoMsg: ''
   };
 
   componentDidMount() {
@@ -22,9 +23,9 @@ class User extends Component {
   }
 
   loadDetails = () => {
-    console.log('loaded');
+    // console.log('loaded');
     return axios
-      .get("https://person-api-app.herokuapp.com/user/" + this.props.activeUser._id)
+      .get("/user/" + this.props.activeUser._id)
       .then((response) => {
         // console.log(response.data.userDetails.toDoList);
         this.setState({toDolists: response.data.userDetails.toDoList})
@@ -47,13 +48,13 @@ class User extends Component {
   };
 
   addListHandler = (event) => {
-    console.log(this.props.activeUser._id);
+    // console.log(this.props.activeUser._id);
     axios
-      .post("https://person-api-app.herokuapp.com/user/" + this.props.activeUser._id, {
+      .post("/user/" + this.props.activeUser._id, {
         data: this.state.currentList,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         this.setState({ counter: 1, currentList: " " });
       })
       .catch((err) => {
@@ -62,10 +63,10 @@ class User extends Component {
   };
 
   render() {
-    console.log(this.state.toDolists);
+    // console.log(this.state.toDolists);
     let arr = this.state.toDolists.reverse();
     let allLists = arr.map((el) => {
-      console.log(el);
+      // console.log(el);
       return (
         <li key={Math.random()}>
           <input type="checkbox" style={{ marginRight: "1.5%" }} />
