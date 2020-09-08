@@ -19,7 +19,7 @@ class Login extends Component {
         password: this.state.password
       }
       console.log(data);
-      axios.post('http://localhost:5000/user/login',data)
+      axios.post('https://person-api-app.herokuapp.com/user/login',data)
       .then(response => {
         console.log(response.data);
         this.setState({logincounter: 1})

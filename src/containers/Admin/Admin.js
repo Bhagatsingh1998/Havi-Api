@@ -27,7 +27,7 @@ class Admin extends Component {
 
   loadUsers = () => {
     axios
-      .get("http://localhost:5000/user")
+      .get("https://person-api-app.herokuapp.com/user")
       .then((response) => {
         console.log(response);
         this.setState({ allUsers: response.data.users });
@@ -46,7 +46,7 @@ class Admin extends Component {
   };
 
   deleteHandler = (id) => {
-    axios.delete('http://localhost:5000/user/'+ id)
+    axios.delete('https://person-api-app.herokuapp.com/user/'+ id)
     .then(response => {
       console.log(response);
       this.loadUsers();

@@ -53,7 +53,7 @@ class Signup extends Component {
       };
       console.log('data', data);
 
-      axios.post('http://localhost:5000/user/signup', data)
+      axios.post('https://person-api-app.herokuapp.com/user/signup', data)
       .then(response => {
         console.log(response);
         this.setState({

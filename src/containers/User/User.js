@@ -24,7 +24,7 @@ class User extends Component {
   loadDetails = () => {
     console.log('loaded');
     return axios
-      .get("http://localhost:5000/user/" + this.props.activeUser._id)
+      .get("https://person-api-app.herokuapp.com/user/" + this.props.activeUser._id)
       .then((response) => {
         // console.log(response.data.userDetails.toDoList);
         this.setState({toDolists: response.data.userDetails.toDoList})
@@ -49,7 +49,7 @@ class User extends Component {
   addListHandler = (event) => {
     console.log(this.props.activeUser._id);
     axios
-      .post("http://localhost:5000/user/" + this.props.activeUser._id, {
+      .post("https://person-api-app.herokuapp.com/user/" + this.props.activeUser._id, {
         data: this.state.currentList,
       })
       .then((response) => {

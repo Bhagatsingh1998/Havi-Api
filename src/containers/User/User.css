@@ -122,3 +122,17 @@ body {
   font-weight: bolder;
   color: red;
 }
+
+@media(max-width: 420px) {
+  .todo {
+    width: 95%;
+  }
+
+  .inputListItem {
+    width: 80%;
+  }
+
+  .addButton {
+    width: 18%;
+  }
+}

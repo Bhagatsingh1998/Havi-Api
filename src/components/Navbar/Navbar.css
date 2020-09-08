@@ -56,3 +56,21 @@ nav ul {
   background-color: var(--darkBlue);
   border: 5px solid var(--pink);
 }
+
+@media(max-width: 420px) {
+  .hero {
+    /* flex: 1; */
+    padding: 1% 2%;
+  }
+
+  .navItem {
+    /* margin: 1% 2%; */
+    font-size: medium;
+    /* text-justify: auto; */
+    color: white;
+    border: 5px solid transparent;
+    margin: auto;
+    /* padding: 1%; */
+  }
+  
+}

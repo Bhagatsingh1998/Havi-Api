@@ -130,3 +130,35 @@ input::-webkit-inner-spin-button {
   height: 100%;
   object-fit: contain;
 }
+
+@media(max-width: 420px) {
+  .label {
+    padding-left: 0;
+  }
+
+  .label input[type="text"] {
+    width: 100%;
+  }
+
+  .label input[type="password"] {
+    width: 100%;
+  }
+
+  .label input[type="number"] {
+    width: 100%;
+  }
+
+  .label input[type="date"] {
+    width: 45%;
+    margin-left: 10%;
+  }
+
+  .label select {
+    width: 100%;
+  }
+
+  .avatar {
+    margin: 0% 1%;
+  }
+  
+}

@@ -57,7 +57,7 @@ class UserEdit extends PureComponent {
         gender: this.state.gender
       };
 
-      axios.patch('http://localhost:5000/user/'+ this.props.currentUser._id, data)
+      axios.patch('https://person-api-app.herokuapp.com/user/'+ this.props.currentUser._id, data)
       .then(response => {
         console.log(response);
         this.setState({edit: false});
@@ -131,7 +131,7 @@ class UserEdit extends PureComponent {
 
     let editModal = (
       <React.Fragment>
-        <form id="edit-form">
+        <form id="edit-form" className={classes.editForms}>
           <div className={classes.mainInfo}>
             <div className={classes.holder}>
               <img src={avtar} alt="" />

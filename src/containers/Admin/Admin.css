@@ -79,3 +79,10 @@ main {
   background-color: var(--pink);
   color: white;
 }
+
+@media(max-width: 420px) {
+  .card {
+    width: 330px;
+    margin-bottom: 5%;
+  }
+}
