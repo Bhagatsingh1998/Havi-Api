@@ -143,6 +143,7 @@ class UserEdit extends PureComponent {
                   type="text"
                   value={this.state.name}
                   onChange={this.nameEditHandler}
+                  minLength="3"
                 />
               </h3>
               <h5>
@@ -151,6 +152,7 @@ class UserEdit extends PureComponent {
                   type="text"
                   value={this.state.userName}
                   onChange={this.userNameEditHandler}
+                  minLength="4"
                 />
               </h5>
             </div>
@@ -166,6 +168,8 @@ class UserEdit extends PureComponent {
                 type="number"
                 value={this.state.phone}
                 onChange={this.phoneEditHandler}
+                minLength="1000000000"
+                maxLength="9999999999"
               />
             </div>
           </div>
@@ -176,6 +180,8 @@ class UserEdit extends PureComponent {
                 type="date"
                 value={this.state.dob}
                 onChange={this.dobEditHandler}
+                min="1920-01-01"
+                max="2020-01-01"
               />
             </div>
           </div>

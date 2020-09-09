@@ -24,6 +24,21 @@
   border-bottom: 2px solid var(--darkPurple);
 }
 
+.label input[type="email"] {
+  padding: 1% 2%;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px dotted var(--pink);
+  transition: border-bottom 2s;
+  width: 80%;
+}
+
+.label input[type="email"]:focus {
+  border-bottom: 2px solid var(--darkPurple);
+}
+
 .label input[type="password"] {
   padding: 1% 2%;
   outline: none;
@@ -137,6 +152,10 @@ input::-webkit-inner-spin-button {
   }
 
   .label input[type="text"] {
+    width: 100%;
+  }
+
+  .label input[type="email"] {
     width: 100%;
   }
 

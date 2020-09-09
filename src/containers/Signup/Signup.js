@@ -146,27 +146,27 @@ class Signup extends Component {
     let signupComponent =
     <form onSubmit={this.signupHandler} id="signup-form">
       <div  className={classes.label}>
-        <input type="text" onChange={this.nameHandler} value={this.state.name} required placeholder="Your Full Name" />
+        <input type="text" onChange={this.nameHandler} minLength="3" value={this.state.name} required placeholder="Your Full Name" />
       </div>
       <div  className={classes.label}>
-        <input type="text" onChange={this.emailHandler}  value={this.state.email} required placeholder="Email" />
+        <input type="email" onChange={this.emailHandler}  value={this.state.email} required placeholder="Email" />
       </div>
       <div  className={classes.label}>
-        <input type="text" onChange={this.usernameHandler} value={this.state.userName} required placeholder="UserName" />
+        <input type="text" onChange={this.usernameHandler} minLength="4" value={this.state.userName} required placeholder="UserName" />
       </div>
       <div  className={classes.label}>
-        <input type="number" onChange={this.phoneHandler} value={this.state.phone} required placeholder="Phone Number" />
+        <input type="number" onChange={this.phoneHandler} min={1000000000} max={9999999999} value={this.state.phone} required placeholder="Phone Number" />
       </div>
       <div className={classes.label}>
-        <input type="password" onChange={this.passwordHandler} value={this.state.password} required placeholder="Password" />
+        <input type="password" onChange={this.passwordHandler} minLength="6" value={this.state.password} required placeholder="Password" />
       </div>
       <div className={classes.label}>
-        <input type="password" onChange={this.cpasswordHandler} value={this.state.cpassword} required placeholder="Confirm Password" />
+        <input type="password" onChange={this.cpasswordHandler} minLength="6" value={this.state.cpassword} required placeholder="Confirm Password" />
       </div>
       <div  className={classes.label}>
         <div className={classes.subLabel}>
           <span><strong>Date of Birth</strong> </span>
-          <input required onChange={this.dobHandler} value={this.state.dob} type="date" placeholder="DOB" />  
+          <input required onChange={this.dobHandler} min="1920-01-01" max="2020-01-01" value={this.state.dob} type="date" placeholder="DOB" />  
         </div>
       </div>
       <div  className={classes.label}>

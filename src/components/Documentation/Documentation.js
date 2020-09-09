@@ -317,7 +317,7 @@ const Documentation = props => {
                 </ul>
               </ul>
             </p>
-            <h4><strong>1.2v</strong>: Upcoming Version</h4>
+            <h4><strong>1.3v</strong>: Upcoming Version</h4>
             <p>
               <ul>
                 <li>What  yet to come? </li>
