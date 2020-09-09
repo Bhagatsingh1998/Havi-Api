@@ -73,10 +73,10 @@ class Login extends Component {
             { errorComp }
             <form id="login-form" onSubmit={this.loginHandler} className={classes.loginForm}>
               <div  className={classes.label}>
-                <input type="text" onChange={this.emailHandler} required placeholder="Email" />
+                <input type="email" onChange={this.emailHandler} required placeholder="Email" />
               </div>
               <div className={classes.label}>
-                <input type="password" onChange={this.passwordHandler} required placeholder="Password" />
+                <input type="password" minLength="6" onChange={this.passwordHandler} required placeholder="Password" />
               </div>
             </form>
           </Modal.Body>

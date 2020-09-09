@@ -272,22 +272,22 @@ const Documentation = props => {
               <li>Admin 1</li>
               <ul>
                 <li>Email: admin1@admin.com</li>
-                <li>Password: admin</li>
+                <li>Password: admin1</li>
               </ul>
               <li>Admin 2</li>
               <ul>
                 <li>Email: admin2@admin.com</li>
-                <li>Password: admin</li>
+                <li>Password: admin2</li>
               </ul>
               <li>User 1</li>
               <ul>
-                <li>Email: user@user.com</li>
-                <li>Password: user</li>
+                <li>Email: user1@user.com</li>
+                <li>Password: user11</li>
               </ul>
               <li>User 2</li>
               <ul>
                 <li>Email: user2@user.com</li>
-                <li>Password: user</li>
+                <li>Password: user22</li>
               </ul>
             </ol>
             <br />
