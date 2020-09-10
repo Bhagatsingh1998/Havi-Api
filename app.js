@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors');
 
 const apiRoutes = require('./routes/api');
+const tableRoutes = require('./routes/tableRoutes');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +27,8 @@ app.use((req, res, next) => {
 const MONGODB_URI = `mongodb+srv://owner:owner@nodeapp-oke9f.mongodb.net/HaviAPI`;
 const PORT = process.env.Port || 5000;
 
-app.use('/user',apiRoutes);
+app.use('/user', apiRoutes);
+app.use('/table', tableRoutes);
 
 app.use((req, res, next) => { 
   const error = new Error("Technical Error. Try after some time");
