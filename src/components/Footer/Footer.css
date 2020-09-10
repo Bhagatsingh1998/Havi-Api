@@ -1,0 +1,20 @@
+.Footer {
+  background-color: #f8f9fa;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 1% 2%;
+  text-align: center;
+}
+
+.Footer p {
+  padding: 0;
+}
+
+.Footer p i {
+  padding-right: 2%;
+}
+
+.Footer p a {
+  text-decoration: underline;
+}

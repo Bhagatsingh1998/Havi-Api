@@ -1,0 +1,14 @@
+.Navbar {
+  /* background-color: red; */
+}
+
+.LogoHolder {
+  width: 30%;
+  height: 50px;
+}
+
+.LogoHolder img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
