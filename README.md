@@ -1,3 +1,13 @@
+# Task:
+Need to create a data table. Though this url is in reactJS, you can do with any other framework including React. 
+Reference URL <br />
+[http://react-material.fusetheme.com/documentation/material-ui-components/tables]http://react-material.fusetheme.com/documentation/material-ui-components/tables <br />
+-Need to create the gird exactly like “Sorting and selecting” table in this page.
+-The title row of the table should be styled like “Fixed header” table in this page.
+-Add feature of search from “Editable example” table in this page.
+-All styles, effects and functionalities must match. 0% Tolerance.#
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
