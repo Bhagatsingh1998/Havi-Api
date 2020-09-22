@@ -286,18 +286,35 @@ function searchRow(event) {
   let text;
 
   setTimeout(() => {
-    text = search.value;
-    console.log(text);
+    // console.log(search);
+    text = document.querySelector("#search").value;
+    text = text.toLowerCase();
+    // console.log(text);
 
-    let result = data.filter(
-      (el) =>
-        el.fname.includes(text) ||
-        el.lname.includes(text) ||
+    // let result = data.filter(
+    //   (el) =>
+    //     el.fname.includes(text) ||
+    //     el.lname.includes(text) ||
+    //     el.doy.toString().includes(text) ||
+    //     el.city.includes(text)
+    // );
+
+    let result = [];
+    data.map((el) => {
+      console.log(text);
+      if (
+        el.fname.toLowerCase().includes(text) ||
+        el.lname.toLowerCase().includes(text) ||
         el.doy.toString().includes(text) ||
-        el.city.includes(text)
-    );
+        el.city.toLowerCase().includes(text)
+      ) {
+        result.push(el);
+        // console.log(result);
+      }
+    });
 
     if (text) {
+      console.log(result);
       allRowsOnSearch(result);
     } else {
       allRows();
