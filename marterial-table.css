@@ -1,0 +1,278 @@
+:root {
+  --heading: #f50057;
+  --header: #ff80ab;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* common */
+
+nav,
+footer {
+  background-color: #e0e0e0 !important;
+}
+
+/* navbar */
+.brand-logo img {
+  position: relative;
+  padding-top: 8%;
+  padding-bottom: 8%;
+}
+
+
+/* card */
+.card-header {
+  margin-bottom: 5%;
+}
+
+.card-title {
+  display: inline-block !important;
+}
+
+.card-content {
+  /* padding: 2% 5%; */
+}
+
+.actions {
+  display: flex;
+}
+
+.search {
+  display: flex;
+  border-bottom: 1px solid black;
+}
+
+.input-field {
+  margin: 0 !important;
+  padding-bottom: 2%;
+}
+
+input[type="text"] {
+  border: 0 !important;
+  outline: none !important;
+  margin: 0 !important;
+}
+
+input[type="text"]:focus {
+  border: 0 !important;
+  outline: none !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.btn-floating {
+  background-color: #fff !important;
+}
+
+.btn-floating:hover {
+  background-color: #e0e0e0 !important;
+}
+
+
+/* table */
+
+.table {
+  overflow-x: auto;
+  height: 450px;
+}
+
+
+thead tr {
+  border-bottom: 0 !important;
+}
+
+tbody th {
+  padding-top: 0 !important;
+}
+
+.actions-icons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+
+/* pagination */
+
+.whole-pagination {
+  padding-top: 15px;
+  display: flex;
+}
+
+.pagination-space {
+  flex: 1;
+}
+
+.pagination-range {
+  flex: 1;
+}
+
+.select-wrapper input.select-dropdown {
+  left: 25%;
+  width: 50% !important;
+  color: black !important;
+  background-color: #f5f5f5  !important;
+  /* padding: 0 5px 0 0 !important; */
+}
+
+.select-wrapper .caret {
+  left: 66% !important;
+  /* color: gray !important; */
+  z-index: 2 !important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #000 !important;
+}
+
+.pagination {
+  /* flex: 1; */
+  display: block;
+  width: 180px !important;
+  margin: auto 0 !important;
+}
+
+.pagination span a {
+  padding: 0 !important;
+  color: gray !important;
+}
+
+/* footer */
+
+.page-footer {
+  color: #000 !important;
+}
+
+i {
+  padding-right: 2%;
+}
+
+i a {
+  padding-bottom: 2%;
+  color: #000 !important;
+}
+
+
+@media(max-width: 555px) {
+
+  table {
+    width: 500px;
+  }
+
+  .pagination-space {
+    flex: 0 !important;
+  }
+
+}
+
+@media(max-width: 471px) {
+
+  .table {
+    width: 100%;
+  }
+
+  table {
+    width: 500px;
+  }
+
+}
+
+
+/* dynamic */
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+  border-color: #f50057 !important;
+  background-color: #f50057 !important;
+}
+
+.dropdownBox .select-wrapper input.select-dropdown{
+  width: 100% !important;
+  position: relative;
+  left: 0px !important;
+}
+
+.dropdownBox .select-wrapper .caret {
+
+  left: 90% !important;
+}
+
+#firstName {
+  border-bottom: 1px solid gray !important;
+}
+
+#lastName {
+  border-bottom: 1px solid gray !important;
+}
+
+#firstName:focus {
+  border-bottom: 1px solid #f50057 !important;
+}
+
+#lastName:focus {
+  border-bottom: 1px solid #f50057 !important;
+}
+
+input[type="number"] {
+  margin: 0 !important;
+  border-bottom: 1px solid gray !important;
+}
+
+input[type="number"]:not(.browser-default):focus {
+  border-bottom: 1px solid #f50057 !important;
+  box-shadow: none !important;
+}
+
+.actions-box {
+  width: 10% !important;
+}
+
+.username-box,
+.doy-box,
+.city-box {
+  width: 20% !important;
+}
+
+.card .card-content {
+  padding: 0 !important;
+}
+
+.card-header-text {
+  padding:  45px 30px 20px 30px !important;
+}
+
+.card-header {
+  margin-bottom: 0 !important;
+}
+
+.card-main-text {
+  padding: 0 24px 24px 24px !important;
+}
+
+#add-dropdownBox .select-wrapper input.select-dropdown {
+  width: 100% !important;
+  left: 0 !important;
+}
+
+#add-dropdownBox .select-wrapper .caret {
+  left: 90% !important;
+}
+
+th div{
+  display: flex !important;
+  flex-wrap: nowrap !important;
+}
+
+#row_num .select-wrapper input.select-dropdown{
+  padding-left: 10% !important;
+}
+
+#row_num .select-wrapper .caret {
+  left: 80% !important;
+}
