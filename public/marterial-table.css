@@ -34,12 +34,10 @@ footer {
 }
 
 .card-title {
+  flex: 1 !important;
   display: inline-block !important;
 }
 
-.card-content {
-  /* padding: 2% 5%; */
-}
 
 .actions {
   display: flex;
@@ -81,7 +79,7 @@ input[type="text"]:focus {
 
 .table {
   overflow-x: auto;
-  height: 450px;
+  height: 480px;
 }
 
 
@@ -102,7 +100,7 @@ tbody th {
 /* pagination */
 
 .whole-pagination {
-  padding-top: 15px;
+  /* padding-top: 15px; */
   display: flex;
 }
 
@@ -114,11 +112,15 @@ tbody th {
   flex: 1;
 }
 
+.select-wrapper {
+  padding-top: 10px;
+}
+
 .select-wrapper input.select-dropdown {
   left: 25%;
   width: 50% !important;
   color: black !important;
-  background-color: #f5f5f5  !important;
+  background-color: #f5f5f5 !important;
   /* padding: 0 5px 0 0 !important; */
 }
 
@@ -128,7 +130,8 @@ tbody th {
   z-index: 2 !important;
 }
 
-.dropdown-content li > a, .dropdown-content li > span {
+.dropdown-content li>a,
+.dropdown-content li>span {
   color: #000 !important;
 }
 
@@ -166,8 +169,20 @@ i a {
     width: 500px;
   }
 
+  .actions {
+    width: 60%;
+  }
+
+  .card-header-text {
+    font-size: small;
+  }
+
   .pagination-space {
     flex: 0 !important;
+  }
+
+  #row_num .select-wrapper .caret {
+    left: 75% !important;
   }
 
 }
@@ -182,6 +197,13 @@ i a {
     width: 500px;
   }
 
+  
+  
+
+}
+
+.select-wrapper .caret {
+  top: 10px !important;
 }
 
 
@@ -192,7 +214,7 @@ i a {
   background-color: #f50057 !important;
 }
 
-.dropdownBox .select-wrapper input.select-dropdown{
+.dropdownBox .select-wrapper input.select-dropdown {
   width: 100% !important;
   position: relative;
   left: 0px !important;
@@ -200,7 +222,7 @@ i a {
 
 .dropdownBox .select-wrapper .caret {
 
-  left: 90% !important;
+  /* left: 90% !important; */
 }
 
 #firstName {
@@ -244,7 +266,9 @@ input[type="number"]:not(.browser-default):focus {
 }
 
 .card-header-text {
-  padding:  45px 30px 20px 30px !important;
+  display: flex !important;
+  flex-wrap: nowrap;
+  padding: 0px 15px 10px 15px !important;
 }
 
 .card-header {
@@ -252,7 +276,7 @@ input[type="number"]:not(.browser-default):focus {
 }
 
 .card-main-text {
-  padding: 0 24px 24px 24px !important;
+  padding: 0 24px 10px 24px !important;
 }
 
 #add-dropdownBox .select-wrapper input.select-dropdown {
@@ -264,15 +288,53 @@ input[type="number"]:not(.browser-default):focus {
   left: 90% !important;
 }
 
-th div{
+th div {
   display: flex !important;
   flex-wrap: nowrap !important;
 }
 
-#row_num .select-wrapper input.select-dropdown{
+th div p {
+  padding-right: 10px !important;
+}
+
+#row_num .select-wrapper input.select-dropdown {
   padding-left: 10% !important;
 }
 
-#row_num .select-wrapper .caret {
-  left: 80% !important;
+
+.waves-effect a i img{
+  margin-top: 25px !important;
+}
+
+.container {
+  width: 100% !important;
+}
+
+.add-box {
+  padding-bottom: 8%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card-title {
+  flex: 1;
+  padding-top: 28px !important;
+  padding-right: 10px !important;
+}
+
+.delete-box {
+  padding-top: 28px !important;
+}
+
+.filter-arrow span{
+  opacity: 0;
+}
+
+.filter-arrow:hover span{
+  opacity: 1;
+}
+
+.error-box {
+  position: absolute;
+  width: 300px;
 }

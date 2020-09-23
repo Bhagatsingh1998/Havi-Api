@@ -19,43 +19,50 @@ let data = [
   { id: 465, fname: "India", lname: "Romeo", doy: 1920, city: "Delhi" },
 ];
 
-console.log(typeof data);
+// console.log(typeof data);
 
-const allRows = () => {
-  // console.log(data);
-  tbody.innerHTML = "";
+// const allRows = () => {
+//   // console.log(data);
+//   tbody.innerHTML = "";
 
-  data.forEach((rowData) => {
-    let row = `
-    <tr data-id=${rowData.id} >
-      <td class="check-box">
-        <label>
-          <input type="checkbox" onclick="singleSelect(this)" name="checkRow"  class="filled-in singleCheckBox" autocomplete="off" />
-          <span></span>
-        </label>
-      </td>
-      <td class="actions-box">
-        <span class="actions-icons">
-          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="updateRow(event)">edit</i></a>
-          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteRow(event)">delete</i></a>
-        </span>
-      </td>
-      <td class="username-box" >${rowData.fname}</td>
-      <td class="username-box">${rowData.lname}</td>
-      <td class="doy-box">${rowData.doy}</td>
-      <td class="city-box">${rowData.city}</td>
-    </tr>`;
-    tbody.innerHTML += row;
-  });
-  selectMethod();
-};
-allRows();
+//   data.forEach((rowData) => {
+//     let row = `
+//     <tr data-id=${rowData.id} >
+//       <td class="check-box">
+//         <label>
+//           <input type="checkbox" onclick="singleSelect(this)" name="checkRow"  class="filled-in singleCheckBox" autocomplete="off" />
+//           <span></span>
+//         </label>
+//       </td>
+//       <td class="actions-box">
+//         <span class="actions-icons">
+//           <a class="btn-floating z-depth-0" ><i class="material-icons black-text" onclick="updateRow(event)"><img src="./icons/baseline_create_black_18dp.png" onclick="updateRow(event, true) ></i></a>
+//           <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteRow(event)"><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteRow(event, true)></i></a>
+//         </span>
+//       </td>
+//       <td class="username-box" >${rowData.fname}</td>
+//       <td class="username-box">${rowData.lname}</td>
+//       <td class="doy-box">${rowData.doy}</td>
+//       <td class="city-box">${rowData.city}</td>
+//     </tr>`;
+//     tbody.innerHTML += row;
+//   });
+//   selectMethod();
+// };
+// allRows();
 
-function updateRow(e) {
+function updateRow(e, optionalData = false) {
+  // console.log(optionalData);
   // console.log(e.target.parentElement.parentElement.parentElement.parentElement);
 
-  const element =
+  let element =
     e.target.parentElement.parentElement.parentElement.parentElement;
+
+  if (optionalData) {
+    element =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement;
+  }
   // console.log(element);
   const rowId = element.dataset.id;
   // console.log(rowId);
@@ -95,8 +102,8 @@ function updateRow(e) {
   <form id="myForm">
     <td class="actions-box">
       <span class="actions-icons">
-        <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()">close</i></a>
-        <a class="btn-floating z-depth-0"><i onclick="saveForm(event)" class="material-icons black-text">done</i></a>
+        <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" /></i></a>
+        <a class="btn-floating z-depth-0"><i onclick="saveForm(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png" /></i></a>
       </span>
     </td>
     
@@ -170,20 +177,27 @@ function saveForm(e) {
   allRows();
 }
 
-function deleteRow(e) {
-  const element =
+function deleteRow(e, optionalData) {
+  let element =
     e.target.parentElement.parentElement.parentElement.parentElement;
   // console.log(element);
+
+  if (optionalData) {
+    console.log("a");
+    element =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement;
+  }
 
   let row = `
   <td class="check-box"></td>
   <td class="actions-box">
     <span class="actions-icons">
-      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()">close</i></a>
-      <a class="btn-floating z-depth-0"><i onclick="deleteData(event)" class="material-icons black-text">done</i></a>
+      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" /></i></a>
+      <a class="btn-floating z-depth-0"><i onclick="deleteData(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png" /></i></a>
     </span>
   </td>
-  <h5>Are you sure you want to delete this row?</h5>`;
+  <p class="error-box">Are you sure you want to delete this row?</p>`;
   element.innerHTML = row;
 }
 
@@ -314,16 +328,18 @@ function searchRow(event) {
     });
 
     if (text) {
-      console.log(result);
+      // console.log(result);
+      // initialPagination(result)
       allRowsOnSearch(result);
     } else {
       allRows();
+      // initialPagination(data)
     }
   }, 200);
 }
 
 const allRowsOnSearch = (data) => {
-  console.log(data);
+  // console.log(data);
   // console.log(data);
   tbody.innerHTML = "";
 
@@ -338,8 +354,8 @@ const allRowsOnSearch = (data) => {
       </td>
       <td class="actions-box">
         <span class="actions-icons">
-          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="updateRow(event)">edit</i></a>
-          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteRow(event)">delete</i></a>
+          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="updateRow(event)"><img src="./icons/baseline_create_black_18dp.png" onclick="updateRow(event, true)"></i></a>
+          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteRow(event)"><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteRow(event, true)"></i></a>
         </span>
       </td>
       <td class="username-box" >${rowData.fname}</td>
@@ -373,16 +389,16 @@ let cardHeader = document.querySelector(".card-header");
 let cardContent = `
 <div class="card-header">
   <div class="card-header-text">
-    <span class="card-title truncate"><h4>Havi Table</h4></span>
+    <span class="truncate card-title">Havi Table</span>
     <div class="actions valign-wrapper right">
       <div class="search valign-wrapper">
-        <i class="material-icons black-text">search</i>
+        <i class="material-icons black-text"><img src="./icons/baseline_search_black_18dp.png"></i>
         <span class="input-field">
           <input placeholder="Search" id="search" onkeydown="searchRow(event)" type="text" />
         </span>
-        <i class="material-icons black-text">close</i>
+        <i class="material-icons black-text"><img src="./icons/baseline_close_black_18dp.png"></i>
       </div>
-      <span class="waves-effect"><a href="#!"><i class="material-icons black-text" onclick="addRow()">add_box</i></a></span>
+      <span class="waves-effect  add-box"><a href="#!"><i class="material-icons black-text" onclick="addRow()"><img src="./icons/baseline_add_box_black_18dp.png"></i></a></span>
     </div>
   </div>
 </div>`;
@@ -394,20 +410,48 @@ function header() {
 function headerHighlight(numRows) {
   cardHeader.innerHTML = `
   <div class="pink accent-1">
-    <div class="card-header-text">
-      <span class="card-title truncate"><h4>${numRows} row(s) selected</h4></span>
-      <div class="actions valign-wrapper right">
-        <div class="search valign-wrapper">
-          <i class="material-icons black-text">search</i>
-          <span class="input-field">
-            <input placeholder="Search" id="search" onkeydown="searchRow(event)" type="text" />
-          </span>
-          <i class="material-icons black-text">close</i>
-        </div>
+    <div class="card-header-text ">
+      <span class="truncate card-title"><strong> ${numRows} row(s) selected </strong></span>
+      <div class="delete-box valign-wrapper right">
+      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteAllRows()" ><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteAllRows()"></i></a>
       </div>
     </div>
   </div>`;
   // <span class="waves-effect"><a href="#!"><i class="material-icons black-text">add_box</i></a></span>
+}
+
+function deleteAllRows() {
+  const checkboxes = document.querySelectorAll(
+    'input[name="checkRow"]:checked'
+  );
+  let allIds = [];
+  checkboxes.forEach((checkbox) => {
+    let ele = checkbox.parentElement.parentElement.parentElement;
+    let eleId = ele.dataset.id;
+    allIds.push(eleId);
+  });
+
+  allIds = [...new Set(allIds)];
+  // let temp = data;
+  // let allData = temp.slice((currentPageNo -1)*pagesOnEachSlide, pagesOnEachSlide);
+  // console.log(allData);
+  let allData = data;
+  
+  allIds.map(id => {
+    let temp = allData;
+    allData.forEach((el,index) => {
+      if(+el.id === +id) {
+        temp.splice(index, 1);
+      }
+    });
+    allData = temp;
+  });
+
+  document.getElementById('selectAll').checked = false;
+  data = allData;
+  console.log(data);
+  totalPages = Math.ceil(data.length/pagesOnEachSlide);
+  initialPagination();
 }
 
 let toggleSingle = 0;
@@ -444,7 +488,7 @@ const initialPagination = () => {
   );
   allRowsOnSearch(result);
   const pagesSetup = document.querySelector(".pages-setup");
-  pagesSetup.innerText = `${currentPageNo} of ${totalPages}`;
+  pagesSetup.innerHTML = `<a href="#!">${currentPageNo} of ${totalPages}</a>`;
 };
 initialPagination();
 
@@ -504,8 +548,8 @@ function addRow() {
   <td class="check-box"></td>
   <td class="actions-box">
     <span class="actions-icons">
-      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()">close</i></a>
-      <a class="btn-floating z-depth-0"><i onclick="saveAddRow(event)" class="material-icons black-text">done</i></a>
+      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" /> </i></a>
+      <a class="btn-floating z-depth-0"><i onclick="saveAddRow(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png" /></i></a>
     </span>
   </td>
   <td class="username-box">
