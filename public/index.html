@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta http-equiv="pragma" content="no-cache" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="marterial-table.css" />
-  <!-- <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    /> -->
   <link rel="stylesheet" href="./materialize/css/materialize.min.css" />
   <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-  <!-- <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    /> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
   <title>Havi HTML</title>
 </head>
 
 <body>
   <!-- NAVBAR -->
-  <header>
+  <!-- <header>
     <nav class="gray lighten-2">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo center">
@@ -32,11 +24,11 @@
         </a>
       </div>
     </nav>
-  </header>
+  </header> -->
 
   <!-- MAIN -->
-  <main class="valign-wrapper">
-    <section class="container">
+  <main >
+    <section >
       <div class="card">
         <div class="card-content">
           <div class="card-header">
@@ -60,7 +52,6 @@
             </div> -->
           </div>
 
-          <div class="card-main-text">
             <div class="table">
               <table>
                 <thead>
@@ -71,46 +62,49 @@
                         <span></span>
                       </label>
                     </th>
-                    <th class="actions-box">
-                      <p>Action</p>
+                    <th class="actions-box ">
+                      <p class="right-align">Action</p>
                     </th>
                     <th class="username-box">
-                      <div class="valign-wrapper filter-arrow">
-                        <p>Name</p>
+                      <div class="valign-wrapper filter-arrow ">
                         <span class="waves-effect "><a href="#!"><i class="material-icons black-text"
-                              onclick="sortFname()"><img src="./icons/baseline_arrow_upward_black_18dp.png" />
-                            </i></a></span>
+                          onclick="sortFname()"><img src="./icons/baseline_arrow_upward_black_18dp.png"  onclick="sortFname()"/>
+                        </i></a></span>
+                        <p onclick="sortFname()">Name</p>
+                        
                       </div>
                     </th>
                     <th class="username-box">
                       <div class="valign-wrapper filter-arrow">
-                        <p>Surname</p>
                         <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
-                              onclick="sortLname()"><img src="./icons/baseline_arrow_upward_black_18dp.png" />
-                            </i></a></span>
+                          onclick="sortLname()"><img src="./icons/baseline_arrow_upward_black_18dp.png" onclick="sortLname()"/>
+                        </i></a></span>
+                        <p onclick="sortLname()">Surname</p>
+                        
                       </div>
                     </th>
                     <th class="doy-box">
                       <div class="valign-wrapper filter-arrow">
-                        <p>
+                        <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
+                          onclick="sortDoy()"><img src="./icons/baseline_arrow_upward_black_18dp.png" onclick="sortDoy()"/>
+                        </i></a></span>
+                        <p onclick="sortDoy()">
                           Birth <br /> Year
                         </p>
-                        <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
-                              onclick="sortDoy()"><img src="./icons/baseline_arrow_upward_black_18dp.png" />
-                            </i></a></span>
+                        
                       </div>
                     </th>
                     <th class="city-box">
                       <div class="valign-wrapper filter-arrow">
-                        <p>
+                        <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
+                          onclick="sortCity()"><img src="./icons/baseline_arrow_upward_black_18dp.png" onclick="sortCity()"/>
+                        </i></a></span>
+                        <p onclick="sortCity()">
                           Birth <br /> Place
                         </p>
-                        <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
-                              onclick="sortCity()"><img src="./icons/baseline_arrow_upward_black_18dp.png" />
-                            </i></a></span>
                       </div>
                     </th>
-                  </tr>
+                  </tr>     
                 </thead>
 
                 <tbody>
@@ -135,44 +129,45 @@
                 </tbody>
               </table>
             </div>
-            <div class="whole-pagination">
-              <div class="pagination-space"></div>
-              <div class="pagination-range">
-                <div class="input-field right-align" id="row_num">
-                  <select onchange="paginationSize()" id="no_of_rows" autocomplete="off">
-                    <option value="5">5 rows</option>
-                    <option value="10">10 rows</option>
-                    <option value="20">20 rows</option>
-                  </select>
-                </div>
-              </div>
 
-              <div class="pagination right-align">
-                <span class="waves-effect"><a href="#!"><i class="material-icons" onclick="startPage()">
-                      <img src="./icons/baseline_first_page_black_18dp.png" />
-                    </i></a></span>
-                <span class="waves-effect"><a href="#!"><i class="material-icons" onclick="previousPage()"><img
-                        src="./icons/baseline_chevron_left_black_18dp.png" />
-                    </i></a></span>
-                <span class="waves-effect pages-setup">
-                  <!-- 1 of 2 -->
-                </span>
-                <span class="waves-effect"><a href="#!"><i class="material-icons" onclick="nextPage()"><img
-                        src="./icons/baseline_chevron_right_black_18dp.png" />
-                    </i></a></span>
-                <span class="waves-effect"><a href="#!"><i class="material-icons" onclick="endPage()"><img
-                        src="./icons/baseline_last_page_black_18dp.png" />
-                    </i></a></span>
-              </div>
+            <div class="whole-pagination">
+                <div class="pagination-range">
+                  <div class="input-field" >
+                    <select onchange="paginationSize()" id="no_of_rows" autocomplete="off">
+                      <option value="25">25 rows</option>
+                      <option value="50">50 rows</option>
+                      <option value="100">100 rows</option>
+                    </select>
+                  </div>
+                </div>
+  
+                <div class="pages valign-wrapper">
+                  <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper" onclick="startPage()">
+                        <img src="./icons/baseline_first_page_black_18dp.png" />
+                      </i></a></span>
+                  <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper" onclick="previousPage()"><img
+                          src="./icons/baseline_chevron_left_black_18dp.png" />
+                      </i></a></span>
+                  <span class="waves-effect pages-setup ">
+                    <!-- 1 of 2 -->
+                  </span>
+                  <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper" onclick="nextPage()"><img
+                          src="./icons/baseline_chevron_right_black_18dp.png" />
+                      </i></a></span>
+                  <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper" onclick="endPage()"><img
+                          src="./icons/baseline_last_page_black_18dp.png" />
+                      </i></a></span>
+                </div>
+              
             </div>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </section>
   </main>
 
   <!-- FOOTER -->
-  <footer class="page-footer footer">
+  <!-- <footer class="page-footer footer">
     <div class="container center">
       <div>
         <i class="fa fa-copyright small" aria-hidden="true"></i><a href="#" class="black-text"><strong>Havi</strong></a>
@@ -184,12 +179,9 @@
       </div>
       <br />
     </div>
-  </footer>
+  </footer> -->
+
   <script src="./materialize/js/jquery.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
-    crossorigin="anonymous"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
   <script src="./materialize/js/materialize.min.js"></script>
   <script src="./marterial-table.js"></script>
 </body>

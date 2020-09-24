@@ -1,60 +1,77 @@
+// jquery
 const selectMethod = () => {
   $("select").formSelect();
 };
 
-// constants
-let edit;
-const tbody = document.querySelector("tbody");
-
-// initial display of rows
+// initial data
 let data = [
-  { id: 1, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
-  { id: 2, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
-  { id: 3, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
-  { id: 4, fname: "Delta", lname: "Whiskey", doy: 2000, city: "Delhi" },
   { id: 478, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
-  { id: 100, fname: "Foxtrot", lname: "Uniform", doy: 1892, city: "Delhi" },
-  { id: 20, fname: "Golf", lname: "Tango", doy: 2005, city: "Bangalore" },
-  { id: 30, fname: "Hotel", lname: "Sierra", doy: 1910, city: "Delhi" },
-  { id: 465, fname: "India", lname: "Romeo", doy: 1920, city: "Delhi" },
+  { id: 2, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 1, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 3, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 4878, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 28, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 18, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 38, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 478, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 24, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 14, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 34, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 4478, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 21, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 11, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 31, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 4178, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 222, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 122, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 322, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 42278, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 244, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 144, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 344, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 44478, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 266, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 166, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 366, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
+  { id: 46678, fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi" },
+  { id: 25, fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore" },
+  { id: 16, fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi" },
+  { id: 366, fname: "Charlie", lname: "X-ray", doy: 2010, city: "Delhi" },
 ];
 
-// console.log(typeof data);
+// constants
+let edit,updatedCity;
+let toggleSelectAll = 0;
+let toggleSingle = 0;
+let toggleFname = toggleLname = toggleDoy = toggleCity = 0;
+const search = document.querySelector("#search");
+const tbody = document.querySelector("tbody");
+let cardHeader = document.querySelector(".card-header");
+let currentPageNo = 1;
+let previousPageNo = 1;
+let nextPageNo = currentPageNo + 1;
+let pagesOnEachSlide = 25;
+let totalPages = Math.ceil(data.length / pagesOnEachSlide);
 
-// const allRows = () => {
-//   // console.log(data);
-//   tbody.innerHTML = "";
 
-//   data.forEach((rowData) => {
-//     let row = `
-//     <tr data-id=${rowData.id} >
-//       <td class="check-box">
-//         <label>
-//           <input type="checkbox" onclick="singleSelect(this)" name="checkRow"  class="filled-in singleCheckBox" autocomplete="off" />
-//           <span></span>
-//         </label>
-//       </td>
-//       <td class="actions-box">
-//         <span class="actions-icons">
-//           <a class="btn-floating z-depth-0" ><i class="material-icons black-text" onclick="updateRow(event)"><img src="./icons/baseline_create_black_18dp.png" onclick="updateRow(event, true) ></i></a>
-//           <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteRow(event)"><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteRow(event, true)></i></a>
-//         </span>
-//       </td>
-//       <td class="username-box" >${rowData.fname}</td>
-//       <td class="username-box">${rowData.lname}</td>
-//       <td class="doy-box">${rowData.doy}</td>
-//       <td class="city-box">${rowData.city}</td>
-//     </tr>`;
-//     tbody.innerHTML += row;
-//   });
-//   selectMethod();
-// };
-// allRows();
+document.getElementById("selectAll").onclick = function () {
+  toggleSelectAll++;
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  let rowCounter = -1;
+  for (var checkbox of checkboxes) {
+    rowCounter++;
+    checkbox.checked = this.checked;
+  }
 
-function updateRow(e, optionalData = false) {
-  // console.log(optionalData);
-  // console.log(e.target.parentElement.parentElement.parentElement.parentElement);
+  if (toggleSelectAll % 2 == 1) {
+    headerHighlight(rowCounter);
+  } else {
+    header();
+  }
+};
 
+function updateRow(e, optionalData = false, lol) {
+  console.log(lol);
   let element =
     e.target.parentElement.parentElement.parentElement.parentElement;
 
@@ -63,20 +80,22 @@ function updateRow(e, optionalData = false) {
       e.target.parentElement.parentElement.parentElement.parentElement
         .parentElement;
   }
-  // console.log(element);
   const rowId = element.dataset.id;
-  // console.log(rowId);
+  console.log(rowId);
+  let fname, lname, doy;
 
-  let fname, lname, doy, cityNo;
-
-  // console.log(data);
-  let rowdata = data.filter((el) => +el.id === +rowId);
-  // console.log(rowdata);
-  fname = rowdata[0].fname;
-  lname = rowdata[0].lname;
-  doy = rowdata[0].doy;
-  city = rowdata[0].city;
-  // console.log(fname);
+  // let rowdata = data.filter((el) => +el.id === +rowId);
+  let rowdata;
+  data.map(el => {
+    if(+el.id === +rowId) {
+      rowdata = el;
+    }
+  })
+  console.log(rowdata);
+  fname = rowdata.fname;
+  lname = rowdata.lname;
+  doy = rowdata.doy;
+  city = rowdata.city;
 
   const cityDelhi = `
   <div class="input-field dropdownBox text-left" id="dropdownBox">
@@ -93,7 +112,7 @@ function updateRow(e, optionalData = false) {
       <option selected value="Bangalore">   Bangalore</option>
     </select>
   </div>`;
-
+  
   let selectedCity = city === "Delhi" ? cityDelhi : cityBangalore;
 
   let row = `
@@ -102,19 +121,19 @@ function updateRow(e, optionalData = false) {
   <form id="myForm">
     <td class="actions-box">
       <span class="actions-icons">
-        <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" /></i></a>
-        <a class="btn-floating z-depth-0"><i onclick="saveForm(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png" /></i></a>
+        <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" onclick="initialPagination()"></i></a>
+        <a class="btn-floating z-depth-0"><i onclick="saveForm(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png" onclick="saveForm(event, true)" /></i></a>
       </span>
     </td>
     
     <td class="username-box">
       <div class="input-field">
-        <input placeholder="First Name" id="firstName" type="text" class="validate" value="${fname}">
+        <input placeholder="First Name" id="firstName" type="text" value="${fname}">
       </div>
     </td>
     <td class="username-box">
       <div class="input-field">
-        <input placeholder="Last Name" id="lastName" type="text" class="validate" value="${lname}">
+        <input placeholder="Last Name" id="lastName" type="text" value="${lname}">
       </div>
     </td>
     <td class="doy-box">
@@ -126,21 +145,16 @@ function updateRow(e, optionalData = false) {
       ${selectedCity}
     </td>
   </form>`;
-
   element.innerHTML = row;
   selectMethod();
-  // const rowId = element.dataset.id;
-  // console.log(rowId);
 }
 
-let updatedCity;
-
 function cityFun(sel) {
-  console.log(sel.options[sel.selectedIndex].text);
+  // console.log(sel.options[sel.selectedIndex].text);
   updatedCity = sel.options[sel.selectedIndex].text;
 }
 
-function saveForm(e) {
+function saveForm(e, optionalData) {
   const fname = document.querySelector("#firstName").value;
   const lname = document.querySelector("#lastName").value;
   const doy = document.querySelector("#doy").value;
@@ -149,10 +163,16 @@ function saveForm(e) {
 
   let element, rowId, dataIndex, row;
   element = e.target.parentElement.parentElement.parentElement.parentElement;
+  if(optionalData) {
+    element = e.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+    // console.log(element);
+  }
   rowId = element.dataset.id;
+  // console.log(rowId);
 
   data.map((el, index) => {
     if (+el.id === +rowId) {
+      // console.log(el);
       row = el;
       dataIndex = index;
     }
@@ -174,7 +194,7 @@ function saveForm(e) {
 
   updatedData[dataIndex] = updatedDataRow;
   data = updatedData;
-  allRows();
+  allRowsOnSearch(data);
 }
 
 function deleteRow(e, optionalData) {
@@ -183,7 +203,6 @@ function deleteRow(e, optionalData) {
   // console.log(element);
 
   if (optionalData) {
-    console.log("a");
     element =
       e.target.parentElement.parentElement.parentElement.parentElement
         .parentElement;
@@ -193,21 +212,27 @@ function deleteRow(e, optionalData) {
   <td class="check-box"></td>
   <td class="actions-box">
     <span class="actions-icons">
-      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" /></i></a>
-      <a class="btn-floating z-depth-0"><i onclick="deleteData(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png" /></i></a>
+      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="initialPagination()"><img src="./icons/baseline_close_black_18dp.png" onclick="initialPagination()" /></i></a>
+      <a class="btn-floating z-depth-0"><i onclick="deleteData(event)" class="material-icons black-text"><img src="./icons/baseline_done_black_18dp.png"  /></i></a>
     </span>
   </td>
-  <p class="error-box">Are you sure you want to delete this row?</p>`;
+  <td class="valign-wrapper alert-box ">
+  <p class=""><b> Are you sure you want to delete this row? </b> </td>`;
   element.innerHTML = row;
 }
 
-function deleteData(e) {
-  console.log("deleted");
+function deleteData(e, optionalData = false) {
+  // console.log("deleted");
   const element =
     e.target.parentElement.parentElement.parentElement.parentElement;
+  
+  if(optionalData) {
+    const element =
+    e.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+  }
   console.log(element);
   const rowId = element.dataset.id;
-  console.log(rowId);
+  // console.log(rowId);
   let rowIndex;
   data.map((el, index) => {
     // console.log(el.id, rowId);
@@ -215,8 +240,8 @@ function deleteData(e) {
       rowIndex = index;
     }
   });
-  console.log(rowIndex);
-
+  // console.log(rowIndex);
+  console.log('delted');
   let allData = [...data];
   allData.splice(rowIndex, 1);
   data = allData;
@@ -224,7 +249,7 @@ function deleteData(e) {
   initialPagination();
 }
 
-let toggleFname = (toggleLname = toggleDoy = toggleCity = 0);
+
 function sortFname() {
   toggleFname++;
   let byName = data.slice(0);
@@ -239,7 +264,7 @@ function sortFname() {
     toggleFname = 0;
   }
   data = byName;
-  allRows();
+  allRowsOnSearch(data);
 }
 
 function sortLname() {
@@ -250,14 +275,13 @@ function sortLname() {
     let y = b.lname.toLowerCase();
     return x < y ? -1 : x > y ? 1 : 0;
   });
-  // console.log(byName);
   console.log(toggleLname);
   if (toggleLname >= 2) {
     byName = byName.reverse();
     toggleLname = 0;
   }
   data = byName;
-  allRows();
+  allRowsOnSearch(data);
 }
 
 function sortDoy() {
@@ -268,13 +292,12 @@ function sortDoy() {
     let y = +b.doy;
     return x < y ? -1 : x > y ? 1 : 0;
   });
-  // console.log(byName);
   if (toggleDoy >= 2) {
     byName = byName.reverse();
     toggleDoy = 0;
   }
   data = byName;
-  allRows();
+  allRowsOnSearch(data);
 }
 
 function sortCity() {
@@ -285,34 +308,20 @@ function sortCity() {
     let y = b.city.toLowerCase();
     return x < y ? -1 : x > y ? 1 : 0;
   });
-  // console.log(byName);
   if (toggleCity >= 2) {
     byName = byName.reverse();
     toggleCity = 0;
   }
   data = byName;
-  allRows();
+  allRowsOnSearch(data);
 }
 
-const search = document.querySelector("#search");
-function searchRow(event) {
-  // console.log(event);
-  let text;
 
+function searchRow(event) {
+  let text;
   setTimeout(() => {
-    // console.log(search);
     text = document.querySelector("#search").value;
     text = text.toLowerCase();
-    // console.log(text);
-
-    // let result = data.filter(
-    //   (el) =>
-    //     el.fname.includes(text) ||
-    //     el.lname.includes(text) ||
-    //     el.doy.toString().includes(text) ||
-    //     el.city.includes(text)
-    // );
-
     let result = [];
     data.map((el) => {
       console.log(text);
@@ -323,26 +332,19 @@ function searchRow(event) {
         el.city.toLowerCase().includes(text)
       ) {
         result.push(el);
-        // console.log(result);
       }
     });
 
     if (text) {
-      // console.log(result);
-      // initialPagination(result)
       allRowsOnSearch(result);
     } else {
-      allRows();
-      // initialPagination(data)
+      initialPagination()
     }
-  }, 200);
+  }, 150);
 }
 
-const allRowsOnSearch = (data) => {
-  // console.log(data);
-  // console.log(data);
+const allRowsOnSearch = (data = data) => {
   tbody.innerHTML = "";
-
   data.forEach((rowData) => {
     let row = `
     <tr data-id=${rowData.id} >
@@ -352,109 +354,24 @@ const allRowsOnSearch = (data) => {
           <span></span>
         </label>
       </td>
-      <td class="actions-box">
-        <span class="actions-icons">
-          <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="updateRow(event)"><img src="./icons/baseline_create_black_18dp.png" onclick="updateRow(event, true)"></i></a>
+      <td >
+        <span class="actions-icons ">
+          <a class="btn-floating z-depth-0"><i class="material-icons " onclick="updateRow(event, false, 'b')"><img class="gray-text" src="./icons/baseline_create_black_18dp.png" onclick="updateRow(event, true, 'a')"></i></a>
           <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteRow(event)"><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteRow(event, true)"></i></a>
         </span>
       </td>
-      <td class="username-box" >${rowData.fname}</td>
-      <td class="username-box">${rowData.lname}</td>
-      <td class="doy-box">${rowData.doy}</td>
-      <td class="city-box">${rowData.city}</td>
+      <td class="username-box right-align" >${rowData.fname}</td>
+      <td class="username-box right-align">${rowData.lname}</td>
+      <td class="doy-box right-align">${rowData.doy}</td>
+      <td class="city-box right-align">${rowData.city}</td>
     </tr>`;
     tbody.innerHTML += row;
   });
   selectMethod();
 };
 
-let toggleSelectAll = 0;
-document.getElementById("selectAll").onclick = function () {
-  toggleSelectAll++;
-  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  let rowCounter = -1;
-  for (var checkbox of checkboxes) {
-    rowCounter++;
-    checkbox.checked = this.checked;
-  }
 
-  if (toggleSelectAll % 2 == 1) {
-    headerHighlight(rowCounter);
-  } else {
-    header();
-  }
-};
 
-let cardHeader = document.querySelector(".card-header");
-let cardContent = `
-<div class="card-header">
-  <div class="card-header-text">
-    <span class="truncate card-title">Havi Table</span>
-    <div class="actions valign-wrapper right">
-      <div class="search valign-wrapper">
-        <i class="material-icons black-text"><img src="./icons/baseline_search_black_18dp.png"></i>
-        <span class="input-field">
-          <input placeholder="Search" id="search" onkeydown="searchRow(event)" type="text" />
-        </span>
-        <i class="material-icons black-text"><img src="./icons/baseline_close_black_18dp.png"></i>
-      </div>
-      <span class="waves-effect  add-box"><a href="#!"><i class="material-icons black-text" onclick="addRow()"><img src="./icons/baseline_add_box_black_18dp.png"></i></a></span>
-    </div>
-  </div>
-</div>`;
-
-function header() {
-  cardHeader.innerHTML = cardContent;
-}
-
-function headerHighlight(numRows) {
-  cardHeader.innerHTML = `
-  <div class="pink accent-1">
-    <div class="card-header-text ">
-      <span class="truncate card-title"><strong> ${numRows} row(s) selected </strong></span>
-      <div class="delete-box valign-wrapper right">
-      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteAllRows()" ><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteAllRows()"></i></a>
-      </div>
-    </div>
-  </div>`;
-  // <span class="waves-effect"><a href="#!"><i class="material-icons black-text">add_box</i></a></span>
-}
-
-function deleteAllRows() {
-  const checkboxes = document.querySelectorAll(
-    'input[name="checkRow"]:checked'
-  );
-  let allIds = [];
-  checkboxes.forEach((checkbox) => {
-    let ele = checkbox.parentElement.parentElement.parentElement;
-    let eleId = ele.dataset.id;
-    allIds.push(eleId);
-  });
-
-  allIds = [...new Set(allIds)];
-  // let temp = data;
-  // let allData = temp.slice((currentPageNo -1)*pagesOnEachSlide, pagesOnEachSlide);
-  // console.log(allData);
-  let allData = data;
-  
-  allIds.map(id => {
-    let temp = allData;
-    allData.forEach((el,index) => {
-      if(+el.id === +id) {
-        temp.splice(index, 1);
-      }
-    });
-    allData = temp;
-  });
-
-  document.getElementById('selectAll').checked = false;
-  data = allData;
-  console.log(data);
-  totalPages = Math.ceil(data.length/pagesOnEachSlide);
-  initialPagination();
-}
-
-let toggleSingle = 0;
 function singleSelect(sel) {
   const checkboxes = document.querySelectorAll(
     'input[name="checkRow"]:checked'
@@ -471,30 +388,52 @@ function singleSelect(sel) {
   }
 }
 
-// pagination();
+function deleteAllRows(optionalData = false, lol) {
+  console.log(optionalData);
 
-let currentPageNo = 1;
-let previousPageNo = 1;
-let nextPageNo = currentPageNo + 1;
-let pagesOnEachSlide = 5;
-let totalPages = Math.ceil(data.length / pagesOnEachSlide);
-
-const initialPagination = () => {
-  header();
-  let result = data.slice();
-  result = result.slice(
-    (currentPageNo - 1) * pagesOnEachSlide,
-    pagesOnEachSlide * currentPageNo
+  const checkboxes = document.querySelectorAll(
+    'input[name="checkRow"]:checked'
   );
-  allRowsOnSearch(result);
-  const pagesSetup = document.querySelector(".pages-setup");
-  pagesSetup.innerHTML = `<a href="#!">${currentPageNo} of ${totalPages}</a>`;
-};
-initialPagination();
+  let allIds = [];
+  checkboxes.forEach((checkbox) => {
+    let ele = checkbox.parentElement.parentElement.parentElement;
+    // if(optionalData) {
+    //   ele = checkbox.parentElement.parentElement.parentElement;
+    //   console.log(ele);
+    // }
+    let eleId = ele.dataset.id;
+    allIds.push(eleId);
+  });
+
+  allIds = [...new Set(allIds)];
+  let allData = data;
+  
+  allIds.map(id => {
+    let temp = allData;
+    allData.forEach((el,index) => {
+      if(+el.id === +id) {
+        temp.splice(index, 1);
+      }
+    });
+    allData = temp;
+  });
+
+  // document.getElementById('selectAll').checked = false;
+  data = allData;
+  console.log(data);
+  totalPages = Math.ceil(data.length/pagesOnEachSlide);
+  initialPagination();
+}
+
+function paginationSize() {
+  const no_of_rows = document.querySelector("#no_of_rows").value;
+  // console.log(no_of_rows);
+  pagesOnEachSlide = no_of_rows;
+  totalPages = Math.ceil(data.length / pagesOnEachSlide);
+  initialPagination();
+}
 
 function startPage() {
-  // console.log('startPage');
-
   currentPageNo = 1;
   previousPageNo = 1;
   nextPageNo = currentPageNo + 1;
@@ -505,8 +444,6 @@ function startPage() {
 }
 
 function previousPage() {
-  // console.log('previous Page');
-  // console.log(currentPageNo, previousPageNo);
   currentPageNo = currentPageNo - 1;
   previousPageNo = currentPageNo - 1;
   nextPageNo = currentPageNo + 1;
@@ -518,7 +455,6 @@ function previousPage() {
 }
 
 function nextPage() {
-  // console.log('next page');
   currentPageNo = currentPageNo + 1;
   previousPageNo = currentPageNo - 1;
   nextPageNo = currentPageNo + 1;
@@ -530,7 +466,6 @@ function nextPage() {
 }
 
 function endPage() {
-  // console.log('end page');
   currentPageNo = totalPages;
   previousPageNo = currentPageNo - 1;
   nextPageNo = totalPages;
@@ -554,17 +489,17 @@ function addRow() {
   </td>
   <td class="username-box">
     <div class="input-field">
-      <input placeholder="First Name" id="firstName" type="text" class="validate" ">
+      <input placeholder="First Name" id="firstName" type="text" >
     </div>
   </td>
   <td class="username-box">
     <div class="input-field">
-      <input placeholder="Last Name" id="lastName" type="text" class="validate" ">
+      <input placeholder="Last Name" id="lastName" type="text" >
     </div>
   </td>
   <td class="doy-box">
     <div class="input-field">
-      <input placeholder="DoY" id="doy" type="number" class="validate">
+      <input placeholder="DoY" id="doy" type="number" >
     </div>
   </td>
   <td class="city-box">
@@ -601,10 +536,45 @@ function saveAddRow(e) {
   initialPagination();
 }
 
-function paginationSize() {
-  const no_of_rows = document.querySelector("#no_of_rows").value;
-  console.log(no_of_rows);
-  pagesOnEachSlide = no_of_rows;
-  totalPages = Math.ceil(data.length / pagesOnEachSlide);
-  initialPagination();
+let cardContent = `
+  <div class="truncate valign-wrapper card-title"><p> Havi Table </p></div>
+  <div class="card-header-body">
+    <span class="valign-wrapper">
+      <span class="search valign-wrapper">
+      <i class="material-icons black-text"><img src="./icons/baseline_search_black_18dp.png"></i>
+      <span class="input-field">
+        <input placeholder="Search" id="search" onkeydown="searchRow(event)" type="text" />
+      </span>
+      <i class="material-icons black-text"><img src="./icons/baseline_close_black_18dp.png"></i>
+      </span>
+      <span class="waves-effect"><a href="#!"><i class="material-icons  btn-floating z-depth-0 center-align valign-wrapper black-text" onclick="addRow()"><img src="./icons/baseline_add_box_black_18dp.png"></i></a></span>
+    </span>
+  </div>`;
+
+
+function headerHighlight(numRows) {
+  cardHeader.innerHTML = `
+      <span class="truncate valign-wrapper card-title"><strong> ${numRows} row(s) selected </strong></span>
+      <div >
+      <a class="btn-floating z-depth-0"><i class="material-icons black-text" onclick="deleteAllRows(false, 'a')" ><img src="./icons/baseline_delete_black_18dp.png" onclick="deleteAllRows(true, 'b')"></i></a>
+      </div>`;
+      cardHeader.classList.add('header-highlight');
+  // <span class="waves-effect"><a href="#!"><i class="material-icons black-text">add_box</i></a></span>
 }
+
+function header() {
+  cardHeader.innerHTML = cardContent;
+}
+
+const initialPagination = () => {
+  header();
+  let result = data.slice();
+  result = result.slice(
+    (currentPageNo - 1) * pagesOnEachSlide,
+    pagesOnEachSlide * currentPageNo
+  );
+  allRowsOnSearch(result);
+  const pagesSetup = document.querySelector(".pages-setup");
+  pagesSetup.innerHTML = `<a href="#!" class="black-text">${currentPageNo} of ${totalPages}</a>`;
+};
+initialPagination();
