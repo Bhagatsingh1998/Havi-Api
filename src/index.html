@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <title>Havi HTML</title>
+</head>
+
+<body>
+
+  <!-- MAIN -->
+  <main>
+    <section>
+      <div class="card">
+        <div class="card-content">
+          <div class="card-header">
+            <!-- card header -->
+          </div>
+
+          <div id="modal1" class="modal note">
+            <!-- modal data -->
+          </div>
+
+          <div id="modal2" class="modal tags">
+            <!-- modal data -->
+          </div>
+
+          <div class="table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="check-box">
+                    <label data-action="check-all-rows">
+                      <input type="checkbox" id="selectAll" data-action="check-all-rows" class="filled-in"
+                        autocomplete="off" />
+                      <span></span>
+                    </label>
+                  </th>
+                  <th class="actions-box ">
+                    <p>Action</p>
+                  </th>
+                  <th class="tags">
+                    <p>Tags</p>
+                  </th>
+                  <th class="username-box">
+                    <div class="valign-wrapper filter-arrow ">
+
+                      <p data-action="sort-fname">Name</p>
+                      <span class="waves-effect "><a href="#!"><i class="material-icons black-text"
+                            data-action="sort-fname"><svg data-action="sort-fname" xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                              <path data-action="sort-fname" d="M0 0h24v24H0V0z" fill="none" />
+                              <path data-action="sort-fname"
+                                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
+                          </i></a></span>
+                    </div>
+                  </th>
+                  <th class="username-box">
+                    <div class="valign-wrapper filter-arrow">
+
+                      <p data-action="sort-lname">Surname</p>
+                      <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
+                            data-action="sort-lname"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                              fill="black" width="18px" height="18px">
+                              <path data-action="sort-lname" d="M0 0h24v24H0V0z" fill="none" />
+                              <path data-action="sort-lname"
+                                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
+                          </i></a></span>
+                    </div>
+                  </th>
+                  <th class="doy-box">
+                    <div class="valign-wrapper filter-arrow">
+
+                      <p data-action="sort-doy">
+                        Birth <br /> Year
+                      </p>
+                      <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
+                            data-action="sort-doy"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                              fill="black" width="18px" height="18px">
+                              <path data-action="sort-doy" d="M0 0h24v24H0V0z" fill="none" />
+                              <path data-action="sort-doy"
+                                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
+                          </i></a></span>
+                    </div>
+                  </th>
+                  <th class="city-box">
+                    <div class="valign-wrapper filter-arrow">
+
+                      <p data-action="sort-city">
+                        Birth <br /> Place
+                      </p>
+                      <span class="waves-effect"><a href="#!"><i class="material-icons black-text"
+                            data-action="sort-city"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                              fill="black" width="18px" height="18px">
+                              <path data-action="sort-city" d="M0 0h24v24H0V0z" fill="none" />
+                              <path data-action="sort-city"
+                                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" /></svg>
+                          </i></a></span>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- table rows -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="whole-pagination">
+            <div class="pagination-range">
+              <div class="input-field">
+                <select class="no-of-rows" autocomplete="off">
+                  <option value="25">25 rows</option>
+                  <option value="50">50 rows</option>
+                  <option value="100">100 rows</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pages valign-wrapper">
+              <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper start-page-svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                      <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z" />
+                      <path d="M24 24H0V0h24v24z" fill="none" /></svg>
+                  </i></a></span>
+              <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper previous-page-svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg>
+                  </i></a></span>
+              <span class="waves-effect pages-setup ">
+                <!-- 1 of 2 -->
+              </span>
+              <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper next-page-svg"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg>
+                  </i></a></span>
+              <span class="waves-effect"><a href="#!"><i class="material-icons valign-wrapper end-page-svg"><svg
+                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px">
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z" /></svg>
+                  </i></a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- <script src="./materialize/js/jquery.min.js"></script>
+  <script  src="./materialize/js/materialize.min.js"></script>
+  <script  src="./main.js"></script>
+  <script  src="./updateRow.js"></script>
+  <script  src="./noteTags.js"></script>
+  <script  src="./pagination.js"></script> -->
+</body>
+
+</html>

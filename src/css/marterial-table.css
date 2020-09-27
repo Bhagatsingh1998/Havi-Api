@@ -1,0 +1,273 @@
+
+.search {
+
+  border-bottom: 1px solid black;
+}
+
+.table {
+  overflow-x: auto;
+}
+
+thead tr {
+  border-bottom: 0 !important;
+}
+
+tbody th {
+  padding-top: 0 !important;
+}
+
+.actions-icons {
+  display: flex;
+}
+
+.tags-td {
+  display: flex;   
+  width: 100px; 
+  overflow-x: auto;
+}
+
+.tags-td span {
+  display: flex;
+
+}
+
+.tag-info .tag-name {
+  padding: 0px 10px 5px 10px;
+
+}
+
+.whole-pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 14px 14px 14px;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
+  padding-top: 10px;
+  background-color: white;
+}
+
+.pagination-range {
+  width: 10%;
+  margin-right: 30px;
+}
+
+.username-box,
+.doy-box,
+.city-box {
+  width: 20% !important;
+}
+
+.card .card-content {
+  padding: 0 !important;
+}
+
+.card-header {
+  display: flex;
+  padding: 14px;
+  position: sticky ;
+  top: 0;
+  left: 0;
+  background-color: white ;
+  padding-bottom: 20px ;
+  padding-top: 10px;
+  z-index: 10;
+}
+
+.table {
+  /* margin-bottom: 50px; */
+  padding: 0 14px 40px 14px;
+}
+
+/* table thead div{
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  z-index: 10;
+  padding-bottom: 10px;
+  background-color: blue;
+} */
+
+.card-header-body {
+  display: flex;
+}
+
+.search {
+  display: flex;
+}
+
+th div {
+  display: flex ;
+  flex-wrap: nowrap ;
+}
+
+th div p {
+  padding-right: 10px ;
+}
+
+.card-title {
+  flex: 1;
+}
+
+.filter-arrow span{
+  opacity: 0;
+}
+
+.filter-arrow:hover span{
+  opacity: 1;
+}
+
+.filter-arrow p {
+  cursor: pointer;
+}
+
+.alert-box {
+  position: absolute;
+  width: 400px;
+}
+
+.header-highlight {
+  background-color: #f7fdfe;
+  color: #61dafb;
+}
+
+/* overwriting the materialze properties */
+
+@font-face {
+  font-family: 'Muli';
+  src: url("../fonts/Mulish-Regular.ttf")format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src: url("../fonts/HelveticaNeue.ttf")format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Muli','Helvetica', sans-serif !important;
+}
+.card {
+  margin: 0 !important;
+}
+
+.card-title {
+  margin-bottom: 0 !important;
+}
+
+input[type="text"]:not(.browser-default),
+input[type="number"]:not(.browser-default) {
+  margin: 0 !important;
+}
+
+i {
+  padding: 0 5px;
+}
+
+.search input[type="text"]:not(.browser-default) {
+  border: none !important;
+}
+
+input[type="text"]:not(.browser-default),
+input[type="number"]:not(.browser-default) {
+  border-bottom-color: black !important;
+  box-shadow: none !important;
+  padding-bottom: 2px;
+}
+
+.search input[type="text"]:not(.browser-default):focus {
+  box-shadow: none !important;
+  padding-bottom: 2px;
+}
+
+.pagination-range input[type="text"]:not(.browser-default) {
+  border: none !important;
+}
+
+.input-field {
+  margin: 0 !important;
+}
+
+.dropdown-content li span {
+  color:  black !important;
+}
+
+.btn-floating {
+  background-color: transparent !important;
+}
+
+.btn-floating:hover {
+  background-color: #eeeeee !important;
+}
+
+input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
+  border-color: #61dafb;
+  background-color: #61dafb;
+}
+
+
+/* notes */
+.btn-small i {
+  /* font-size: 1.8rem !important; */
+  text-align: center !important;
+}
+
+.btn, .btn-large, .btn-small {
+  background-color: #61dafb !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .pagination-range {
+    width: 13%;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .pagination-range {
+    width: 15%;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .pagination-range {
+    width: 18%;
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 550px){
+  table {
+    width: 500px;
+  }
+  .pagination-range {
+    width: 25%;
+    margin-right: 10px;
+  }
+  .card-header-body {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 410px) {
+  .pagination-range {
+    width: 25%;
+    margin-right: 10px;
+  }
+} 
+
+@media only screen and (max-width: 310px) {
+  .pagination-range {
+    width: 30%;
+    margin-right: 10px;
+  }
+  .card-header-body {
+    width: 65%;
+  }
+}
