@@ -31,7 +31,7 @@ const openNote = (e, data = DATA) => {
     <div class="divider"></div>
     <br />
     <p class="center-align">No notes added.  <br /> <br />
-      <a data-id=${rowId} data-action="add-note" class="waves-effect waves-light btn-small">
+      <a data-id=${rowId} data-personnote="" data-action="add-note" class="waves-effect waves-light btn-small">
         Add Note
       </a>
     </p>
@@ -52,41 +52,41 @@ const openNote = (e, data = DATA) => {
   if (!personData.note) {
     note.innerHTML = newNote;
   } else {
-    showNote(rowId, personData);
+    updateNote(e, personData);
   }
 
   let elems = document.querySelectorAll(".note");
   M.Modal.init(elems, open);
 };
 
-const addNote = (event) => {
-  // console.log('addNote');
-  let element = event.target;
-  // console.log(element);
-  let rowId = element.dataset.id;  
+// const addNote = (event) => {
+//   // console.log('addNote');
+//   let element = event.target;
+//   // console.log(element);
+//   let rowId = element.dataset.id;  
 
-  let addNote = `
-  <div class="modal-content">
-    <h4>Your Note </h4>
-    <div class="divider"></div>
-    <br />
-    <p class="center-align">
-      <form id="note-form">
-        <input type="text" id="note-data" placeholder="Enter your note" />
-      </form>
-    </p>
-  </div>
-  <div class="modal-footer">
-  <a class="waves-light btn-small waves-effect waves-blue" data-id=${rowId} form="note-form" type="submit" data-action="save-note-data"> Add Note </a>
-  <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
-  </div>`;
+//   let addNote = `
+//   <div class="modal-content">
+//     <h4>Your Note </h4>
+//     <div class="divider"></div>
+//     <br />
+//     <p class="center-align">
+//       <form id="note-form">
+//         <input type="text" id="note-data" placeholder="Enter your note" />
+//       </form>
+//     </p>
+//   </div>
+//   <div class="modal-footer">
+//   <a class="waves-light btn-small waves-effect waves-blue" data-id=${rowId} form="note-form" type="submit" data-action="save-note-data"> Add Note </a>
+//   <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
+//   </div>`;
 
-  note.innerHTML = addNote;
-  // var elems = document.querySelectorAll('.modal');
+//   note.innerHTML = addNote;
+//   // var elems = document.querySelectorAll('.modal');
 
-  // require('./noteData');
-  M.Modal.init(elems, open);
-};
+//   // require('./noteData');
+//   M.Modal.init(elems, open);
+// };
 
 const saveNoteData = (event, data = DATA) => {
   // console.log("saveNote Data", event.target);
@@ -106,61 +106,58 @@ const saveNoteData = (event, data = DATA) => {
 
   person.note = noteData;
   // console.log(data);
-  showNote(rowId, person);
+  // showNote(rowId, person);
 };
 
-const showNote = (rowId, person, data = DATA) => {
-  // console.log('showNote', rowId);
-  // let person;
+// const showNote = (rowId, person, data = DATA) => {
+//   let savedNote = `
+//   <div class="modal-content">
+//     <h4>Your Note </h4>
+//     <div class="divider"></div>
+//     <br />
+//     <p class="center-align">
+//       ${person.note}
+//     </p>
+//   </div>
+//   <div class="modal-footer">
+//     <a class="waves-light btn-small waves-effect waves-blue" data-personnote="${person.note}" data-id="${rowId}" data-action="update-note"> Update Note </a>
+//     <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
+//   </div>`;
 
-  // data.map(el => {
-  //   if(+el.id === +rowId) {
-  //     person = el;
-  //   }
-  // });
+//   note.innerHTML = savedNote;
+//   M.Modal.init(elems, open);
+// }
 
-  let savedNote = `
-  <div class="modal-content">
-    <h4>Your Note </h4>
-    <div class="divider"></div>
-    <br />
-    <p class="center-align">
-      ${person.note}
-    </p>
-  </div>
-  <div class="modal-footer">
-    <a class="waves-light btn-small waves-effect waves-blue" data-personnote="${person.note}" data-id="${rowId}" data-action="update-note"> Update Note </a>
-    <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
-  </div>`;
-
-  note.innerHTML = savedNote;
-  M.Modal.init(elems, open);
-}
-
-const updateNote = (event, data = DATA) => {
+const updateNote = (event, personData = null, data = DATA) => {
   // console.log('updateNote', event.target);
   let element = event.target;
   let rowId = element.dataset.id;
   // console.log(rowId);
   let pNote = element.dataset.personnote;
   // console.log(pNote);
+  if(personData) {
+    console.log(personData);
+    pNote = personData.note;
+    rowId = personData.id;
+  }
 
   let addNote = `
   <div class="modal-content">
     <h4>Your Note </h4>
     <div class="divider"></div>
     <br />
-    <p class="center-align">
-        <input value="${pNote}" type="text" id="note-data" placeholder="Enter your note" />
-    </p>
+        <div class="input-field col s12">
+          <textarea value="${pNote}" id="textarea1" height="5" id="note-data" class="materialize-textarea"></textarea>
+          <label for="textarea1">Enter your note</label>
+        </div>
   </div>
   <div class="modal-footer">
-  <a class="waves-light btn-small waves-effect waves-blue" data-id=${rowId} data-action="update-note-data"> Update Note </a>
+  <a class="waves-light modal-close btn-small waves-effect waves-blue" data-id=${rowId} data-action="update-note-data"> Save Note </a>
   <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
   </div>`;
 
   note.innerHTML = addNote;
-  M.Modal.init(elems, open);
+  var instances = M.Modal.init(elems, open);
 }
 
 const updateNoteDate = (event, data = DATA) => {
@@ -180,7 +177,7 @@ const updateNoteDate = (event, data = DATA) => {
   // console.log(noteText);
 
   person.note = noteText;
-  showNote(rowId, person);
+  // showNote(rowId, person);
 }
 
-export { openNote, addNote, saveNoteData, updateNote, updateNoteDate };
+export { openNote, saveNoteData, updateNote, updateNoteDate };

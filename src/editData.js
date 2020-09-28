@@ -1,7 +1,5 @@
 import {DATA} from './data';
-import { allRowsOnSearch } from './displaydata';
 import { initialPagination } from './pagination';
-// const DATA = require('./data').default;
 
 
 const updateRow = (e, data = DATA) => {
@@ -34,7 +32,8 @@ const updateRow = (e, data = DATA) => {
     if(+el.id === +rowId) {
       rowdata = el;
     }
-  })
+  });
+
   // console.log(rowdata);
   fname = rowdata.fname;
   lname = rowdata.lname;
@@ -69,7 +68,7 @@ const updateRow = (e, data = DATA) => {
         <a data-id=${rowId} class="btn-floating z-depth-0" data-action="update-data"><i data-action="update-data" data-tag="i" class="material-icons black-text"><svg data-tag="svg" data-action="update-data" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path  data-tag="path" data-action="update-data" d="M0 0h24v24H0z" fill="none"/><path data-tag="path1" data-action="update-data" d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg></i></a>
       </span>
     </td>
-    
+    <td></td>
     <td class="username-box">
       <div class="input-field">
         <input placeholder="First Name" id="firstName" type="text" value="${fname}">

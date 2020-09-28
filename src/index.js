@@ -6,12 +6,10 @@ import {initialPagination} from './pagination';
 import './displaydata';
 import { updateRow, updateData } from './editData';
 import { deleteData, deleteRow, checkAllRows, deleteAllData, checkSingleRow } from './deleteData';
-import { sortFname, sortLname, sortDoy, sortCity, searchText } from './filters';
-import { openNote, addNote, saveNoteData, updateNote, updateNoteDate } from './notes';
-import { openTags, addTag, deleteTag, tagColor, saveTagData } from './tags';
-// setTimeout(() => {require('./editData');},500);
-
-// let tbody = document.querySelector("tbody");
+import { sortFname, sortLname, sortDoy, sortCity, searchText, claerSearchBox } from './filters';
+import { openNote, saveNoteData, updateNote, updateNoteDate } from './notes';
+import { openTags, addTag, deleteTag, saveTagData, easyAddLabel } from './tags';
+import { newRow, newRowData } from './newData';
 
 document.addEventListener('DOMContentLoaded', function() {
   let elems = document.querySelectorAll('select');
@@ -51,6 +49,9 @@ const tableActions = event => {
     openNote(event)
   } else if(elementAction === 'open-tags') {
     openTags(event)
+  }  else if(elementAction === 'save-row-data') {
+    console.log('lol');
+    newRowData(event);
   } else {
     console.log('tableActions');
   }
@@ -63,11 +64,14 @@ const cardHeaderActions = event => {
   let elementAction = event.target.dataset.action
   if(elementAction === 'delete-all-data') {
     deleteAllData(event);
+  } else if(elementAction === 'clear-serach-box') {
+    claerSearchBox(event);
+  } else if(elementAction === 'new-row') {
+    newRow(event);
   } else {
     console.log('cardHeaderActions');
   }
 }
-
 document.querySelector('.card-header').addEventListener('click', cardHeaderActions);
 
 const noteActions = event => {
@@ -75,7 +79,7 @@ const noteActions = event => {
   // console.log(event.target.dataset.action);
   let elementAction = event.target.dataset.action;
   if(elementAction === 'add-note') {
-    addNote(event);
+    updateNote(event);
   } else if(elementAction === 'save-note-data') {
     saveNoteData(event);
   } else if(elementAction === 'update-note') {
@@ -85,9 +89,7 @@ const noteActions = event => {
   } else {
     console.log('noteActions');
   }
-
 }
-
 document.querySelector('.note').addEventListener('click', noteActions);
 
 const tagsActions = event => {
@@ -102,12 +104,12 @@ const tagsActions = event => {
     tagColor(event);
   } else if(elementAction === 'save-tag-data') {
     saveTagData(event);
+  } else if(elementAction === 'easy-add-label') {
+    easyAddLabel(event);
   } else {
     console.log('tagsActions');
   }
-
 }
-
 
 document.querySelector('.tags').addEventListener('click', tagsActions);
 initialPagination();

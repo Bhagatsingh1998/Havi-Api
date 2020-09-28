@@ -96,11 +96,15 @@ const searchText = (event, data = DATA) => {
     if(text) {
       initialPagination(result);
     } else {
-      initialPagination()
+      initialPagination();
     }
   }, 150);
 }
 
 document.querySelector('#search').addEventListener('keydown', searchText);
 
-export {sortFname, sortLname, sortCity, sortDoy, searchText}
+const claerSearchBox = (event) => {
+  initialPagination();
+}
+
+export {sortFname, sortLname, sortCity, sortDoy, searchText, claerSearchBox}

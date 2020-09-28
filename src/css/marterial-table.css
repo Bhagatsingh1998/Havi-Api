@@ -22,19 +22,24 @@ tbody th {
 
 .tags-td {
   display: flex;   
-  width: 100px; 
-  overflow-x: auto;
 }
 
 .tags-td span {
   display: flex;
-
 }
 
-.tag-info .tag-name {
-  padding: 0px 10px 5px 10px;
-
+.tag-info-div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
+
+.tag-details {
+  cursor: pointer;
+  padding: 4px;
+  margin: 5px;
+}
+
 
 .whole-pagination {
   display: flex;
@@ -97,6 +102,7 @@ tbody th {
 .search {
   display: flex;
 }
+
 
 th div {
   display: flex ;
@@ -221,6 +227,34 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
   background-color: #61dafb !important;
 }
 
+/* label color */
+.input-field label {
+  color: #61dafb !important;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #61dafb !important;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #61dafb !important;
+  box-shadow: 0 1px 0 0 #61dafb !important;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #61dafb !important;
+  box-shadow: 0 1px 0 0 #61dafb !important;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #61dafb !important;
+  box-shadow: 0 1px 0 0 #61dafb !important;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #61dafb !important;
+}
+
 @media only screen and (max-width: 900px) {
   .pagination-range {
     width: 13%;
@@ -252,6 +286,14 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
   }
   .card-header-body {
     width: 75%;
+  }
+  .tags-td {
+    width: 100px; 
+    overflow-x: auto;
+  }
+  .modal {
+    padding: 15px !important;
+    width: 100% !important;
   }
 }
 

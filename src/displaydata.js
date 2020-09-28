@@ -1,7 +1,7 @@
-import {DATA} from './data';
+import {DATA, TAGS} from './data';
 
 
-const allRowsOnSearch = (data = DATA) => {
+const allRowsOnSearch = (data = DATA, tags = TAGS) => {
   let tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
   // console.log(data);
@@ -9,11 +9,15 @@ const allRowsOnSearch = (data = DATA) => {
 
     let totalTags = '';
     if(rowData.tags) {
-      rowData.tags.forEach(tagInfo => {
-        totalTags +=  `
-        <a data-id=${rowData.id} class="btn-floating z-depth-0 modal-trigger" data-action="open-tags" data-target="modal2"><i data-action="open-tags" data-tag="i"  class="material-icons black-text" >
-        <svg  data-tag="svg" data-action="open-tags" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${tagInfo.color}" width="18px" height="18px"><path data-tag="path" data-action="open-tags" d="M0 0h24v24H0V0z" fill="none"/><path data-tag="path2" data-action="open-tags" d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>
-        </i></a>`
+      rowData.tags.forEach(tagId => {
+        tags.forEach(tag => {
+          if(+tag.id === +tagId) {
+            totalTags +=  `
+            <a data-id=${rowData.id} class="btn-floating z-depth-0 modal-trigger" data-action="open-tags" data-target="modal2"><i data-action="open-tags" data-tag="i"  class="material-icons black-text" >
+            <svg  data-tag="svg" data-action="open-tags" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${tag.color}" width="18px" height="18px"><path data-tag="path" data-action="open-tags" d="M0 0h24v24H0V0z" fill="none"/><path data-tag="path2" data-action="open-tags" d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>
+            </i></a>`;
+          }
+        }) 
       });
     }
 

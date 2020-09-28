@@ -40,11 +40,11 @@ module.exports = {
       }
     ],
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     template: "./src/index.html",
-  //     filename: "index.html",
-  //   }),
-  // ],
-  // devtool: 'eval-cheap-module-source-map'
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html",
+    }),
+  ],
+  devtool: 'eval-cheap-module-source-map'
 };
