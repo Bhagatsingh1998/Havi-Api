@@ -7,7 +7,7 @@ import './displaydata';
 import { updateRow, updateData } from './editData';
 import { deleteData, deleteRow, checkAllRows, deleteAllData, checkSingleRow } from './deleteData';
 import { sortFname, sortLname, sortDoy, sortCity, searchText, claerSearchBox } from './filters';
-import { openNote, saveNoteData, updateNote, updateNoteDate } from './notes';
+import { openNote, updateNote } from './notes';
 import { openTags, addTag, deleteTag, saveTagData, easyAddLabel } from './tags';
 import { newRow, newRowData } from './newData';
 
@@ -80,12 +80,12 @@ const noteActions = event => {
   let elementAction = event.target.dataset.action;
   if(elementAction === 'add-note') {
     updateNote(event);
-  } else if(elementAction === 'save-note-data') {
-    saveNoteData(event);
+  // } else if(elementAction === 'save-note-data') {
+  //   saveNoteData(event);
   } else if(elementAction === 'update-note') {
     updateNote(event);
-  } else if(elementAction === 'update-note-data') {
-    updateNoteDate(event);
+  // } else if(elementAction === 'update-note-data') {
+  //   updateNoteDate(event);
   } else {
     console.log('noteActions');
   }

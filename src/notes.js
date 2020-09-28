@@ -1,4 +1,5 @@
 import { DATA } from "./data";
+import { initialPagination } from './pagination';
 
 let note = document.querySelector(".note");
 
@@ -56,7 +57,27 @@ const openNote = (e, data = DATA) => {
   }
 
   let elems = document.querySelectorAll(".note");
-  M.Modal.init(elems, open);
+  // M.Modal.init(elems, open);
+  // M.AutoInit();
+  M.Modal.init(elems, {
+    onCloseStart: () => {
+      if(document.querySelector("#note-data")) {
+        const noteData = document.querySelector("#note-data").value;
+        // console.log(document.querySelector("#note-data"));
+      
+        let person;
+        data.map(el => {
+          if(+el.id === +rowId) {
+            person = el;
+          }
+        });
+        
+        person.note = noteData;
+        initialPagination();
+      }
+    },
+    dismissible: false
+  });
 };
 
 // const addNote = (event) => {
@@ -88,26 +109,26 @@ const openNote = (e, data = DATA) => {
 //   M.Modal.init(elems, open);
 // };
 
-const saveNoteData = (event, data = DATA) => {
-  // console.log("saveNote Data", event.target);
-  let element = event.target;
-  console.log(element);
-  const rowId = element.dataset.id;
-  // console.log(rowId);
-  const noteData = document.querySelector('#note-data').value;
-  // console.log(d);
+// const saveNoteData = (event, data = DATA) => {
+//   // console.log("saveNote Data", event.target);
+//   let element = event.target;
+//   console.log(element);
+//   const rowId = element.dataset.id;
+//   // console.log(rowId);
+//   const noteData = document.querySelector('#note-data').value;
+//   // console.log(d);
 
-  let person;
-  data.map(el => {
-    if(+el.id === +rowId) {
-      person = el;
-    }
-  });
+//   let person;
+//   data.map(el => {
+//     if(+el.id === +rowId) {
+//       person = el;
+//     }
+//   });
 
-  person.note = noteData;
-  // console.log(data);
-  // showNote(rowId, person);
-};
+//   person.note = noteData;
+//   // console.log(data);
+//   // showNote(rowId, person);
+// };
 
 // const showNote = (rowId, person, data = DATA) => {
 //   let savedNote = `
@@ -125,7 +146,7 @@ const saveNoteData = (event, data = DATA) => {
 //   </div>`;
 
 //   note.innerHTML = savedNote;
-//   M.Modal.init(elems, open);
+  
 // }
 
 const updateNote = (event, personData = null, data = DATA) => {
@@ -147,8 +168,8 @@ const updateNote = (event, personData = null, data = DATA) => {
     <div class="divider"></div>
     <br />
         <div class="input-field col s12">
-          <textarea value="${pNote}" id="textarea1" height="5" id="note-data" class="materialize-textarea"></textarea>
-          <label for="textarea1">Enter your note</label>
+          <textarea  height="5" id="note-data" class="materialize-textarea">${pNote}</textarea>
+          <label class="active" for="note-data">Enter your note</label>
         </div>
   </div>
   <div class="modal-footer">
@@ -157,27 +178,29 @@ const updateNote = (event, personData = null, data = DATA) => {
   </div>`;
 
   note.innerHTML = addNote;
-  var instances = M.Modal.init(elems, open);
+  // M.AutoInit();
 }
 
-const updateNoteDate = (event, data = DATA) => {
-  // console.log('updatedNoteData', event.target);
-  let element = event.target;
-  let rowId = element.dataset.id;
-  // console.log(rowId);
+// const updateNoteDate = (event, data = DATA) => {
+//   console.log('updatedNoteData', event.target);
+//   let element = event.target;
+//   let rowId = element.dataset.id;
+//   // console.log(rowId);
 
-  let person;
-  data.map(el => {
-    if(+el.id === +rowId) {
-      person = el;
-    }
-  });
+//   let person;
+//   data.map(el => {
+//     if(+el.id === +rowId) {
+//       person = el;
+//     }
+//   });
 
-  let noteText = note.querySelector('#note-data').value;
-  // console.log(noteText);
+//   let noteText = document.querySelector("#note-data");
+//   console.log(noteText);
 
-  person.note = noteText;
-  // showNote(rowId, person);
-}
+//   person.note = noteText;
+//   // showNote(rowId, person);
+//   // var instances = M.Modal.init(elems, open);
+//   // M.AutoInit();
+// }
 
-export { openNote, saveNoteData, updateNote, updateNoteDate };
+export { openNote, updateNote };

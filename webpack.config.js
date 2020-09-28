@@ -1,7 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // mode: 'development',
   module: {
     rules: [
       // {
@@ -40,11 +39,12 @@ module.exports = {
       }
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "index.html",
-    }),
-  ],
-  devtool: 'eval-cheap-module-source-map'
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     template: "./src/index.html",
+  //     filename: "index.html",
+  //   }),
+  // ],
+  // devtool: 'eval-cheap-module-source-map',
+  // mode: 'development',
 };

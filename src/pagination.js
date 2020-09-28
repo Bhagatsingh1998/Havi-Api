@@ -11,7 +11,7 @@ let cardHeader = document.querySelector(".card-header");
 const paginationData = {
   currentPageNo: 1,
   previousPageNo: 1,
-  pagesOnEachSlide: 5
+  pagesOnEachSlide: 25
 };
 
 paginationData.nextPageNo = paginationData.currentPageNo + 1;
