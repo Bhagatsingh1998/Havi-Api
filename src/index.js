@@ -8,7 +8,7 @@ import { updateRow, updateData } from './editData';
 import { deleteData, deleteRow, checkAllRows, deleteAllData, checkSingleRow } from './deleteData';
 import { sortFname, sortLname, sortDoy, sortCity, searchText, claerSearchBox } from './filters';
 import { openNote, updateNote } from './notes';
-import { openTags, addTag, deleteTag, saveTagData, easyAddLabel } from './tags';
+import { openTags, addTag, deleteTag, saveTagData, easyAddTag } from './tags';
 import { newRow, newRowData } from './newData';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -104,8 +104,8 @@ const tagsActions = event => {
     tagColor(event);
   } else if(elementAction === 'save-tag-data') {
     saveTagData(event);
-  } else if(elementAction === 'easy-add-label') {
-    easyAddLabel(event);
+  } else if(elementAction === 'easy-add-tag') {
+    easyAddTag(event);
   } else {
     console.log('tagsActions');
   }
@@ -113,6 +113,7 @@ const tagsActions = event => {
 
 document.querySelector('.tags').addEventListener('click', tagsActions);
 initialPagination();
+
 
 
 

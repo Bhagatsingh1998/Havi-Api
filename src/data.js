@@ -29,7 +29,7 @@ let DATA = [
 ];
 
 let TAGS = [
-  {id: 1, name: 'Imp', color: 'green'},
+  {id: 1, name: 'Imp', color: '#f44336'},
   {id: 2, name: 'danger', color: 'red'},
   {id: 3, name: 'try', color: 'brown'},
   {id: 4, name: 'random', color: 'yellow'},

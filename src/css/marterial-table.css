@@ -20,10 +20,18 @@ tbody th {
   display: flex;
 }
 
-.tags-td  span  span{
-  padding-right: 8px ;
-  border-radius: 10px ;
-  margin-right: 5px ;
+.tags-td  span  div {
+  padding: 0 5px;
+  margin-right: 10px;
+  text-transform: capitalize;
+  font-weight: lighter;
+}
+
+.tags-td  span  div span{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .tags-td {
@@ -46,6 +54,30 @@ tbody th {
   cursor: pointer;
   padding: 4px;
   margin: 5px;
+}
+
+.tag-form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tag-form i:last-child {
+  cursor: pointer;
+}
+
+.tags-list:last-child {
+  height: 250px;
+  overflow-y: auto;
+}
+
+.tags-list div {
+  margin-bottom: 3px;
+}
+
+.tags-list div p {
+  width: 350px !important;
+  /* overflow-x: auto; */
+  word-wrap: break-word;
 }
 
 
@@ -147,6 +179,26 @@ th div p {
   color: #61dafb;
 }
 
+/* input[type="color"] {
+  padding: 0;
+  width: 40px;
+  border-radius: 50%;
+  margin: none;
+  display: none;
+} */
+
+input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  outline: none;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
 /* overwriting the materialze properties */
 
 @font-face {
@@ -261,6 +313,22 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
 /* icon prefix focus color */
 .input-field .prefix.active {
   color: #61dafb !important;
+}
+
+.tags {
+  width: 400px !important;
+  margin: auto;
+  /* padding: 10px !important; */
+}
+
+.tag-form input[type="text"]:not(.browser-default) {
+  width: 230px !important;
+  height: 2rem !important;
+
+}
+
+.tag-form input[type="color"] {
+  margin: 0 10px;
 }
 
 @media only screen and (max-width: 900px) {
