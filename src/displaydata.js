@@ -27,7 +27,7 @@ const allRowsOnSearch = (data = DATA, tags = TAGS) => {
           if(+tag.id === +tagId) {
             totalTags +=  `
               <a href="#!">
-              <div data-target="modal2" data-id=${rowData.id} data-action="open-tags" class="grey lighten-3 valign-wrapper z-depth-0 modal-trigger "><span data-action="open-tags" data-tag="span" class="left" style="background-color: ${tag.color}"></span>${tag.name}</div></a>`;
+              <div data-target="modal2" data-id=${rowData.id} data-action="open-tags" class="grey black-text lighten-3 valign-wrapper z-depth-0 modal-trigger "><span data-action="open-tags" data-tag="span" class="left" style="background-color: ${tag.color}"></span>${tag.name}</div></a>`;
           }
         }) 
       });

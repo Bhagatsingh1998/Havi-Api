@@ -20,14 +20,18 @@ tbody th {
   display: flex;
 }
 
-.tags-td  span  div {
+.tags-td  span a {
+  font-size: smaller;
+}
+
+.tags-td  span a div {
   padding: 0 5px;
   margin-right: 10px;
   text-transform: capitalize;
   font-weight: lighter;
 }
 
-.tags-td  span  div span{
+.tags-td  span a div span{
   width: 8px;
   height: 8px;
   border-radius: 50%;
