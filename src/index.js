@@ -8,7 +8,7 @@ import { updateRow, updateData } from './editData';
 import { deleteData, deleteRow, checkAllRows, deleteAllData, checkSingleRow } from './deleteData';
 import { sortFname, sortLname, sortDoy, sortCity, searchText, claerSearchBox } from './filters';
 import { openNote, updateNote } from './notes';
-import { openTags, addTag, deleteTag, saveTagData, easyAddTag } from './tags';
+import { openTags, addTag, deleteTag, easyAddTag } from './tags';
 import { newRow, newRowData } from './newData';
 
 document.addEventListener('DOMContentLoaded', function() {

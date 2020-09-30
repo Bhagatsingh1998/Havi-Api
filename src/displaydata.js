@@ -26,8 +26,7 @@ const allRowsOnSearch = (data = DATA, tags = TAGS) => {
         tags.forEach(tag => {
           if(+tag.id === +tagId) {
             totalTags +=  `
-              <a href="#!">
-              <div data-target="modal2" data-id=${rowData.id} data-action="open-tags" class="grey black-text lighten-3 valign-wrapper z-depth-0 modal-trigger "><span data-action="open-tags" data-tag="span" class="left" style="background-color: ${tag.color}"></span>${tag.name}</div></a>`;
+              <div data-target="modal2" data-id=${rowData.id} data-action="open-tags" class="each-tag-display valign-wrapper z-depth-0 modal-trigger "><span data-action="open-tags" data-tag="span" class="left" style="background-color: ${tag.color}"></span><p data-action="open-tags" > ${tag.name} </p></div>`;
           }
         }) 
       });
@@ -52,10 +51,9 @@ const allRowsOnSearch = (data = DATA, tags = TAGS) => {
       </td>
       <td class="tags-td">
         <span class="valign-wrapper"> 
-        
         ${totalTags}
 
-        <a data-id=${rowData.id} class="btn-floating z-depth-0 modal-trigger" data-action="open-tags" data-target="modal2"><i data-action="open-tags" data-tag="i"  class="material-icons black-text" >
+        <a data-id=${rowData.id} class="  modal-trigger" data-action="open-tags" data-target="modal2"><i data-action="open-tags" data-tag="i"  class="material-icons valign-wrapper black-text" >
         <svg data-tag="svg" data-action="open-tags" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path data-tag="path" data-action="open-tags" d="M0 0h24v24H0z" fill="none"/><path data-tag="path2" data-action="open-tags" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         </i></a>
 

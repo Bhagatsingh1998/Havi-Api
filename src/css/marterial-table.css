@@ -20,18 +20,29 @@ tbody th {
   display: flex;
 }
 
-.tags-td  span a {
-  font-size: smaller;
+.tags-td span {
+  flex-wrap: wrap;
 }
 
-.tags-td  span a div {
-  padding: 0 5px;
-  margin-right: 10px;
-  text-transform: capitalize;
-  font-weight: lighter;
+.tags-td span div{
+  margin-top: 8px;
 }
 
-.tags-td  span a div span{
+.each-tag-display {
+  display: flex;
+  font-size: 11px;
+  height: 21px;
+  background-color: #00000014;
+  padding: 0 6px;  
+  align-items: center;
+  border-radius: 2px;
+  /* text-transform: capitalize; */
+  color: #000000DE;
+  margin: 0 .2rem; 
+  cursor: pointer;
+}
+
+.each-tag-display span {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -40,12 +51,21 @@ tbody th {
 
 .tags-td {
   display: flex;  
-  width: 300px;
-  overflow-x: auto; 
+  width: 250px;
 }
 
 .tags-td span {
   display: flex;
+}
+
+/* .tags-td span a {
+  padding-top: 10px;
+} */
+
+.tags-td span a i {
+  height: 30px;
+  font-size: 1.3rem !important;
+  padding-top: 8px;
 }
 
 .tag-info-div {
@@ -67,15 +87,10 @@ tbody th {
 
 .tag-form i:last-child {
   cursor: pointer;
-}
-
-.tags-list:last-child {
-  height: 250px;
-  overflow-y: auto;
-}
+}  
 
 .tags-list div {
-  margin-bottom: 3px;
+  margin-bottom: .8rem;
 }
 
 .tags-list div p {
@@ -84,6 +99,17 @@ tbody th {
   word-wrap: break-word;
 }
 
+.tags-list div label span {
+  width: 320px !important;
+  word-wrap: break-word;
+  /* text-align: center; */
+  color: black;
+  /* font-size: 11px !important; */
+}
+
+.tags [type="checkbox"] + span:not(.lever) {
+  margin-left: 5px;
+}
 
 .whole-pagination {
   display: flex;
@@ -191,10 +217,16 @@ th div p {
   display: none;
 } */
 
+#tagColorInput {
+  padding: 0;
+  width: 30px;
+  border-radius: 50%;
+}
+
 input[type=color]::-webkit-color-swatch {
   border: none;
   border-radius: 50%;
-  padding: 0;
+  padding: 0 ;
   outline: none;
 }
 
@@ -322,13 +354,13 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
 .tags {
   width: 400px !important;
   margin: auto;
+  border-radius: 10px !important;
   /* padding: 10px !important; */
 }
 
 .tag-form input[type="text"]:not(.browser-default) {
-  width: 230px !important;
+  width: 250px !important;
   height: 2rem !important;
-
 }
 
 .tag-form input[type="color"] {
@@ -369,11 +401,14 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
   }
   .tags-td {
     width: 100px; 
-    overflow-x: auto;
   }
-  .modal {
-    padding: 15px !important;
+  .notes {
+    padding: 5px !important;
     width: 100% !important;
+  }
+
+  .modal-content {
+    padding: 10px !important;
   }
 }
 
@@ -382,7 +417,40 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
     width: 25%;
     margin-right: 10px;
   }
+
+  .tags {
+    width: 350px !important;
+    /* padd */
+  }
+
+  .tags-list div label span {
+    width: 280px !important;
+  }
+
+  .tag-form input[type="text"]:not(.browser-default) {
+    width: 216px !important;
+  }
+  
+  .tag-form input[type="color"] {
+    margin: 0 5px;
+  }
 } 
+
+@media only screen and (max-width: 360px) {
+  .tags {
+    width: 310px !important;
+    /* padd */
+  }
+
+  .tags-list div label span {
+    width: 260px !important;
+  }
+
+  .tag-form input[type="text"]:not(.browser-default) {
+    width: 200px !important;
+  }
+  
+}
 
 @media only screen and (max-width: 310px) {
   .pagination-range {
@@ -392,4 +460,18 @@ input[type="checkbox"].filled-in:checked + span:not(.lever)::after {
   .card-header-body {
     width: 65%;
   }
+
+  .tags {
+    width: 280px !important;
+    /* padd */
+  }
+
+  .tags-list div label span {
+    width: 210px !important;
+  }
+
+  .tag-form input[type="text"]:not(.browser-default) {
+    width: 170px !important;
+  }
+  
 }
