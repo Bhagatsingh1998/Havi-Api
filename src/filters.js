@@ -88,7 +88,8 @@ const searchText = (event, data = DATA) => {
         el.fname.toLowerCase().includes(text) ||
         el.lname.toLowerCase().includes(text) ||
         el.doy.toString().includes(text) ||
-        el.city.toLowerCase().includes(text)
+        el.city.toLowerCase().includes(text) ||
+        el.note.toLowerCase().includes(text)
       ) {
         result.push(el);
       }
@@ -104,6 +105,7 @@ const searchText = (event, data = DATA) => {
 document.querySelector('#search').addEventListener('keydown', searchText);
 
 const claerSearchBox = (event) => {
+  document.querySelector("#search").value = '';
   initialPagination();
 }
 

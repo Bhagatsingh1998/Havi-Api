@@ -4,7 +4,7 @@ import './js/materialize.min.js';
 
 import {initialPagination} from './pagination';
 import './displaydata';
-import { updateRow, updateData } from './editData';
+import { updateRow } from './editData';
 import { deleteData, deleteRow, checkAllRows, deleteAllData, checkSingleRow } from './deleteData';
 import { sortFname, sortLname, sortDoy, sortCity, searchText, claerSearchBox } from './filters';
 import { openNote, updateNote } from './notes';
@@ -23,10 +23,11 @@ const tableActions = event => {
   let elementAction = event.target.dataset.action
   if(elementAction === 'update-row') {
     updateRow(event);
-  } else if(elementAction === 'close-row') {
+  } else 
+  if(elementAction === 'close-row') {
     initialPagination();
-  } else if(elementAction === 'update-data') {
-    updateData(event);
+  // } else if(elementAction === 'update-data') {
+  //   updateData(event);
   } else if(elementAction === 'delete-row') {
     deleteRow(event)
   } else if(elementAction === 'delete-data') {

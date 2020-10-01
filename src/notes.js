@@ -26,20 +26,20 @@ const openNote = (e, data = DATA) => {
   let rowId = element.dataset.id;
   // console.log(rowId);
 
-  let newNote = `
-  <div class="modal-content">
-    <h4>Your Note </h4>
-    <div class="divider"></div>
-    <br />
-    <p class="center-align">No notes added.  <br /> <br />
-      <a data-id=${rowId} data-personnote="" data-action="add-note" class="waves-effect waves-light btn-small">
-        Add Note
-      </a>
-    </p>
-  </div>
-  <div class="modal-footer">
-  <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
-  </div>`;
+  // let newNote = `
+  // <div class="modal-content">
+  //   <h4>Your Note </h4>
+  //   <div class="divider"></div>
+  //   <br />
+  //   <p class="center-align">No notes added.  <br /> <br />
+  //     <a data-id=${rowId} data-personnote="" data-action="add-note" class="waves-effect waves-light btn-small">
+  //       Add Note
+  //     </a>
+  //   </p>
+  // </div>
+  // <div class="modal-footer">
+  // <a class="waves-light btn-small modal-close waves-effect waves-blue"> Close </a>
+  // </div>`;
 
   let personData;
   data.map((el) => {
@@ -51,7 +51,8 @@ const openNote = (e, data = DATA) => {
   // console.log(personData);
 
   if (!personData.note) {
-    note.innerHTML = newNote;
+    // note.innerHTML = newNote;
+    updateNote(e, personData)
   } else {
     updateNote(e, personData);
   }
@@ -99,7 +100,7 @@ const updateNote = (event, personData = null, data = DATA) => {
     <h4>Your Note </h4>
     <div class="divider"></div>
     <br />
-        <div class="input-field col s12">
+        <div class="input-field">
           <textarea  height="5" id="note-data" class="materialize-textarea">${pNote}</textarea>
           <label class="active" for="note-data">Enter your note</label>
         </div>
@@ -110,29 +111,6 @@ const updateNote = (event, personData = null, data = DATA) => {
   </div>`;
 
   note.innerHTML = addNote;
-  // M.AutoInit();
 }
-
-// const updateNoteDate = (event, data = DATA) => {
-//   console.log('updatedNoteData', event.target);
-//   let element = event.target;
-//   let rowId = element.dataset.id;
-//   // console.log(rowId);
-
-//   let person;
-//   data.map(el => {
-//     if(+el.id === +rowId) {
-//       person = el;
-//     }
-//   });
-
-//   let noteText = document.querySelector("#note-data");
-//   console.log(noteText);
-
-//   person.note = noteText;
-//   // showNote(rowId, person);
-//   // var instances = M.Modal.init(elems, open);
-//   // M.AutoInit();
-// }
 
 export { openNote, updateNote };

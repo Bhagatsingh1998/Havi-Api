@@ -152,9 +152,10 @@ const easyManageTag = (e, value) => {
 }
 
 const enterAddTag = (e) => {
-  console.log(e.explicitOriginalTarget);
-  console.log(e.explicitOriginalTarget.dataset.id);
-  let rowId = e.explicitOriginalTarget.dataset.id;
+  // console.log(e.target.dataset.id);
+  // console.log(e.explicitOriginalTarget);
+  // console.log(e.explicitOriginalTarget.dataset.id);
+  let rowId = e.target.dataset.id;
   if(e.key === 'Enter') {
     addTag(false, rowId);
   }

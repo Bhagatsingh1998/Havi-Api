@@ -36,15 +36,15 @@ module.exports = {
         use: [
           'file-loader',
         ],
-      }
+      },
     ],
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     template: "./src/index.html",
-  //     filename: "index.html",
-  //   }),
-  // ],
-  // devtool: 'eval-cheap-module-source-map',
-  // mode: 'development',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html",
+    }),
+  ],
+  devtool: 'eval-cheap-module-source-map',
+  mode: 'development'
 };
