@@ -57,8 +57,8 @@ const Documentation = props => {
                   </ol>  
                   Some of the components under this category are : App, Admin, Login, Signin, Signup, Toolbar, User.
                   To give the feel of MPA(Multi-Page Appliaction ), we have used routing with the help of 'react-router-dom'. <br/>
-                  To style wepages, CSS has been used extensively and also made use of 'react-bootstrap' package. <br/>
-                  To add icons, 'bootstrap-icons' and 'font-awesome-icons' CDN has been used.
+                  To style webpages, CSS has been used extensively and also made use of 'react-bootstrap' package. <br/>
+                  To add icons, 'bootstrap-icons' and 'font-awesome-icons' has been used.
                 </li>
                 <li>
                   Components:
@@ -139,7 +139,7 @@ const Documentation = props => {
                 HTTP VERB: <strong> DELETE</strong>
                 <ul>
                   <li>
-                    BASE_URL/user/:user_id
+                    BASE_URL/user/:user_id                      
                     <p>
                       If user is loggedIn as admin i.e. (User Type : Admin). Admin has functionily to delete the person's API from database. To do that admin has to send request to above URL while passing <u>:user_id</u> along with the URL. <br />
                       <strong>Caution:</strong> <i>:user_id</i> will be 20 characters alphanumneric string.
@@ -324,6 +324,7 @@ const Documentation = props => {
                 <ul>
                   <li>More API routes.</li>
                   <li>More better UI  with animations</li>
+                  <li>Reducing the size of total application by more optimizing it</li>
                 </ul>
               </ul>
             </p>
@@ -333,7 +334,7 @@ const Documentation = props => {
             <h3>Contact Me</h3>
             <br />
             <h4><strong>Bhagat Singh</strong></h4>
-            <p>Freelancer, Full Stack Webdeveloper </p>
+            <p>Freelancer || Full Stack Webdeveloper </p>
             <ol>
               <li>E-Mail: bhagat99198@gmail.com</li>
               <li>
@@ -350,7 +351,7 @@ const Documentation = props => {
             <br />
             <br />
             <hr />
-            <p style={{textAlign: 'center'}} >Thank You <span>🙂</span></p>
+            <p style={{textAlign: 'center'}} > 🎉🎉 Thanks 🎉🎉 </p>
             <br/>
             <hr/>
             <hr/>
