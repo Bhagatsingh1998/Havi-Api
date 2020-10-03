@@ -1,4 +1,4 @@
-import { DATA } from "./data";
+import { DATA, updateData } from "./data";
 import { initialPagination } from './pagination';
 
 let note = document.querySelector(".note");
@@ -74,6 +74,7 @@ const openNote = (e, data = DATA) => {
         });
         
         person.note = noteData;
+        updateData(data);
         initialPagination();
       }
     },

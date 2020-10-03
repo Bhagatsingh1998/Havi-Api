@@ -1,4 +1,4 @@
-import { DATA } from './data';
+import { DATA, updateData } from './data';
 import { initialPagination, paginationData } from './pagination';
 
 const newRow = (e, data = DATA) => {
@@ -62,6 +62,7 @@ const newRowData = (e, data = DATA) => {
   allData[allData.length] = newData;
   data = allData;
   paginationData.totalPages = Math.ceil(data.length / paginationData.pagesOnEachSlide);
+  updateData(data);
   initialPagination();
 }
 

@@ -113,10 +113,5 @@ const tagsActions = event => {
 }
 
 document.querySelector('.tags').addEventListener('click', tagsActions);
+
 initialPagination();
-
-
-
-
-
-

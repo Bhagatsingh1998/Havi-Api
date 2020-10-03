@@ -24,6 +24,10 @@ tbody th {
   flex-wrap: wrap;
 }
 
+.tags-td span a{
+  cursor: pointer;
+}
+
 .tags-td span div{
   margin-top: 8px;
 }
@@ -367,7 +371,7 @@ textarea.materialize-textarea:focus {
   color: #61dafb !important;
 }
 
-.tags {
+.note, .tags {
   width: 400px !important;
   margin: auto;
   border-radius: 10px !important;
@@ -434,6 +438,7 @@ textarea.materialize-textarea:focus {
     margin-right: 10px;
   }
 
+  .note,
   .tags {
     width: 350px !important;
     /* padd */

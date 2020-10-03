@@ -1,5 +1,5 @@
 import { initialPagination } from './pagination';
-import { DATA, TAGS } from './data';
+import { DATA, TAGS, updateData, updateTags } from './data';
 
 let tagsModal = document.querySelector('.tags');
 
@@ -205,7 +205,8 @@ const addTag = (e = false, rowid = false, data = DATA, tags = TAGS) => {
     color : tagColorInput
   });
   person.tags.push(tagId);
-
+  updateTags(tags);
+  updateData(data);
   initialPagination();
   openTags(false, rowId); 
 }
@@ -220,31 +221,32 @@ const easyAddTag = (e, rowId, tagId, data = DATA, tags = TAGS) => {
     }
   });
   person.tags.push(+tagId);
+  updateData(data);
   initialPagination();
   openTags(false, rowId);
 }
 
-const easyRemoveTag = (e, rowId, tagId, data = DATA, tags = TAGS) => {
-  console.log('easyAddTag', e.target);
+// const easyRemoveTag = (e, rowId, tagId, data = DATA, tags = TAGS) => {
+//   console.log('easyAddTag', e.target);
   
-  let person;
-  data.map(el => {
-    if(+el.id === +rowId) {
-      person = el;
-    }
-  });
-  let tagIndex;
-  for(let i = 0; i < person.tags.length; i++) {
-    if(+person.tags[i] === +tagId) {
-      tagIndex = i;
-      break;
-    }
-  }
-
-  person.tags.splice(tagIndex, 1);
-  initialPagination();
-  openTags(false, rowId);
-}
+//   let person;
+//   data.map(el => {
+//     if(+el.id === +rowId) {
+//       person = el;
+//     }
+//   });
+//   let tagIndex;
+//   for(let i = 0; i < person.tags.length; i++) {
+//     if(+person.tags[i] === +tagId) {
+//       tagIndex = i;
+//       break;
+//     }
+//   }
+//   person.tags.splice(tagIndex, 1);
+//   updateData(data);
+//   initialPagination();
+//   openTags(false, rowId);
+// }
 
 const deleteTag = (e, data = DATA, tags = TAGS) => {
   console.log('opentags', e.target);
@@ -282,6 +284,7 @@ const deleteTag = (e, data = DATA, tags = TAGS) => {
   }
   tags.splice(tIndex, 1);  
   // console.log(person.tags);
+  updateTags(tags)
   initialPagination();
   openTags(false, rowId);
 }

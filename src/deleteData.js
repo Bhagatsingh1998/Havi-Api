@@ -1,4 +1,4 @@
-import { DATA } from './data';
+import { DATA, updateData } from './data';
 import { initialPagination, paginationData, header, headerHighlight } from './pagination';
 
 const deleteRow = e => {
@@ -77,6 +77,8 @@ const deleteData = (e, data = DATA) => {
   console.log('delted');
   let allData = data;
   allData.splice(rowIndex, 1);
+
+  updateData(data);
   paginationData.totalPages = Math.ceil(allData.length / paginationData.pagesOnEachSlide);
   initialPagination();
 }
@@ -148,6 +150,7 @@ const deleteAllData = (e, data = DATA) => {
   document.getElementById('selectAll').checked = false;
   data = allData;
   // console.log(data);
+  updateData(data);
   paginationData.totalPages = Math.ceil(data.length/paginationData.pagesOnEachSlide);
   initialPagination();
 }

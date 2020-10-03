@@ -58,17 +58,17 @@ const allRowsOnSearch = (data = DATA, tags = TAGS) => {
       <td class="tags-td">
         <span class="valign-wrapper"> 
         ${totalTags}
+        
+        <a data-id=${rowData.id} class="  modal-trigger" data-action="open-tags" data-target="modal2"><i data-action="open-tags" data-tag="i"  class="material-icons valign-wrapper black-text" >
+        <svg data-tag="svg" data-action="open-tags" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path data-tag="path" data-action="open-tags" d="M0 0h24v24H0z" fill="none"/><path data-tag="path2" data-action="open-tags" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        </i></a> 
         </span>
       </td>
-      
     </tr>`;
+    
     tbody.innerHTML += row;
   });
 };
 
 export { allRowsOnSearch };
 
-// plus icon for tags
-{/* <a data-id=${rowData.id} class="  modal-trigger" data-action="open-tags" data-target="modal2"><i data-action="open-tags" data-tag="i"  class="material-icons valign-wrapper black-text" >
-        <svg data-tag="svg" data-action="open-tags" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path data-tag="path" data-action="open-tags" d="M0 0h24v24H0z" fill="none"/><path data-tag="path2" data-action="open-tags" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-        </i></a> */}

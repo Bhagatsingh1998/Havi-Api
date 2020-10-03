@@ -1,4 +1,4 @@
-let DATA = [
+let persons = [
   { id: 478, tags:[1, 4, 1, 2, 3, 4, 5], fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi", note: "" },
   { id: 2,   tags:[], fname: "Bravo", lname: "Yankee", doy: 2020, city: "Bangalore", note: "hey hello" },
   { id: 1,   tags:[2], fname: "Alfa", lname: "Zulu", doy: 1992, city: "Delhi", note: "" },
@@ -28,14 +28,32 @@ let DATA = [
   { id: 46978,tags:[], fname: "Echo", lname: "Victor", doy: 2450, city: "Delhi", note: "" },
 ];
 
-let TAGS = [
+let tags = [
   {id: 1, name: 'Imp', color: '#f44336'},
   {id: 2, name: 'danger', color: 'red'},
   {id: 3, name: 'try', color: 'brown'},
   {id: 4, name: 'random', color: 'yellow'},
-  {id: 5, name: 'Imp', color: 'pink'},
-  {id: 6, name: 'danger', color: 'purple'},
+  {id: 5, name: 'Imp2', color: 'pink'},
+  {id: 6, name: 'danger2', color: 'purple'},
+];
 
-]
+if(!sessionStorage.getItem('persons')) {
+  sessionStorage.setItem('persons', JSON.stringify(persons));
+  sessionStorage.setItem('tags', JSON.stringify(tags));
+}
 
-export {DATA, TAGS};
+
+const updateData = (updatedData) => {
+  console.log(updatedData);
+  sessionStorage.setItem('persons', JSON.stringify(updatedData));
+}
+
+const updateTags= (updatedTags) => {
+  sessionStorage.setItem('tags', JSON.stringify(updatedTags));
+}
+
+let DATA = JSON.parse(sessionStorage.getItem('persons'));
+
+let TAGS = JSON.parse(sessionStorage.getItem('tags'));
+
+export {DATA, TAGS, updateData, updateTags};

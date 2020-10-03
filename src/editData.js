@@ -1,4 +1,4 @@
-import { DATA } from "./data";
+import { DATA, updateData } from "./data";
 import { initialPagination } from "./pagination";
 
 let editModal = document.querySelector(".edit");
@@ -65,8 +65,8 @@ const updateRow = (e, data = DATA) => {
     </div>
     <br />
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Update</a>
-      <a href="#!" class="modal-close waves-effect waves-blue btn-flat">Close</a>
+      <a href="#!" class="modal-close waves-effect waves-blue btn-small ">Update</a>
+      <a href="#!" class="modal-close waves-effect waves-blue btn-small">Close</a>
     </div>
   </div>`;
   editModal.innerHTML = editForm;
@@ -90,6 +90,7 @@ const updateRow = (e, data = DATA) => {
       person.doy = doy;
       person.city = city;
       person.note = note;
+      updateData(data);
       initialPagination();
     }
   });
