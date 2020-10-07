@@ -1,8 +1,8 @@
 import React from 'react';
-import Table from './components/Table/Table';
+import WholeTable from './components/Table/Table';
 
 const App = () => {
-  return <Table />
+  return <WholeTable />
 }
 
 export default App;
