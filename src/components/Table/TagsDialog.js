@@ -96,7 +96,7 @@ const TagsDialog = (props) => {
     // console.log(event.key);
     if (event.key === "Enter") {
       props.onAddTag(tagData);
-      setNewTagName('');
+      setNewTagName("");
       // changeHandler()
       // props.closeModalHandler();
     }
@@ -104,11 +104,19 @@ const TagsDialog = (props) => {
 
   const onAddTagHandler = () => {
     props.onAddTag(tagData);
-    setNewTagName('');
+    setNewTagName("");
     // changeHandler()
     // props.closeModalHandler();
-  }
-  
+  };
+
+  const deleteTagHandler = (tagId, tagIndex) => {
+    let data = {
+      tagId: tagId,
+      tagIndex: tagIndex,
+    };
+    props.onDeleteTag(data);
+  };
+
   props.tagsData.map((tag) => {
     let tagName = `tag_${tag.id}`;
     if (props.personsData[props.personIndex].tags.includes(tag.id)) {
@@ -123,11 +131,11 @@ const TagsDialog = (props) => {
   // console.log(Object.keys(st).length);
 
   const [checkedState, setCheckedState] = React.useState({ ...st, ...ot });
-  
+
   const changeHandler = (event, tagName) => {
     setCheckedState(() => {
       let a = { ...checkedState };
-      if(tagName) {
+      if (tagName) {
         a[tagName] = !a[tagName];
       }
       return a;
@@ -137,15 +145,14 @@ const TagsDialog = (props) => {
   // console.log(props.personsData[props.personIndex].tags);
 
   // console.log(checkedState);
-  React.useEffect(() => { 
+  React.useEffect(() => {
     setCheckedState(() => {
       let a = { ...st, ...ot };
       return a;
-    })
-  },[Object.keys(st).length]);
+    });
+  }, [Object.keys(st).length]);
 
-
-  props.tagsData.map((tag) => {
+  props.tagsData.map((tag, tagIndex) => {
     let tagName = `tag_${tag.id}`;
     // console.log(checkedState);
     if (props.personsData[props.personIndex].tags.includes(tag.id)) {
@@ -163,7 +170,7 @@ const TagsDialog = (props) => {
             className={formLabelClasses.root}
             label={tag.name}
           />
-          <IconButton>
+          <IconButton onClick={() => deleteTagHandler(tag.id, tagIndex)}>
             <DeleteIcon />
           </IconButton>
         </div>
@@ -182,7 +189,7 @@ const TagsDialog = (props) => {
             className={formLabelClasses.root}
             label={tag.name}
           />
-          <IconButton >
+          <IconButton onClick={() => deleteTagHandler(tag.id, tagIndex)}>
             <DeleteIcon />
           </IconButton>
         </div>
@@ -204,7 +211,7 @@ const TagsDialog = (props) => {
           label="New Tag Name"
         />
         <TextField type="color" onChange={newTagColorHandler} label=" " />
-        <IconButton onClick={onAddTagHandler} >
+        <IconButton onClick={onAddTagHandler}>
           <DoneIcon style={{ padding: "7px" }} />
         </IconButton>
       </div>
@@ -222,7 +229,7 @@ const TagsDialog = (props) => {
       </Button>
       <Button
         onClick={(event) => {
-          props.closeModalHandler();
+          props.closeModalHandler(event, checkedState);
         }}
         color="primary"
       >
@@ -254,6 +261,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAddTag: (tagData) =>
       dispatch({ type: actionTypes.ADD_TAG, data: tagData }),
+    onDeleteTag: (tagData) =>
+      dispatch({ type: actionTypes.DELETE_TAG, data: tagData }),
   };
 };
 

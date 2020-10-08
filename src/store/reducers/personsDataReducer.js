@@ -16,7 +16,7 @@ const initialState = {
 }
 
 const personDataReducer = (state = initialState, action) => {
-  let pIndex, newState, newPersonsData, p;
+  let pIndex, newState, newPersonsData, p, newPersonData, newPersonTag;
   switch(action.type) {
     case actionTypes.EDIT_PERSON_DETAILS :
 
@@ -63,16 +63,56 @@ const personDataReducer = (state = initialState, action) => {
       pIndex = action.data.pIndex;
       newState = {...state};
       newPersonsData = newState.personsData.slice();
-      let newPersonData = {...newPersonsData[pIndex]}
-      let newPersonTag = newPersonData.tags.slice();
+      newPersonData = {...newPersonsData[pIndex]}
+      newPersonTag = newPersonData.tags.slice();
       newPersonTag.push(action.data.id);
       // console.log(action.data);
       newPersonData.tags = newPersonTag;
       newPersonsData[pIndex] = newPersonData;
       newState.personsData = newPersonsData;
-
       return newState;
-      
+
+    case actionTypes.ADD_ALL_TAGS:
+      pIndex = action.data.pIndex;
+      newState = {...state};
+      newPersonsData = newState.personsData.slice();
+      newPersonData = {...newPersonsData[pIndex]};
+      newPersonTag = action.data.tags;
+
+      newPersonData.tags = newPersonTag;
+      newPersonsData[pIndex] = newPersonData;
+      // console.log(newPersonsData[pIndex]);
+      newState.personsData = newPersonsData;
+      return newState;
+
+    case actionTypes.ADD_PERSON_DETAILS:
+      newState = {...state};
+      newPersonsData = newState.personsData.slice();
+      newPersonsData.push(action.data);
+      console.log(action.data);
+      newState.personsData = newPersonsData;
+      return newState;
+
+    case actionTypes.DELETE_SELECTED_PERSONS:
+      console.log('DELETE_SELECTED_PERSONS', action.data);
+      newState = {...state};
+      newPersonsData = newState.personsData.slice();
+      // action.data.map(pId => {
+      //   if(newPersonsData.includes(pId)) {
+      //     console.log(pId);
+      //   }
+      // })
+     
+      for(let i = 0; i < action.data.length; i++) {
+        for(let j = 0; j < newPersonsData.length; j++) {
+          if(+action.data[i] === newPersonsData[j].id) {
+            newPersonsData.splice(j, 1);
+            break;
+          }
+        }
+      }
+      newState.personsData = newPersonsData
+      return newState;
     default:
       return state;
   }

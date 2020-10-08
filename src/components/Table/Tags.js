@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import classes from "./Tags.css";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import TagsDialog from "./TagsDialog";
+import * as actionTypes from './../../store/actionTypes';
 
 const Tags = (props) => {
   const [dialogInfo, setDialogInfo] = React.useState({
@@ -17,7 +18,23 @@ const Tags = (props) => {
     setDialogInfo({ status: true, triggerAction: action });
   };
   const closeModalHandler = (e, data) => {
-    if (data) {
+    if (typeof(data) === 'object') {
+      // console.log(data);
+      let t = [];
+      for(let property in data) {
+        if(data[property] === true) {
+          let val = property;
+          val = val.substring(4);
+          val = +val;
+          t.push(val);
+        }
+      }
+      let tagsData = {
+        pIndex: props.personIndex,
+        personId: props.personId,
+        tags: t
+      }
+      props.onAddAllTags(tagsData);
       // console.log(data);
     }
     setDialogInfo({ status: false, triggerAction: "" });
@@ -26,7 +43,7 @@ const Tags = (props) => {
   let allTags = [];
 
   let pTags = props.personsData[props.personIndex].tags;
-  
+
   if (pTags.length === 0) {
     allTags = (
       <IconButton onClick={() => openModalHandler()}>
@@ -78,9 +95,12 @@ const Tags = (props) => {
   );
 };
 
-// const mapDispatchToProps = state => {
-//   return;
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddAllTags: (allTags) => dispatch({type: actionTypes.ADD_ALL_TAGS, data: allTags}),
+  }
+  
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -88,4 +108,4 @@ const mapStateToProps = (state) => {
     tagsData: state.tags.tagsData,
   };
 };
-export default connect(mapStateToProps)(Tags);
+export default connect(mapStateToProps, mapDispatchToProps)(Tags);

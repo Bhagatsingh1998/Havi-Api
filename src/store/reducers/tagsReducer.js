@@ -23,6 +23,15 @@ const tagsReducer = (state = initialState, action) => {
 
       newState.tagsData = newTagsData
       return newState;
+    
+    case actionTypes.DELETE_TAG:
+      console.log('DELETE_TAG', action.data);
+      newState = { ...state };
+      newTagsData = newState.tagsData.slice();
+
+      newTagsData.splice(action.data.tagIndex, 1);
+      newState.tagsData = newTagsData;
+      return newState;
     default:
       return state;
   }

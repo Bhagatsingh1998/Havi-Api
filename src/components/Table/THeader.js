@@ -25,6 +25,7 @@ const THeader = (props) => {
     rowCount,
     onRequestSort,
   } = props;
+  
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };

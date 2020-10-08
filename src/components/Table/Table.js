@@ -80,10 +80,19 @@ const WholeTable = (props) => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState(null);
+
+  const searchResultsHandler = (searches) => {
+    setSearchResults([...searches]);
+  };
   const [deleteConfirm, setdeleteConfirm] = React.useState({
     status: false,
     pId: null,
   });
+
+  React.useEffect(() => {
+    setSelected([]);
+  }, [props.personsData.length]);
 
   const personDeleteHandler = (personIndex) => {
     // console.log('personDeleteHandler', personIndex);
@@ -133,11 +142,21 @@ const WholeTable = (props) => {
     }
     setSelected(newSelected);
   };
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
+  let personsToBeDisplayed;
+  if (searchResults) {
+    personsToBeDisplayed = searchResults;
+  } else {
+    personsToBeDisplayed = props.personsData;
+  }
 
   return (
     <div className={classes.root}>
-      <TToolbar numSelected={selected.length} />
+      <TToolbar
+        searchResultsHandler={searchResultsHandler}
+        personsSelected={selected}
+      />
       <Table className={classes.table} aria-label="persons table">
         <THeader
           classes={classes}
@@ -149,15 +168,12 @@ const WholeTable = (props) => {
           rowCount={props.personsData.length}
         />
         <TableBody>
-          {stableSort(props.personsData, getComparator(order, orderBy))
+          {stableSort(personsToBeDisplayed, getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((person, index) => {
               const isItemSelected = isSelected(person.id);
               const labelId = `enhanced-table-checkbox-${index}`;
               if (+person.id === +deleteConfirm.pId) {
-                {
-                  /* console.log('same', +deleteConfirm.pId) */
-                }
                 return (
                   <TableRow
                     key={person.id}

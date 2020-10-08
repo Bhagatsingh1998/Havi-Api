@@ -6,10 +6,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import PersonDialog from "./PersonDialog";
 import NotesIcon from "@material-ui/icons/Notes";
-import DoneIcon from '@material-ui/icons/Done';
-import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from "@material-ui/icons/Done";
+import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
-import * as actionTypes from './../../store/actionTypes';
+import * as actionTypes from "./../../store/actionTypes";
 
 const Actions = (props) => {
   const [dialogInfo, setDialogInfo] = React.useState({
@@ -26,11 +26,18 @@ const Actions = (props) => {
     setDialogInfo({ status: false, triggerAction: "" });
   };
 
-  if(props.status === 'delete') {
+  if (props.status === "delete") {
     return (
       <TableCell>
-        <IconButton 
-          onClick={() => {props.onDeletePerson({personId: props.personId, pIndex: props.personIndex}); props.personDeleteHandler(null) }}>
+        <IconButton
+          onClick={() => {
+            props.onDeletePerson({
+              personId: props.personId,
+              pIndex: props.personIndex,
+            });
+            props.personDeleteHandler(null);
+          }}
+        >
           <DoneIcon />
         </IconButton>
         <IconButton onClick={() => props.personDeleteHandler(null)}>
@@ -53,7 +60,7 @@ const Actions = (props) => {
       <IconButton onClick={() => openModalHandler("edit")}>
         <EditIcon />
       </IconButton>
-      <IconButton onClick={() => props.personDeleteHandler(props.personId)} >
+      <IconButton onClick={() => props.personDeleteHandler(props.personId)}>
         <DeleteIcon />
       </IconButton>
       {props.personsData[props.personIndex].note ? (
@@ -71,8 +78,8 @@ const Actions = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDeletePerson: (data) => 
-      dispatch({type: actionTypes.DELETE_PERSON, data: data}) 
+    onDeletePerson: (data) =>
+      dispatch({ type: actionTypes.DELETE_PERSON, data: data }),
   };
 };
 
