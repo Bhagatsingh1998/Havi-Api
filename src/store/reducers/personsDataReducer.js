@@ -16,19 +16,15 @@ const initialState = {
 }
 
 const personDataReducer = (state = initialState, action) => {
-  let pIndex, newState, newPersonData, p;
+  let pIndex, newState, newPersonsData, p;
   switch(action.type) {
     case actionTypes.EDIT_PERSON_DETAILS :
-      // console.log(action.data);
+
       pIndex = action.data.pIndex;
       newState = {...state};
-      newPersonData = newState.personsData.slice();
-      newState.personsData = newPersonData;
-      // console.log(newPersonData);
-      // console.log(typeof(newPersonData));
-      // console.log(newState);
-      p = {...newPersonData[pIndex]};
-      // let p = newState.personsData[pIndex];
+      newPersonsData = newState.personsData.slice();
+      newState.personsData = newPersonsData;
+      p = {...newPersonsData[pIndex]};
 
       p.fname = action.data.fname;
       p.lname = action.data.lname;
@@ -37,32 +33,46 @@ const personDataReducer = (state = initialState, action) => {
       p.note = action.data.note;
       p.tags = action.data.tags
 
-      newPersonData[pIndex] = p;
-      // console.log(newState);
+      newPersonsData[pIndex] = p;
       return newState;
     
     case actionTypes.EDIT_PERSON_NOTE :
       pIndex = action.data.pIndex;
       newState = {...state};
-      newPersonData = newState.personsData.slice();
-      newState.personsData = newPersonData;
-      p = {...newPersonData[pIndex]};
+      newPersonsData = newState.personsData.slice();
+      newState.personsData = newPersonsData;
+      p = {...newPersonsData[pIndex]};
       p.note = action.data.note;
 
-      newPersonData[pIndex] = p;
+      newPersonsData[pIndex] = p;
       // console.log(newState);
       return newState;
     
     case actionTypes.DELETE_PERSON:
       pIndex = action.data.pIndex;
       newState = {...state};
-      newPersonData = newState.personsData.slice();
-      newPersonData.splice(pIndex, 1);
-      newState.personsData = newPersonData;
+      newPersonsData = newState.personsData.slice();
+      newPersonsData.splice(pIndex, 1);
+      newState.personsData = newPersonsData;
 
       // console.log(newState);
       return newState;
 
+    case actionTypes.ADD_TAG:
+      // console.log('ADD_TAG', action.data);
+      pIndex = action.data.pIndex;
+      newState = {...state};
+      newPersonsData = newState.personsData.slice();
+      let newPersonData = {...newPersonsData[pIndex]}
+      let newPersonTag = newPersonData.tags.slice();
+      newPersonTag.push(action.data.id);
+      // console.log(action.data);
+      newPersonData.tags = newPersonTag;
+      newPersonsData[pIndex] = newPersonData;
+      newState.personsData = newPersonsData;
+
+      return newState;
+      
     default:
       return state;
   }

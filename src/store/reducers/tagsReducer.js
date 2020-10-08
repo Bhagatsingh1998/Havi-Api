@@ -12,7 +12,21 @@ const initialState = {
 };
 
 const tagsReducer = (state = initialState, action) => {
-  return state;
+  let newState, newTagsData;
+  switch(action.type) {
+    case actionTypes.ADD_TAG:
+      // console.log('ADD_TAG', action.data);
+      newState = {...state};
+      newTagsData = newState.tagsData.slice();
+      // console.log(action.data);
+      newTagsData.push({id: action.data.id, name: action.data.name, color: action.data.color});
+
+      newState.tagsData = newTagsData
+      return newState;
+    default:
+      return state;
+  }
+  
 }
 
 export default tagsReducer;

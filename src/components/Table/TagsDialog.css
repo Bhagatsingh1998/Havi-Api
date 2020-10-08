@@ -1,4 +1,16 @@
 .Header {
   display: flex;
   justify-content: center;
+} 
+
+.SingleTagDiv {
+  height: 35px;
 }
+
+.Header input[type="text"] {
+  width: 250px;
+} 
+
+.Header input[type="color"] {
+  width: 20px;
+} 

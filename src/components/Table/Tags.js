@@ -12,6 +12,7 @@ const Tags = (props) => {
     status: false,
     triggerAction: "",
   });
+
   const openModalHandler = (action) => {
     setDialogInfo({ status: true, triggerAction: action });
   };
@@ -23,10 +24,12 @@ const Tags = (props) => {
   };
 
   let allTags = [];
+
   let pTags = props.personsData[props.personIndex].tags;
+  
   if (pTags.length === 0) {
     allTags = (
-      <IconButton onClick={() => openModalHandler("edit")}>
+      <IconButton onClick={() => openModalHandler()}>
         <AddIcon />
       </IconButton>
     );
@@ -36,7 +39,7 @@ const Tags = (props) => {
         if (+props.tagsData[i].id === +tag) {
           return (
             <div
-              onClick={() => openModalHandler("edit")}
+              onClick={() => openModalHandler()}
               key={Math.random()}
               className={classes.TagDiv}
             >
@@ -55,7 +58,7 @@ const Tags = (props) => {
       }
     });
     allTags.push(
-      <IconButton key={Math.random()}>
+      <IconButton onClick={() => openModalHandler()} key={Math.random()}>
         <AddIcon />
       </IconButton>
     );
