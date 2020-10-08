@@ -7,39 +7,41 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 import { connect } from "react-redux";
+import * as actionTypes from "./../../store/actionTypes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: "25ch",
     },
   },
 }));
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
-    maxWidth: '100%',
-    width: '350px',
-    margin: 'auto',
-    alignItems:'center',justifyContent:'center'
+    maxWidth: "100%",
+    width: "350px",
+    margin: "auto",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paperWidthSm: {
-    maxWidth: '100%',
-    width: '100%',
-    margin: '0'
+    maxWidth: "100%",
+    width: "100%",
+    margin: "0",
   },
   paper: {
-    margin: '0'
-  }
+    margin: "0",
+  },
 }));
 
 const useStyles3 = makeStyles((theme) => ({
@@ -57,39 +59,59 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const EditPerson = (props) => {
-  // console.log(props.dialogInfo);
   const dialogClasses = useStyles1();
   const formClasses = useStyles();
   const selectClasses = useStyles3();
 
-  let person, personIndex;
-  // console.log(props.personsData);
-  // console.log(typeof(props.personsData));
+  let person = props.personsData[props.personIndex];
 
-  props.personsData.some((el,i) => {
-    console.log(el);
-    if(+props.personsData[i].id === +props.personId) {
-      person = props.personsData[i];
-      personIndex = i;
-      console.log(person);
-      return true;
-    }
-  })
-  console.log(person.city);
-  const [doy, setDoy] = React.useState(person.city);
+  let [fname, setFname] = React.useState(person.fname);
+  let [lname, setLname] = React.useState(person.lname);
+  let [doy, setDoy] = React.useState(person.doy);
+  let [city, setCity] = React.useState(person.city);
+  let [note, setNote] = React.useState(person.note);
+
   const handleChange = (event) => {
-    setDoy(event.target.value);
+    setCity(event.target.value);
+  };
+
+  const valueChangeHandler = (e, targetTextField) => {
+    // console.log('valueChangeHandler', e);
+    // console.log(e.target.value);
+    let val = e.target.value;
+    if (targetTextField === "fname") {
+      setFname(val);
+    }
+    if (targetTextField === "lname") {
+      setLname(val);
+    }
+    if (targetTextField === "doy") {
+      setDoy(val);
+    }
+    if (targetTextField === "note") {
+      setNote(val);
+    }
   };
 
   let alertBody, alertTitle, alertFooter;
 
-  if(props.dialogInfo.triggerAction === 'edit') {
-    alertTitle = 'Edit Person';
-    alertFooter = {leftBtn: 'Cancle', rightBtn: 'Update'}
-    alertBody = 
+  if (props.dialogInfo.triggerAction === "edit") {
+    alertTitle = "Edit Person";
+    // alertFooter = { leftBtn: "Cancle", rightBtn: "Update" };
+    alertBody = (
       <form className={formClasses.root} noValidate autoComplete="off">
-        <TextField id="standard-basic" label="First Name" value={person.fname} />
-        <TextField id="standard-basic" label="Surname" value={person.lname} />
+        <TextField
+          id="basic"
+          label="First Name"
+          value={fname}
+          onChange={(event) => valueChangeHandler(event, "fname")}
+        />
+        <TextField
+          id="standard-basic"
+          label="Surname"
+          value={lname}
+          onChange={(event) => valueChangeHandler(event, "lname")}
+        />
         <TextField
           id="filled-number"
           label="Birth Year"
@@ -97,19 +119,19 @@ const EditPerson = (props) => {
           InputLabelProps={{
             shrink: true,
           }}
-          value={person.doy}
+          value={doy}
+          onChange={(event) => valueChangeHandler(event, "doy")}
         />
         <FormControl className={selectClasses.formControl}>
           <InputLabel id="demo-simple-select-label">City</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={doy}
+            value={city}
             onChange={handleChange}
           >
-        
-            <MenuItem value={'Delhi'}>Delhi</MenuItem>
-            <MenuItem value={'Bangalore'}>Bangalore</MenuItem>
+            <MenuItem value={"Delhi"}>Delhi</MenuItem>
+            <MenuItem value={"Bangalore"}>Bangalore</MenuItem>
           </Select>
         </FormControl>
         <TextField
@@ -117,26 +139,79 @@ const EditPerson = (props) => {
           label="Note"
           multiline
           rows={3}
-          defaultValue={person.note}
+          defaultValue={note}
+          onChange={(event) => valueChangeHandler(event, "note")}
         />
-      </form>;
+      </form>
+    );
+
+    alertFooter = (
+      <DialogActions>
+        <Button onClick={props.closeModalHandler} color="primary">
+          Cancle
+        </Button>
+        <Button
+          onClick={(event) => {
+            props.closeModalHandler(event, personData);
+            props.onEditPersonDetails(personData);
+          }}
+          color="primary"
+        >
+          Update
+        </Button>
+      </DialogActions>
+    );
   }
 
-  if(props.dialogInfo.triggerAction === 'note') {
-    alertTitle = 'Note';
-    alertFooter = {leftBtn: 'Close', rightBtn: 'Save'}
-    alertBody = 
+  if (props.dialogInfo.triggerAction === "note") {
+    alertTitle = "Note";
+    // alertFooter = { leftBtn: "Close", rightBtn: "Save" };
+    alertBody = (
       <form className={formClasses.root} noValidate autoComplete="off">
         <TextField
           id="standard-multiline-static"
           label="Note"
           multiline
           rows={3}
-          defaultValue={person.note}
+          defaultValue={note}
+          onChange={(event) => valueChangeHandler(event, "note")}
         />
-      </form>;
+      </form>
+    );
+    alertFooter = (
+      <DialogActions>
+        <Button onClick={props.closeModalHandler} color="primary">
+        Close
+        </Button>
+        <Button
+          onClick={(event) => {
+            props.closeModalHandler(event);
+            props.onEditPersonNote(noteData);
+          }}
+          color="primary"
+        >
+          Save
+        </Button>
+      </DialogActions>
+    );
   }
-  
+
+  let personData = {
+    id: person.id,
+    fname: fname,
+    lname: lname,
+    doy: doy,
+    city: city,
+    note: note,
+    tags: person.tags,
+    pIndex: props.personIndex,
+  };
+
+  let noteData = {
+    id: person.id,
+    pIndex: props.personIndex,
+    note: note
+  }
 
   return (
     <Dialog
@@ -148,32 +223,29 @@ const EditPerson = (props) => {
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title">
-        {alertTitle}
-      </DialogTitle>
+      <DialogTitle id="alert-dialog-slide-title">{alertTitle}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
-          
-        </DialogContentText>
+        <DialogContentText id="alert-dialog-slide-description"></DialogContentText>
         {alertBody}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={props.closeModalHandler} color="primary">
-          {alertFooter.leftBtn}
-        </Button>
-        <Button onClick={props.closeModalHandler} color="primary">
-          {alertFooter.rightBtn}
-        </Button>
-      </DialogActions>
+        {alertFooter}
     </Dialog>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    personsData: state.personsData,
+    onEditPersonDetails: (personData) =>
+      dispatch({ type: actionTypes.EDIT_PERSON_DETAILS, data: personData }),
+    onEditPersonNote: (noteData) =>
+      dispatch({ type: actionTypes.EDIT_PERSON_NOTE, data: noteData }),
   };
 };
 
-export default connect(mapStateToProps)(EditPerson);
+const mapStateToProps = (state) => {
+  return {
+    personsData: state.persons.personsData,
+  };
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(EditPerson);

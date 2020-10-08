@@ -2,13 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
-import personDataReducer from './store/reducers/personDataReducer'
+import personDataReducer from './store/reducers/personsDataReducer'
+import tagsReducer from './store/reducers/tagsReducer';
+
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(personDataReducer);
+
+const rootReducer = combineReducers({
+  persons: personDataReducer,
+  tags: tagsReducer
+});
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   // <React.StrictMode>

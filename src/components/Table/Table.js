@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import THeader from "./THeader";
 import TPagination from "./TPagination";
-import Checkbox from '@material-ui/core/Checkbox';
-import TToolbar from './TToolbar';
-import Actions from './Actions';
-import Tags from './Tags';
+import Checkbox from "@material-ui/core/Checkbox";
+import TToolbar from "./TToolbar";
+import Actions from "./Actions";
+import Tags from "./Tags";
 
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -80,6 +80,25 @@ const WholeTable = (props) => {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("name");
   const [selected, setSelected] = React.useState([]);
+  const [deleteConfirm, setdeleteConfirm] = React.useState({
+    status: false,
+    pId: null,
+  });
+
+  const personDeleteHandler = (personIndex) => {
+    // console.log('personDeleteHandler', personIndex);
+    if (personIndex) {
+      setdeleteConfirm({
+        status: true,
+        pId: personIndex,
+      });
+    } else {
+      setdeleteConfirm({
+        status: false,
+        pId: null,
+      });
+    }
+  };
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -135,19 +154,47 @@ const WholeTable = (props) => {
             .map((person, index) => {
               const isItemSelected = isSelected(person.id);
               const labelId = `enhanced-table-checkbox-${index}`;
+              if (+person.id === +deleteConfirm.pId) {
+                {
+                  /* console.log('same', +deleteConfirm.pId) */
+                }
+                return (
+                  <TableRow
+                    key={person.id}
+                    hover
+                    // onClick={(event) => handleClick(event, person.id)}
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    selected={isItemSelected}
+                  >
+                    <TableCell padding="checkbox"></TableCell>
+                    <TableCell>
+                      Are you sure you want to delete this row?
+                    </TableCell>
+                    <Actions
+                      personId={person.id}
+                      personIndex={index}
+                      status="delete"
+                      personDeleteHandler={(data) => personDeleteHandler(data)}
+                    />
+                  </TableRow>
+                );
+              }
               return (
-                <TableRow 
+                <TableRow
                   key={person.id}
                   hover
                   // onClick={(event) => handleClick(event, person.id)}
                   role="checkbox"
                   aria-checked={isItemSelected}
                   tabIndex={-1}
-                  selected={isItemSelected}>
+                  selected={isItemSelected}
+                >
                   <TableCell padding="checkbox">
                     <Checkbox
                       checked={isItemSelected}
-                      inputProps={{ 'aria-labelledby': labelId }}
+                      inputProps={{ "aria-labelledby": labelId }}
                       onClick={(event) => handleClick(event, person.id)}
                     />
                   </TableCell>
@@ -155,12 +202,17 @@ const WholeTable = (props) => {
                   <TableCell>{person.lname}</TableCell>
                   <TableCell>{person.doy}</TableCell>
                   <TableCell>{person.city}</TableCell>
-                  <Actions personId={person.id}/>
-                  <Tags />
+                  <Actions
+                    personId={person.id}
+                    personDeleteHandler={(personIndex) =>
+                      personDeleteHandler(personIndex)
+                    }
+                    personIndex={index}
+                  />
+                  <Tags personId={person.id} personIndex={index} />
                 </TableRow>
               );
-            })
-          }
+            })}
         </TableBody>
         <TableFooter>
           <TPagination
@@ -178,7 +230,7 @@ const WholeTable = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    personsData: state.personsData,
+    personsData: state.persons.personsData,
   };
 };
 
