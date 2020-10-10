@@ -15,8 +15,13 @@ import * as actionTypes from "./../../store/actionTypes";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
+    // paddingLeft: theme.spacing(2),
+    // paddingRight: theme.spacing(1),
+    position: 'sticky',
+    top: '0px',
+    marginBottom: '40px',
+    backgroundColor: 'white',
+    zIndex: 1
   },
   highlight:
     theme.palette.type === "light"
@@ -36,7 +41,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 const TToolbar = (props) => {
   const classes = useToolbarStyles();
   const { personsSelected } = props;
-  console.log(personsSelected);
+  // console.log(personsSelected);
 
   const [dialogInfo, setDialogInfo] = React.useState({
     status: false,
@@ -90,7 +95,7 @@ const TToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {personsSelected.length} selected
+          <h3>{personsSelected.length} Row(s) Selected</h3> 
         </Typography>
       ) : (
         <>
@@ -104,6 +109,7 @@ const TToolbar = (props) => {
           </Typography>
           <SearchIcon />
           <InputBase
+            style={{marginLeft: 10, borderBottom: '1px solid black'}}
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
             onChange={searchHandler}

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "95%",
     },
   },
 }));
@@ -29,19 +29,19 @@ const useStyles = makeStyles((theme) => ({
 const useStyles1 = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
-    width: "350px",
+    width: "450px",
     margin: "auto",
     alignItems: "center",
     justifyContent: "center",
   },
-  paperWidthSm: {
-    maxWidth: "100%",
-    width: "100%",
-    margin: "0",
-  },
-  paper: {
-    margin: "0",
-  },
+  // paperWidthSm: {
+  //   maxWidth: "100%",
+  //   width: "100%",
+  //   margin: "0",
+  // },
+  // paper: {
+  //   margin: "0",
+  // },
 }));
 
 const useStyles3 = makeStyles((theme) => ({
@@ -165,18 +165,19 @@ const EditPerson = (props) => {
 
   if (props.dialogInfo.triggerAction === "note") {
     alertTitle = "Note";
-    // alertFooter = { leftBtn: "Close", rightBtn: "Save" };
     alertBody = (
-      <form className={formClasses.root} noValidate autoComplete="off">
+
+      <form className={formClasses.root} noValidate autoComplete="on">
         <TextField
-          id="standard-multiline-static"
+        style={{width: 300}}
+          id=""
           label="Note"
           multiline
           rows={3}
           defaultValue={note}
           onChange={(event) => valueChangeHandler(event, "note")}
         />
-      </form>
+      </form> 
     );
     alertFooter = (
       <DialogActions>

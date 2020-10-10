@@ -5,7 +5,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import TToolbar from "./TToolbar";
 import Actions from "./Actions";
 import Tags from "./Tags";
-
+import clsx from "clsx";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,9 +14,15 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TableFooter from "@material-ui/core/TableFooter";
 
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import IconButton from "@material-ui/core/IconButton";
+import AdditionalData from "./AdditionalData";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    borderBottom: "unset",
   },
   paper: {
     width: "100%",
@@ -25,18 +31,25 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
-  visuallyHidden: {
-    border: 0,
-    clip: "rect(0 0 0 0)",
-    height: 1,
-    margin: -1,
-    overflow: "hidden",
-    padding: 0,
-    position: "absolute",
-    top: 20,
-    width: 1,
-  },
+  // visuallyHidden: {
+  //   border: 0,
+  //   clip: "rect(0 0 0 0)",
+  //   height: 1,
+  //   margin: -1,
+  //   overflow: "hidden",
+  //   padding: 0,
+  //   position: "absolute",
+  //   top: 20,
+  //   width: 1,
+  // },
 }));
+
+// const useStyles1 = makeStyles((theme) => ({
+//   root: {
+//     // width: "100%",
+//     backgroundColor: "red",
+//   },
+// }));
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -66,8 +79,10 @@ function stableSort(array, comparator) {
 
 const WholeTable = (props) => {
   const classes = useStyles();
+
+  // const headerrClasses = useStyles1();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   let setPageHandler = (newPage) => {
     setPage(newPage);
@@ -144,11 +159,148 @@ const WholeTable = (props) => {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
+
   let personsToBeDisplayed;
   if (searchResults) {
     personsToBeDisplayed = searchResults;
   } else {
     personsToBeDisplayed = props.personsData;
+  }
+
+  let allDisplayData = stableSort(
+    personsToBeDisplayed,
+    getComparator(order, orderBy)
+  ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  
+  let moreInfoObj = {};
+  allDisplayData.map((row) => {
+    let rowName = `row_${row.id}`;
+    moreInfoObj[rowName] = false;
+  });
+
+  const [moreInfo, setMoreInfo] = React.useState({ ...moreInfoObj });
+
+  function DeleteRow(person, index, isItemSelected) {
+    return (
+      <TableRow
+        key={person.id}
+        hover
+        // onClick={(event) => handleClick(event, person.id)}
+        role="checkbox"
+        aria-checked={isItemSelected}
+        tabIndex={-1}
+        selected={isItemSelected}
+      >
+        <TableCell />
+        <TableCell padding="checkbox"></TableCell>
+        <TableCell></TableCell>
+        <TableCell
+          style={{
+            width: "400px",
+            left: "90px",
+            position: "absolute",
+            paddingTop: 25,
+            borderBottom: "none",
+          }}
+        >
+          <strong>Are you sure you want to delete this row?</strong>
+        </TableCell>
+        <TableCell></TableCell>
+        <TableCell></TableCell>
+        <Actions
+          personId={person.id}
+          personIndex={index}
+          status="delete"
+          personDeleteHandler={(data) => personDeleteHandler(data)}
+        />
+        <TableCell></TableCell>
+      </TableRow>
+    );
+  }
+
+  let setMoreInfoHandler = (e, rowName) => {
+    setMoreInfo(() => {
+      let a = { ...moreInfo };
+      if (rowName) {
+        a[rowName] = !a[rowName];
+      }
+      console.log(a);
+      return a;
+    });
+  }
+  console.log(moreInfo);
+  function DisplayRow(person, index, isItemSelected, labelId) {
+    let rowName = `row_${person.id}`;
+    return (
+      <React.Fragment>
+        <TableRow
+          key={person.id}
+          hover
+          // onClick={(event) => handleClick(event, person.id)}
+          role="checkbox"
+          aria-checked={isItemSelected}
+          tabIndex={-1}
+          selected={isItemSelected}
+        >
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={(e) => setMoreInfoHandler(e, rowName)}
+            >
+              {moreInfo[rowName] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+          <TableCell padding="checkbox">
+            <Checkbox
+              checked={isItemSelected}
+              inputProps={{ "aria-labelledby": labelId }}
+              onClick={(event) => handleClick(event, person.id)}
+            />
+          </TableCell>
+          <TableCell
+            style={{
+
+              padding: "8px 8px 8px 0px",
+            }}
+          >
+            {person.fname}
+          </TableCell>
+          <TableCell
+            style={{
+
+              padding: "8px 8px 8px 0px",
+            }}
+          >
+            {person.lname}
+          </TableCell>
+          <TableCell
+            style={{
+      
+              padding: "8px 8px 8px 0px",
+            }}
+          >
+            {person.doy}
+          </TableCell>
+          <TableCell
+            style={{
+              padding: "8px 8px 8px 0px",
+            }}
+          >
+            {person.city}
+          </TableCell>
+          <Actions
+            personId={person.id}
+            personDeleteHandler={(personIndex) =>
+              personDeleteHandler(personIndex)
+            }
+            personIndex={index}
+          />
+          <Tags style={{ width: "100px" }} personId={person.id} personIndex={index} />
+        </TableRow>
+        <AdditionalData open={moreInfo[rowName]} personId={person.id} personIndex={index} />
+      </React.Fragment>
+    );
   }
 
   return (
@@ -157,9 +309,12 @@ const WholeTable = (props) => {
         searchResultsHandler={searchResultsHandler}
         personsSelected={selected}
       />
-      <Table className={classes.table} aria-label="persons table">
+      <Table 
+        // fixedHeader={true} 
+        // style={{ tableLayout: 'fixed' }}
+        aria-label="persons table"
+      >  
         <THeader
-          classes={classes}
           numSelected={selected.length}
           order={order}
           orderBy={orderBy}
@@ -168,69 +323,19 @@ const WholeTable = (props) => {
           rowCount={props.personsData.length}
         />
         <TableBody>
-          {stableSort(personsToBeDisplayed, getComparator(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((person, index) => {
-              const isItemSelected = isSelected(person.id);
-              const labelId = `enhanced-table-checkbox-${index}`;
-              if (+person.id === +deleteConfirm.pId) {
-                return (
-                  <TableRow
-                    key={person.id}
-                    hover
-                    // onClick={(event) => handleClick(event, person.id)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    selected={isItemSelected}
-                  >
-                    <TableCell padding="checkbox"></TableCell>
-                    <TableCell>
-                      Are you sure you want to delete this row?
-                    </TableCell>
-                    <Actions
-                      personId={person.id}
-                      personIndex={index}
-                      status="delete"
-                      personDeleteHandler={(data) => personDeleteHandler(data)}
-                    />
-                  </TableRow>
-                );
-              }
-              return (
-                <TableRow
-                  key={person.id}
-                  hover
-                  // onClick={(event) => handleClick(event, person.id)}
-                  role="checkbox"
-                  aria-checked={isItemSelected}
-                  tabIndex={-1}
-                  selected={isItemSelected}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={isItemSelected}
-                      inputProps={{ "aria-labelledby": labelId }}
-                      onClick={(event) => handleClick(event, person.id)}
-                    />
-                  </TableCell>
-                  <TableCell>{person.fname}</TableCell>
-                  <TableCell>{person.lname}</TableCell>
-                  <TableCell>{person.doy}</TableCell>
-                  <TableCell>{person.city}</TableCell>
-                  <Actions
-                    personId={person.id}
-                    personDeleteHandler={(personIndex) =>
-                      personDeleteHandler(personIndex)
-                    }
-                    personIndex={index}
-                  />
-                  <Tags personId={person.id} personIndex={index} />
-                </TableRow>
-              );
-            })}
+          {allDisplayData.map((person, index) => {
+            const isItemSelected = isSelected(person.id);
+            const labelId = `enhanced-table-checkbox-${index}`;
+            if (+person.id === +deleteConfirm.pId) {
+              return DeleteRow(person, index, isItemSelected, labelId);
+            } else {
+              return DisplayRow(person, index, isItemSelected, labelId);
+            }
+          })}
         </TableBody>
-        <TableFooter>
+        <TableFooter
+        // className={footerClasses.root}
+        >
           <TPagination
             totalPersons={props.personsData.length}
             page={page}

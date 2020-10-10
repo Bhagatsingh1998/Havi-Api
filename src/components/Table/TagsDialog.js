@@ -224,9 +224,15 @@ const TagsDialog = (props) => {
 
   alertFooter = (
     <DialogActions>
-      <Button onClick={props.closeModalHandler} color="primary">
+    <Button
+        onClick={
+          props.closeModalHandler
+        }
+        color="primary"
+      >
         Cancle
       </Button>
+      
       <Button
         onClick={(event) => {
           props.closeModalHandler(event, checkedState);
@@ -244,7 +250,7 @@ const TagsDialog = (props) => {
       open={props.dialogInfo.status}
       TransitionComponent={Transition}
       keepMounted
-      onClose={props.closeModalHandler}
+      onClose={() => props.closeModalHandler(undefined, checkedState)}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >

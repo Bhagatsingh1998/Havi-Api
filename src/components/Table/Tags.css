@@ -1,5 +1,6 @@
 .TagsHolder {
   display: flex;
+  /* position: sticky; */
 }
 
 .TagDiv {

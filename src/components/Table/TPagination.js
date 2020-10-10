@@ -11,7 +11,6 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
-    
     flexShrink: 0,
     marginLeft: theme.spacing(2.5),
   },
@@ -82,8 +81,9 @@ const TPagination = props => {
   return (
     <TableRow>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-        colSpan={7}
+        style={{position: 'sticky', bottom: 0, zIndex: 10, marginTop: '40px', backgroundColor: 'white'}}
+        rowsPerPageOptions={[25, 50, 100, { label: 'All', value: -1 }]}
+        colSpan={8}
         count={+props.totalPersons}
         rowsPerPage={+props.rowsPerPage}
         page={+props.page}

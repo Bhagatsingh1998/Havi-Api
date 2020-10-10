@@ -28,7 +28,7 @@ const Actions = (props) => {
 
   if (props.status === "delete") {
     return (
-      <TableCell>
+      <TableCell >
         <IconButton
           onClick={() => {
             props.onDeletePerson({
@@ -48,7 +48,7 @@ const Actions = (props) => {
   }
 
   return (
-    <TableCell>
+    <TableCell style={{paddingLeft: 0}}>
       {dialogInfo.status ? (
         <PersonDialog
           personIndex={props.personIndex}
@@ -57,21 +57,23 @@ const Actions = (props) => {
           closeModalHandler={closeModalHandler}
         />
       ) : null}
-      <IconButton onClick={() => openModalHandler("edit")}>
-        <EditIcon />
-      </IconButton>
-      <IconButton onClick={() => props.personDeleteHandler(props.personId)}>
-        <DeleteIcon />
-      </IconButton>
-      {props.personsData[props.personIndex].note ? (
-        <IconButton onClick={() => openModalHandler("note")}>
-          <NotesIcon />
+      <div style={{ display: 'flex' }}>
+        <IconButton onClick={() => openModalHandler("edit")}>
+          <EditIcon />
         </IconButton>
-      ) : (
-        <IconButton onClick={() => openModalHandler("note")}>
-          <NoteAddIcon />
+        <IconButton onClick={() => props.personDeleteHandler(props.personId)}>
+          <DeleteIcon />
         </IconButton>
-      )}
+        {props.personsData[props.personIndex].note ? (
+          <IconButton onClick={() => openModalHandler("note")}>
+            <NotesIcon />
+          </IconButton>
+        ) : (
+          <IconButton onClick={() => openModalHandler("note")}>
+            <NoteAddIcon />
+          </IconButton>
+        )}
+      </div>
     </TableCell>
   );
 };

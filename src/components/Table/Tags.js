@@ -18,8 +18,8 @@ const Tags = (props) => {
     setDialogInfo({ status: true, triggerAction: action });
   };
   const closeModalHandler = (e, data) => {
-    if (typeof(data) === 'object') {
-      // console.log(data);
+    if (data) {
+      console.log(data);
       let t = [];
       for(let property in data) {
         if(data[property] === true) {
@@ -81,7 +81,7 @@ const Tags = (props) => {
     );
   }
   return (
-    <TableCell>
+    <TableCell style={{paddingLeft: 0}}>
       {dialogInfo.status ? (
         <TagsDialog
           personIndex={props.personIndex}
@@ -90,7 +90,7 @@ const Tags = (props) => {
           closeModalHandler={closeModalHandler}
         />
       ) : null}
-      <div className={classes.TagsHolder}>{allTags}</div>
+      <div style={{display: 'flex', flexWrap: 'wrap', width: 300}} className={classes.TagsHolder}>{allTags}</div>
     </TableCell>
   );
 };

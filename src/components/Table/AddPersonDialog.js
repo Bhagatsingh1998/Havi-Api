@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "95%",
     },
   },
 }));
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const useStyles1 = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
-    width: "350px",
+    width: "450px",
     margin: "auto",
     alignItems: "center",
     justifyContent: "center",
