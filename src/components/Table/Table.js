@@ -5,7 +5,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import TToolbar from "./TToolbar";
 import Actions from "./Actions";
 import Tags from "./Tags";
-import clsx from "clsx";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -18,38 +17,30 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import IconButton from "@material-ui/core/IconButton";
 import AdditionalData from "./AdditionalData";
+import SelectColumns from "./SelectColumns";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     borderBottom: "unset",
   },
-  paper: {
-    width: "100%",
-    marginBottom: theme.spacing(2),
-  },
+
   table: {
     minWidth: 650,
   },
-  // visuallyHidden: {
-  //   border: 0,
-  //   clip: "rect(0 0 0 0)",
-  //   height: 1,
-  //   margin: -1,
-  //   overflow: "hidden",
-  //   padding: 0,
-  //   position: "absolute",
-  //   top: 20,
-  //   width: 1,
-  // },
 }));
 
-// const useStyles1 = makeStyles((theme) => ({
-//   root: {
-//     // width: "100%",
-//     backgroundColor: "red",
-//   },
-// }));
+const tableCellStyles = makeStyles((theme) => ({
+  root: {
+    paddingLeft: 0,
+    maxWidth: 350,
+  },
+  tags :{
+    [theme.breakpoints.down('xs')]: {
+      minWidth: 200
+    }
+  }
+}));
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -79,6 +70,7 @@ function stableSort(array, comparator) {
 
 const WholeTable = (props) => {
   const classes = useStyles();
+  const tableCellClasses = tableCellStyles();
 
   // const headerrClasses = useStyles1();
   const [page, setPage] = React.useState(0);
@@ -171,7 +163,7 @@ const WholeTable = (props) => {
     personsToBeDisplayed,
     getComparator(order, orderBy)
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  
+
   let moreInfoObj = {};
   allDisplayData.map((row) => {
     let rowName = `row_${row.id}`;
@@ -227,14 +219,53 @@ const WholeTable = (props) => {
       console.log(a);
       return a;
     });
+  };
+
+  let columnData = (columnNum, person, index, isItemSelected, labelId) => {
+      let colLabel = props.tableHeaderData[columnNum -1].label;
+      if(colLabel === 'Name') {
+        return person.fname;
+      } else if(colLabel === 'Surname') {
+        return person.lname;
+      } else if(colLabel === 'City') {
+        return person.city;
+      } else if(colLabel === 'Birth Year') {
+        return person.doy;
+      } else if(colLabel === 'Actions') {
+        return (<Actions
+          personId={person.id}
+          personDeleteHandler={(index) =>
+            personDeleteHandler(index)
+          }
+          personIndex={index}
+        />);
+      } else if(colLabel === 'Tags') {
+        return (<Tags
+          style={{ width: "100px" }}
+          personId={person.id}
+          personIndex={index}
+        />);
+      } else if(colLabel === 'Info 1') {
+        return person.otherInfo.info1;
+      } else if(colLabel === 'Info 2') {
+        return person.otherInfo.info2;
+      } else if(colLabel === 'File') {
+        return (
+          <a
+            href={require(`./../../assets/files/${person.files.file1}`)}
+          >
+            {person.files.file1}
+          </a>
+        );
+      }
   }
-  console.log(moreInfo);
+
+  // console.log(moreInfo);
   function DisplayRow(person, index, isItemSelected, labelId) {
     let rowName = `row_${person.id}`;
     return (
-      <React.Fragment>
+      <React.Fragment key={person.id}>
         <TableRow
-          key={person.id}
           hover
           // onClick={(event) => handleClick(event, person.id)}
           role="checkbox"
@@ -248,7 +279,11 @@ const WholeTable = (props) => {
               size="small"
               onClick={(e) => setMoreInfoHandler(e, rowName)}
             >
-              {moreInfo[rowName] ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              {moreInfo[rowName] ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}
             </IconButton>
           </TableCell>
           <TableCell padding="checkbox">
@@ -259,61 +294,60 @@ const WholeTable = (props) => {
             />
           </TableCell>
           <TableCell
-            style={{
+            className={tableCellClasses.root}
+          >
+            {columnData(1, person, index, isItemSelected, labelId)}
+          </TableCell>
+          <TableCell
+            className={tableCellClasses.root}
+          >
+            {columnData(2, person, index, isItemSelected, labelId)}
+          </TableCell>
+          <TableCell
+            className={tableCellClasses.root}
+          >
+            {columnData(3, person, index, isItemSelected, labelId)}
+          </TableCell>
+          <TableCell
+            className={tableCellClasses.root}
+          >
+            {columnData(4, person, index, isItemSelected, labelId)}
+          </TableCell>
+          <TableCell className={tableCellClasses.root}>
+            {columnData(5, person, index, isItemSelected, labelId)}
+          </TableCell>
 
-              padding: "8px 8px 8px 0px",
-            }}
-          >
-            {person.fname}
+          <TableCell className={`${tableCellClasses.root} ${tableCellClasses.tags}`}>
+          {columnData(6, person, index, isItemSelected, labelId)}
           </TableCell>
-          <TableCell
-            style={{
-
-              padding: "8px 8px 8px 0px",
-            }}
-          >
-            {person.lname}
-          </TableCell>
-          <TableCell
-            style={{
-      
-              padding: "8px 8px 8px 0px",
-            }}
-          >
-            {person.doy}
-          </TableCell>
-          <TableCell
-            style={{
-              padding: "8px 8px 8px 0px",
-            }}
-          >
-            {person.city}
-          </TableCell>
-          <Actions
+        </TableRow>
+          <AdditionalData
+            open={moreInfo[rowName]}
             personId={person.id}
-            personDeleteHandler={(personIndex) =>
-              personDeleteHandler(personIndex)
-            }
             personIndex={index}
           />
-          <Tags style={{ width: "100px" }} personId={person.id} personIndex={index} />
-        </TableRow>
-        <AdditionalData open={moreInfo[rowName]} personId={person.id} personIndex={index} />
+        
       </React.Fragment>
     );
   }
 
   return (
     <div className={classes.root}>
+      <div
+      style={{marginBottom: 80}}
+      >
       <TToolbar
         searchResultsHandler={searchResultsHandler}
         personsSelected={selected}
+        
       />
-      <Table 
-        // fixedHeader={true} 
-        // style={{ tableLayout: 'fixed' }}
+      </div>
+      
+      <SelectColumns />
+      <Table
+        size="small"
         aria-label="persons table"
-      >  
+      >
         <THeader
           numSelected={selected.length}
           order={order}
@@ -352,6 +386,7 @@ const WholeTable = (props) => {
 const mapStateToProps = (state) => {
   return {
     personsData: state.persons.personsData,
+    tableHeaderData: state.theaders.tableHeaderData
   };
 };
 

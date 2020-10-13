@@ -25,7 +25,7 @@ const tagsReducer = (state = initialState, action) => {
       return newState;
     
     case actionTypes.DELETE_TAG:
-      console.log('DELETE_TAG', action.data);
+      // console.log('DELETE_TAG', action.data);
       newState = { ...state };
       newTagsData = newState.tagsData.slice();
 

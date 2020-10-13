@@ -1,5 +1,4 @@
 import React from "react";
-import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,70 +6,83 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
-
+import Tags from './Tags';
 import { connect } from "react-redux";
 
 const AdditionalData = (props) => {
   const { open, personId, personIndex } = props;
 
-  let otherInfo = [];
-  let files = [];
+  let allHeaders = props.tableHeaderData.concat();
+  let subHeadersArr = allHeaders.slice(6);
+  let sunHeader = subHeadersArr.map((header) => {
+    return <TableCell key={Math.random()}>{header.label}</TableCell>;
+  });
 
-  for (let info in props.personsData[personIndex].otherInfo) {
-    // console.log(props.personsData[personIndex].otherInfo[info]);
-    otherInfo.push(props.personsData[personIndex].otherInfo[info]);
-  }
-
-  for (let file in props.personsData[personIndex].files) {
-    // console.log(props.personsData[personIndex].files[file]);
-    files.push(props.personsData[personIndex].files[file]);
-  }
+  let subColumnData = (columnNum, person, index) => {
+    let colLabel = props.tableHeaderData[columnNum -1].label;
+    if(colLabel === 'Name') {
+      return person.fname;
+    } else if(colLabel === 'Surname') {
+      return person.lname;
+    } else if(colLabel === 'City') {
+      return person.city;
+    } else if(colLabel === 'Birth Year') {
+      return person.doy;
+    } else if(colLabel === 'Actions') {
+      return 'Restricted';
+    } else if(colLabel === 'Tags') {
+      return (<Tags
+        style={{ width: "100px" }}
+        personId={person.id}
+        personIndex={index}
+      />);
+    } else if(colLabel === 'Info 1') {
+      return person.otherInfo.info1;
+    } else if(colLabel === 'Info 2') {
+      return person.otherInfo.info2;
+    } else if(colLabel === 'File') {
+      return (
+        <a
+          href={require(`./../../assets/files/${person.files.file1}`)}
+        >
+          {person.files.file1}
+        </a>
+      );
+    }
+}
 
   return (
     <React.Fragment>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
-            {/* <Box margin={1}> */}
-              <Typography variant="h6" gutterBottom component="div">
-                Other Data
-              </Typography>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell />
-                    <TableCell>Heading 1</TableCell>
-                    <TableCell>Heading 2</TableCell>
-                    <TableCell>Heading 3</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell />
-                    {otherInfo.map((info) => (
-                      <TableCell key={Math.random()}>{info}</TableCell>
-                    ))}
-                  </TableRow>
-                  <TableRow>
-                    <TableCell />
-                    {files.map((file) => (
-                      <TableCell key={Math.random()}>
-                        <a
-                          href={require(`./../../assets/files/${file}`)}
-                          target="_blank"
-                        >
-                          {file}
-                        </a>
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableBody>
-              </Table>
-            {/* </Box> */}
+            <Typography variant="h6" gutterBottom component="div">
+              Other Data
+            </Typography>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  {sunHeader}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>
+                    {subColumnData(7, props.personsData[personIndex],personIndex)}
+                  </TableCell>
+                  <TableCell>
+                  {subColumnData(8, props.personsData[personIndex],personIndex)}
+                  </TableCell>
+                  <TableCell>
+                  {subColumnData(9, props.personsData[personIndex],personIndex)}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </Collapse>
         </TableCell>
-        <TableCell />
-        <TableCell />
       </TableRow>
     </React.Fragment>
   );
@@ -79,7 +91,7 @@ const AdditionalData = (props) => {
 const mapStateToProps = (state) => {
   return {
     personsData: state.persons.personsData,
-    tagsData: state.tags.tagsData,
+    tableHeaderData: state.theaders.tableHeaderData,
   };
 };
 

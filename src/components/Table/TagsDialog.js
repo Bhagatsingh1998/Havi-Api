@@ -78,7 +78,7 @@ const TagsDialog = (props) => {
   };
 
   const newTagColorHandler = (event) => {
-    console.log("newTagColorHandler", event);
+    // console.log("newTagColorHandler", event);
     // console.log(event.target.value);
     let val = event.target.value;
     setNewTagColor(val);
@@ -125,10 +125,6 @@ const TagsDialog = (props) => {
       ot[tagName] = false;
     }
   });
-
-  // console.log(props.personsData[props.personIndex].tags);
-  // console.log(st);
-  // console.log(Object.keys(st).length);
 
   const [checkedState, setCheckedState] = React.useState({ ...st, ...ot });
 

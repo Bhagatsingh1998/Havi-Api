@@ -1,12 +1,11 @@
 import React from "react";
-import TableCell from "@material-ui/core/TableCell";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 import { connect } from "react-redux";
 import classes from "./Tags.css";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import TagsDialog from "./TagsDialog";
-import * as actionTypes from './../../store/actionTypes';
+import * as actionTypes from "./../../store/actionTypes";
 
 const Tags = (props) => {
   const [dialogInfo, setDialogInfo] = React.useState({
@@ -21,8 +20,8 @@ const Tags = (props) => {
     if (data) {
       console.log(data);
       let t = [];
-      for(let property in data) {
-        if(data[property] === true) {
+      for (let property in data) {
+        if (data[property] === true) {
           let val = property;
           val = val.substring(4);
           val = +val;
@@ -32,8 +31,8 @@ const Tags = (props) => {
       let tagsData = {
         pIndex: props.personIndex,
         personId: props.personId,
-        tags: t
-      }
+        tags: t,
+      };
       props.onAddAllTags(tagsData);
       // console.log(data);
     }
@@ -81,7 +80,7 @@ const Tags = (props) => {
     );
   }
   return (
-    <TableCell style={{paddingLeft: 0}}>
+    <>
       {dialogInfo.status ? (
         <TagsDialog
           personIndex={props.personIndex}
@@ -90,17 +89,21 @@ const Tags = (props) => {
           closeModalHandler={closeModalHandler}
         />
       ) : null}
-      <div style={{display: 'flex', flexWrap: 'wrap', width: 300}} className={classes.TagsHolder}>{allTags}</div>
-    </TableCell>
+      <div
+        style={{ display: "flex", width: '100%', flexWrap: "wrap", marginRight: 0 }}
+      >
+        {allTags}
+      </div>
+    </>
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAddAllTags: (allTags) => dispatch({type: actionTypes.ADD_ALL_TAGS, data: allTags}),
-  }
-  
-}
+    onAddAllTags: (allTags) =>
+      dispatch({ type: actionTypes.ADD_ALL_TAGS, data: allTags }),
+  };
+};
 
 const mapStateToProps = (state) => {
   return {

@@ -7,22 +7,22 @@ import { Provider } from 'react-redux';
 
 import personDataReducer from './store/reducers/personsDataReducer'
 import tagsReducer from './store/reducers/tagsReducer';
+import tableHeaderReducer from './store/reducers/tableHeaderReducer';
 
 import * as serviceWorker from './serviceWorker';
 
 
 const rootReducer = combineReducers({
   persons: personDataReducer,
-  tags: tagsReducer
+  tags: tagsReducer,
+  theaders: tableHeaderReducer
 });
 const store = createStore(rootReducer);
 
 ReactDOM.render(
-  // <React.StrictMode>
     <Provider store={store} >
       <App />
     </Provider>
-  // </React.StrictMode>,
   ,
   document.getElementById('root')
 );

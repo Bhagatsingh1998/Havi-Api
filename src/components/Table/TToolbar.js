@@ -15,11 +15,10 @@ import * as actionTypes from "./../../store/actionTypes";
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
-    // paddingLeft: theme.spacing(2),
-    // paddingRight: theme.spacing(1),
-    position: 'sticky',
+    position: 'fixed',
     top: '0px',
-    marginBottom: '40px',
+    width: '98%',
+    marginBottom: '50px',
     backgroundColor: 'white',
     zIndex: 1
   },
@@ -41,7 +40,6 @@ const useToolbarStyles = makeStyles((theme) => ({
 const TToolbar = (props) => {
   const classes = useToolbarStyles();
   const { personsSelected } = props;
-  // console.log(personsSelected);
 
   const [dialogInfo, setDialogInfo] = React.useState({
     status: false,
@@ -51,17 +49,14 @@ const TToolbar = (props) => {
     setDialogInfo({ status: true, triggerAction: action });
   };
   const closeModalHandler = (e, data) => {
-    if (data) {
-      // console.log(data);
-    }
     setDialogInfo({ status: false, triggerAction: "" });
   };
 
   const searchHandler = (event) => {
-    console.log("searchHandler", event);
+    // console.log("searchHandler", event);
     let val = event.target.value;
     val = val.toLowerCase();
-    console.log(val);
+    // console.log(val);
     let postiveSearches = [];
     props.personsData.map((personData) => {
       if (
@@ -74,11 +69,6 @@ const TToolbar = (props) => {
         postiveSearches.push(personData);
       }
     });
-    // props.tagsData.map(tag => {
-    //   if(tag.name.toLowerCase().includes(val)) {
-    //     postiveSearches.push(tag);
-    //   }
-    // })
     props.searchResultsHandler(postiveSearches);
   };
 

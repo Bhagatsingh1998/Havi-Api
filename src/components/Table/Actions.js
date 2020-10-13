@@ -48,7 +48,7 @@ const Actions = (props) => {
   }
 
   return (
-    <TableCell style={{paddingLeft: 0}}>
+    <>
       {dialogInfo.status ? (
         <PersonDialog
           personIndex={props.personIndex}
@@ -74,7 +74,7 @@ const Actions = (props) => {
           </IconButton>
         )}
       </div>
-    </TableCell>
+    </>
   );
 };
 

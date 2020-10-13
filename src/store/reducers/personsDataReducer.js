@@ -4,8 +4,8 @@ const initialState = {
   personsData: [
     {
       id: 47728,
-      tags: [1, 4, 1, 5],
-      fname: "Echo",
+      tags: [1, 4, 1, 5, 1, 4, 1, 5, 1, 4, 1, 5],
+      fname: "Echosdgdh wegwsgwseg ",
       lname: "Victor",
       doy: 2450,
       city: "Delhi",
@@ -53,7 +53,7 @@ const initialState = {
         info2: "info 2",
         info3: "info 3"
       },
-      ffiles: {
+      files: {
         file1: "file1.pptx",
         file2: "file2.png",
         file3: "file3.txt"
@@ -186,7 +186,7 @@ const initialState = {
         info2: "info 2",
         info3: "info 3"
       },
-      ffiles: {
+      files: {
         file1: "file1.pptx",
         file2: "file2.png",
         file3: "file3.txt"

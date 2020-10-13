@@ -34,14 +34,7 @@ const useStyles1 = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  // paperWidthSm: {
-  //   maxWidth: "100%",
-  //   width: "100%",
-  //   margin: "0",
-  // },
-  // paper: {
-  //   margin: "0",
-  // },
+
 }));
 
 const useStyles3 = makeStyles((theme) => ({
@@ -54,6 +47,18 @@ const useStyles3 = makeStyles((theme) => ({
   },
 }));
 
+const noteStyles = makeStyles((theme) => ({
+  tField: {
+    width: 350,
+    margin: "auto",
+    [theme.breakpoints.down('xs')]: {
+      width: 260,
+      
+    }
+  },
+
+}));
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
@@ -62,6 +67,7 @@ const EditPerson = (props) => {
   const dialogClasses = useStyles1();
   const formClasses = useStyles();
   const selectClasses = useStyles3();
+  const noteClasses = noteStyles();
 
   let person = props.personsData[props.personIndex];
 
@@ -169,7 +175,7 @@ const EditPerson = (props) => {
 
       <form className={formClasses.root} noValidate autoComplete="on">
         <TextField
-        style={{width: 300}}
+          className={noteClasses.tField}
           id=""
           label="Note"
           multiline
