@@ -1,2 +1,0 @@
-build	firebase.json  node_modules  public	scripts  yarn.lock
-config	listing.txt    package.json  README.md	src
