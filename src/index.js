@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import personDataReducer from './store/reducers/personsDataReducer'
 import tagsReducer from './store/reducers/tagsReducer';
 import tableHeaderReducer from './store/reducers/tableHeaderReducer';
+import authReducer from './store/reducers/authReducer';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -15,7 +16,8 @@ import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
   persons: personDataReducer,
   tags: tagsReducer,
-  theaders: tableHeaderReducer
+  theaders: tableHeaderReducer,
+  auth: authReducer
 });
 const store = createStore(rootReducer);
 

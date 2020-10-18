@@ -77,7 +77,6 @@ const TAccordion = (props) => {
         style={{
           color: "#61dafb",
           marginRight: 20,
-          borderRadius: 10,
           fontSize: 15,
           cursor: "move",
           backgroundColor: "#f5f5f5",

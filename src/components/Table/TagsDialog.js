@@ -141,12 +141,13 @@ const TagsDialog = (props) => {
   // console.log(props.personsData[props.personIndex].tags);
 
   // console.log(checkedState);
+  let objLength = Object.keys(st).length
   React.useEffect(() => {
     setCheckedState(() => {
       let a = { ...st, ...ot };
       return a;
-    });
-  }, [Object.keys(st).length]);
+    }); 
+  },objLength);
 
   props.tagsData.map((tag, tagIndex) => {
     let tagName = `tag_${tag.id}`;

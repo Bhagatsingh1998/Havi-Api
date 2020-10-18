@@ -1,8 +1,11 @@
 import React from "react";
 import WholeTable from "./components/Table/Table";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { connect } from 'react-redux';
+import SignIn from './components/SignIn/SignIn';
 
-const App = () => {
+
+const App = props => {
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -12,13 +15,26 @@ const App = () => {
         main: '#61dafb',
       }
     }
-  })
+  });
+  
+  let DisplayComponent;
+  if(props.signInUser) {
+    DisplayComponent = WholeTable;
+  } else {
+    DisplayComponent = SignIn;
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <WholeTable />
+      < DisplayComponent />
     </ThemeProvider>
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    signInUser: state.auth.signInUser
+  }
+}
+
+export default connect(mapStateToProps)(App);
