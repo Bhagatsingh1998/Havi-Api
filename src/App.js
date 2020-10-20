@@ -1,4 +1,5 @@
 import React from "react";
+
 import WholeTable from "./components/Table/Table";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { connect } from 'react-redux';
