@@ -160,7 +160,17 @@ const AddPersonDialog = (props) => {
     doy: doy,
     city: city,
     note: note,
-    tags: []
+    tags: [],
+    otherInfo: {
+      info1: "info 1",
+      info2: "info 2",
+      info3: "info 3"
+    },
+    files: {
+      file1: "file1.pptx",
+      file2: "file2.png",
+      file3: "file3.txt"
+    }
   };
 
   return (

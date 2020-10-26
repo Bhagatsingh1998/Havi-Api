@@ -10,7 +10,7 @@ import Tags from './Tags';
 import { connect } from "react-redux";
 
 const AdditionalData = (props) => {
-  const { open, personId, personIndex } = props;
+  const { open, personIndex } = props;
 
   let allHeaders = props.tableHeaderData.concat();
   let subHeadersArr = allHeaders.slice(6);

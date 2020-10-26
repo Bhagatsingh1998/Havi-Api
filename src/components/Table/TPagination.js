@@ -96,7 +96,7 @@ const TPagination = (props) => {
           width: "100%",
           bottom: 0,
           zIndex: 10,
-          marginTop: "40px",
+          marginTop: "60px",
           backgroundColor: "white",
         }}
         rowsPerPageOptions={[25, 50, 100, { label: "All", value: -1 }]}

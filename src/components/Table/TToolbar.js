@@ -117,9 +117,9 @@ const TToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip title="Add Record">
           <IconButton
-            aria-label="filter list"
+            aria-label="Add Record"
             onClick={() => openModalHandler("add")}
           >
             <AddBoxIcon />

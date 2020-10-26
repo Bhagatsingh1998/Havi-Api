@@ -30,6 +30,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// const tbodyStyles = makeStyles((theme) => ({
+//   root: {
+//     borderBottom: "unset",
+//     paddingBottom: 300,
+//     textDecoration: 'underLine'
+
+//   },
+// }));
+
 const tableCellStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: 0,
@@ -71,6 +80,7 @@ function stableSort(array, comparator) {
 const WholeTable = (props) => {
   const classes = useStyles();
   const tableCellClasses = tableCellStyles();
+  // const tbodyClasses = tbodyStyles(); 
 
   // const headerrClasses = useStyles1();
   const [page, setPage] = React.useState(0);
@@ -356,7 +366,10 @@ const WholeTable = (props) => {
           onRequestSort={handleRequestSort}
           rowCount={props.personsData.length}
         />
-        <TableBody>
+        <TableBody 
+          // className={tbodyClasses.root}
+          // style={{textDecoration: 'underLine'}}
+          >
           {allDisplayData.map((person, index) => {
             const isItemSelected = isSelected(person.id);
             const labelId = `enhanced-table-checkbox-${index}`;
@@ -366,6 +379,7 @@ const WholeTable = (props) => {
               return DisplayRow(person, index, isItemSelected, labelId);
             }
           })}
+          <TableRow style={{height: 50}} />
         </TableBody>
         <TableFooter
         // className={footerClasses.root}
